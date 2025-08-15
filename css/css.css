@@ -311,7 +311,7 @@
     position: relative;
 }
 
-/* Avatar del bot en las respuestas - POSICIONADO FUERA DEL MENSAJE */
+/* Avatar del bot en las respuestas*/
 .bot-avatar {
     position: absolute;
     left: -34px;
@@ -358,7 +358,7 @@
     font-weight: 500;
 }
 
-/* User type buttons: fila con wrap y tamaño pequeño */
+/* User type buttons*/
 .user-type-buttons { 
     display: flex; 
     flex-wrap: wrap; 
@@ -382,7 +382,7 @@
     margin-top: 8px;
 }
 .action-buttons .option-btn { 
-    flex: 0 1 auto; /* Cambiado de flex: 1 1 calc(33.333% - 8px) a flex: 0 1 auto */
+    flex: 0 1 auto;
     min-width: 90px; 
     max-width: 120px; /* Ancho máximo para evitar que se alarguen demasiado */
     padding: 8px 10px !important; 
@@ -391,7 +391,7 @@
 .action-buttons .btn-text { font-size: 13px; }
 .action-buttons .btn-icon { width: 16px; height: 16px; }
 
-/* Suggested options from text messages */
+/* Suggested options oara mensajes de texto */
 .suggested-options { 
     display: flex; 
     flex-wrap: wrap; 
@@ -436,7 +436,7 @@
 }
 
 /* Input Area */
-.input-area { padding: 16px; border-top: 1px solid #f0f0f0; }
+.input-area { padding: 18px; border-top: 1px solid #f0f0f0; }
 .chat-input { border: 1px solid #e0e0e0 !important; border-radius: 25px !important; font-size: 14px; outline: none; transition: border-color 0.2s ease; }
 .chat-input:focus { border-color: #0060ef !important; box-shadow: 0 0 0 0.2rem rgba(0, 96, 239, 0.25) !important; }
 .send-btn { width: 35px !important; height: 35px !important; background: #0060ef !important; border: none !important; color: white !important; font-size: 18px; cursor: pointer; transition: background 0.2s ease; display: flex !important; align-items: center; justify-content: center;}
@@ -446,28 +446,570 @@
 .panel-close-btn { position:absolute; top:-15px; right:-15px; width:30px !important; height:30px !important; background:#0060ef !important; border:none !important; color:#fff !important; border-radius:50% !important; display:flex !important; align-items:center; justify-content:center; }
 .panel-close-btn:hover { background:#0051d1 !important; }
 
-/* Responsive */
+/* Welcome Panel Styles */
+.welcome-panel {
+    position: fixed;
+    bottom: 110px;
+    right: 30px;
+    width: 380px;
+    max-height: calc(100vh - 200px);
+    min-height: 480px;
+    background: rgb(241, 241, 241);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    display: none;
+    flex-direction: column;
+    overflow: hidden; 
+    animation: slideInUp 0.3s ease;
+}
+
+.welcome-panel.active {
+    display: flex;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Welcome Header */
+.welcome-header {
+    background: #0060ef;
+    padding: 14px;
+    border-radius: 20px 20px 0 0;
+    flex-shrink: 0;
+}
+
+.welcome-header-text span {
+    color: #fff;
+    font-size: 13px;
+    white-space: normal;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.welcome-avatar {
+    width: 32px;
+    height: 32px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.welcome-avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.welcome-close-btn {
+    background: transparent !important;
+    border: none !important;
+    color: #fff !important;
+    font-size: 20px;
+    border-radius: 8px !important;
+    padding: 6px 8px !important;
+    min-width: 32px;
+    height: 32px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.welcome-close-btn:hover {
+    background: rgba(255,255,255,0.15) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.welcome-close-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+/* Welcome Content */
+.welcome-content {
+    flex: 1;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px; /* Ajusta este valor para subir/bajar los recuadros */
+    min-height: 0;
+    overflow-y: auto; /* Agrega scroll vertical cuando sea necesario */
+    scrollbar-width: thin; /* Para Firefox */
+    scrollbar-color: #c1c1c1 #f1f1f1; /* Para Firefox */
+}
+
+/* Estilos personalizados para la barra de scroll (Webkit browsers) */
+.welcome-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.welcome-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.welcome-content::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.welcome-content::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Welcome Message Section - Fondo azul con texto blanco */
+.welcome-message {
+    background: #0060ef;
+    color: white;
+    padding: 20px 16px;
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0, 96, 239, 0.2);
+    border-radius: 0;
+}
+
+.welcome-message h4 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    line-height: 1.2;
+}
+
+.welcome-message p {
+    color: #fff;
+    font-size: 15px;
+    margin: 0;
+    font-weight: 400;
+    opacity: 0.95;
+}
+
+/* Welcome Sections - Recuadros blancos */
+/* Estilos base para todas las secciones */
+.welcome-section {
+    border-top: 1px solid #FFFFFF;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== SECCIÓN 1 - COMENZAR CONVERSACIÓN (ACTIVA) ===== */
+.section-1 {
+    margin: -30px 20px 0 20px;
+}
+
+.welcome-section h5 {
+    color: #333;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    margin-top: 0;
+}
+
+.welcome-start-btn {
+    width: 100%;
+    padding: 14px 20px;
+    background: #0060ef !important;
+    border: none !important;
+    border-radius: 10px !important;
+    color: white !important;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0, 96, 239, 0.2);
+}
+
+.welcome-start-btn:hover {
+    background: #0051d1 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 96, 239, 0.4);
+}
+
+.welcome-start-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 96, 239, 0.2);
+}
+
+.welcome-icon {
+    font-size: 16px;
+    font-style: normal;
+    transform: rotate(45deg);
+}
+
+/* ===== SECCIÓN 2 - CENTRO DE AYUDA (COMENTADA HASTA QUE SE IMPLEMENTE) ===== */
+/* 
+.section-2 {
+    margin: 0 20px 0 20px;
+}
+
+.welcome-section h5 {
+    color: #333;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    margin-top: 0;
+}
+
+/* Search Section */
+.welcome-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-icon {
+    position: absolute;
+    left: 14px;
+    color: #999;
+    font-size: 14px;
+    font-style: normal;
+    z-index: 1;
+}
+
+.welcome-search-input {
+    width: 100%;
+    padding: 12px 14px 12px 42px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s ease;
+    background: #f8f9fa;
+    color: #333;
+}
+
+.welcome-search-input:focus {
+    border-color: #0060ef;
+    box-shadow: 0 0 0 0.2rem rgba(0, 96, 239, 0.15);
+    background: white;
+}
+
+.welcome-search-input::placeholder {
+    color: #999;
+    font-weight: 400;
+}
+*/
+
+/* Welcome Footer */
+.welcome-footer {
+    padding: 10px 18px;
+    border-top: 1px solid #f0f0f0;
+    text-align: center;
+    flex-shrink: 0;
+    background: #f8f9fa;
+    margin-top: auto;
+}
+
+.welcome-footer span {
+    color: #999;
+    font-size: 11px;
+}
+
+/* Chat Footer */
+.chat-footer {
+    padding: 16px 24px;
+    border-top: 1px solid #f0f0f0;
+    text-align: center;
+    flex-shrink: 0;
+    background: #f8f9fa;
+}
+
+.chat-footer span {
+    color: #999;
+    font-size: 12px;
+}
+
+/* Responsive para Welcome Panel - Siguiendo el mismo patrón que chat-panel */
 @media (max-width: 768px) {
-  .chat-panel { right: 20px; bottom: 100px; width: 320px; max-height: calc(100vh - 160px); }
-  .chat-icon { bottom: 15px; right: 20px; }
-  .user-type-buttons .option-btn,
-  .action-buttons .option-btn { 
-    flex: 0 1 calc(50% - 8px); 
-    max-width: calc(50% - 8px);
-  }
+    .welcome-panel {
+        right: 20px;
+        bottom: 100px;
+        width: 300px;
+        max-height: calc(100vh - 160px);
+        min-height: 380px;
+    }
+    
+    .welcome-content {
+        padding: 0;
+        gap: 18px;
+        overflow-y: auto; /* Asegura scroll en móviles */
+    }
+    
+    .welcome-section {
+        padding: 18px;
+    }
+    
+    .section-1 {
+        margin: -18px 18px 0 18px; /* ACTIVA - Sección 1 funcional */
+    }
+    
+    /* .section-2 {
+        margin: 0 18px 0 18px;
+    } */
+    
+    .welcome-section h5 {
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+    
+    .welcome-close-btn {
+        min-width: 30px;
+        height: 30px;
+        font-size: 18px;
+        padding: 5px 7px !important;
+    }
+    
+    .welcome-header-text span {
+        font-size: 12px;
+        line-height: 1.2;
+    }
+    
+    .welcome-avatar {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .welcome-message h4 {
+        font-size: 18px;
+    }
+    
+    .welcome-message p {
+        font-size: 14px;
+    }
+    
+    /* Chat panel responsive */
+    .chat-panel { 
+        right: 20px; 
+        bottom: 100px; 
+        width: 320px; 
+        max-height: calc(100vh - 160px); 
+    }
+    
+    .chat-icon { 
+        bottom: 15px; 
+        right: 20px; 
+    }
+    
+    .user-type-buttons .option-btn,
+    .action-buttons .option-btn { 
+        flex: 0 1 calc(50% - 8px); 
+        max-width: calc(50% - 8px);
+    }
 }
+
 @media (max-width: 480px) {
-  .chat-panel { left: 15px; right: 15px; width: auto; bottom: 90px; max-height: calc(100vh - 140px); }
-  .chat-icon { bottom: 10px; right: 15px; } 
-  .user-type-buttons .option-btn,
-  .action-buttons .option-btn { 
-    flex: 0 1 100%; 
-    max-width: 100%;
-  }
+    .welcome-panel {
+        left: 15px;
+        right: 15px;
+        width: auto;
+        bottom: 90px;
+        max-height: calc(100vh - 140px);
+        min-height: 360px;
+    }
+    
+    .welcome-content {
+        padding: 0;
+        gap: 16px;
+        overflow-y: auto; /* Asegura scroll en móviles pequeños */
+    }
+    
+    .welcome-section {
+        padding: 18px;
+    }
+    
+    /* .section-1 {
+        margin: -16px 18px 0 18px;
+    } */
+    
+    /* .section-2 {
+        margin: 0 18px 0 18px;
+    } */
+    
+    .welcome-section h5 {
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+    
+    .welcome-close-btn {
+        min-width: 28px;
+        height: 28px;
+        font-size: 16px;
+        padding: 4px 6px !important;
+    }
+    
+    .welcome-header-text span {
+        font-size: 11px;
+        line-height: 1.1;
+    }
+    
+    .welcome-avatar {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .welcome-message {
+        padding: 18px 14px;
+        margin: 0;
+    }
+    
+    .welcome-message h4 {
+        font-size: 16px;
+    }
+    
+    .welcome-message p {
+        font-size: 13px;
+    }
+    
+    /* .welcome-start-btn {
+        padding: 12px 18px;
+        font-size: 14px;
+    } */
+    
+    .welcome-footer {
+        padding: 12px 18px;
+    }
+    
+    /* Chat panel responsive */
+    .chat-panel { 
+        left: 15px; 
+        right: 15px; 
+        width: auto; 
+        bottom: 90px; 
+        max-height: calc(100vh - 140px); 
+    }
+    
+    .chat-icon { 
+        bottom: 10px; 
+        right: 15px; 
+    }
+    
+    .user-type-buttons .option-btn,
+    .action-buttons .option-btn { 
+        flex: 0 1 100%; 
+        max-width: 100%;
+    }
 }
-@media (max-width: 320px) {
-  .chat-panel { left: 10px; right: 10px; bottom: 80px; max-height: calc(100vh - 120px); }
-  .chat-icon { bottom: 8px; right: 10px; } 
+
+@media (max-width: 360px) {
+    .welcome-panel {
+        left: 10px;
+        right: 10px;
+        bottom: 80px;
+        max-height: calc(100vh - 120px);
+        min-height: 340px;
+    }
+    
+    .welcome-content {
+        padding: 0;
+        gap: 14px;
+        overflow-y: auto; /* Asegura scroll en móviles muy pequeños */
+    }
+    
+    .welcome-section {
+        padding: 16px;
+    }
+    
+    /* .section-1 {
+        margin: -14px 14px 0 14px;
+    } */
+    
+    /* .section-2 {
+        margin: 0 14px 0 14px;
+    } */
+    
+    .welcome-section h5 {
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+    
+    .welcome-close-btn {
+        min-width: 26px;
+        height: 26px;
+        font-size: 15px;
+        padding: 3px 5px !important;
+    }
+    
+    .welcome-header-text span {
+        font-size: 10px;
+        line-height: 1.0;
+    }
+    
+    .welcome-avatar {
+        width: 26px;
+        height: 26px;
+    }
+    
+    .welcome-message {
+        padding: 16px 12px;
+        margin: 0;
+    }
+    
+    .welcome-message h4 {
+        font-size: 15px;
+    }
+    
+    .welcome-message p {
+        font-size: 12px;
+    }
+    
+    /* .welcome-start-btn {
+        padding: 11px 16px;
+        font-size: 13px;
+    } */
+    
+    .welcome-search-input {
+        padding: 10px 12px 10px 38px;
+        font-size: 13px;
+    }
+    
+    .search-icon {
+        left: 12px;
+        font-size: 14px;
+    }
+    
+    .welcome-footer {
+        padding: 10px 14px;
+    }
+    
+    /* Chat panel responsive */
+    .chat-panel { 
+        left: 10px; 
+        right: 10px; 
+        bottom: 80px; 
+        max-height: calc(100vh - 120px); 
+    }
+    
+    .chat-icon { 
+        bottom: 8px; 
+        right: 10px; 
+    }
 }
 
 /* Animación para mensajes nuevos */

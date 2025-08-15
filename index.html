@@ -29,6 +29,59 @@
       </div>
     </div>
 
+    <!-- Welcome Panel (Panel de Bienvenida) -->
+    <div class="welcome-panel" id="welcomePanel">
+      <!-- Header -->
+      <div class="welcome-header">
+        <div class="d-flex justify-content-between align-items-center w-100">
+          <div class="d-flex align-items-center gap-3">
+            <div class="welcome-avatar">
+              <img src="images/agente-de-centro-de-llamadas.png" alt="Avatar" class="welcome-avatar-image">
+            </div>
+            <div class="welcome-header-text">
+              <span class="fw-medium">Soy Victor, tu<br>Asistente Virtual</span>
+            </div>
+          </div>
+          <button class="welcome-close-btn btn btn-link text-white p-2" id="welcomeCloseBtn" title="Cerrar">
+            <span>×</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Welcome Content -->
+      <div class="welcome-content">
+        <div class="welcome-message">
+          <h4>Te damos la bienvenida</h4>
+          <p>Estamos aquí para ayudarte</p>
+        </div>
+        
+        <!-- Start Conversation Section - ACTIVA (Sección 1 para iniciar conversación) -->
+        <div class="welcome-section section-1">
+          <h5>Comenzar una conversación</h5>
+          <button class="welcome-start-btn btn btn-primary" id="welcomeStartBtn">
+            <i class="welcome-icon">✈️</i>
+            Envíanos un mensaje
+          </button>
+        </div>
+
+        <!-- Help Center Section (Sección 2 inactiva hasta que se implemente) -->
+        <!-- 
+        <div class="welcome-section section-2">
+          <h5>Consulta el Centro de Ayuda SAE</h5>
+          <div class="welcome-search">
+            <i class="search-icon">🔍</i>
+            <input type="text" placeholder="Buscar un tema..." class="welcome-search-input">
+          </div>
+        </div>
+        -->
+      </div>
+
+      <!-- Footer -->
+      <div class="welcome-footer">
+        <span>Desarrollado por: AsistEscolar.com</span>
+      </div>
+    </div>
+
     <!-- Chat Panel -->
     <div class="chat-panel" id="chatPanel">
       <!-- Header -->
@@ -64,7 +117,7 @@
           <span>¡Bienvenido👋🏻! ¿Podrías indicar qué tipo de usuario eres?</span>
         </div>
         
-        <!-- User Type Options (tres botones en fila con wrap) -->
+        <!-- User Type Options (tres botones en fila) -->
         <div class="option-buttons user-type-buttons">
           <button class="option-btn btn btn-light w-100 text-start d-flex justify-content-between align-items-center" data-value="Representante">
             <span class="btn-text">Representante</span>
@@ -89,6 +142,11 @@
             <span>↑</span>
           </button>
         </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="chat-footer">
+        <span>Desarrollado por: AsistEscolar.com</span>
       </div>
 
       <!-- Close Button -->

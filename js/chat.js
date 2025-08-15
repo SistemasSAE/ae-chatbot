@@ -1,6 +1,7 @@
 // Chat functionality
 document.addEventListener('DOMContentLoaded', function() {
     const chatIcon = document.getElementById('chatIcon');
+    const welcomePanel = document.getElementById('welcomePanel');
     const chatPanel = document.getElementById('chatPanel');
     const panelCloseBtn = document.getElementById('panelCloseBtn');
     const headerCloseBtn = document.getElementById('headerCloseBtn');
@@ -9,42 +10,64 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputEl = document.querySelector('.chat-input');
     const sendBtn = document.getElementById('sendBtn');
     const chatCloseBtn = document.getElementById('chatCloseBtn');
+    const welcomeCloseBtn = document.getElementById('welcomeCloseBtn');
+    const welcomeStartBtn = document.getElementById('welcomeStartBtn'); // ACTIVO - Botón restaurado
   
     let firstSelectionMade = false;
     let currentUserType = null;
     let conversationActive = true;
     let lastUserSelection = null;
   
-    // Open panel
+    // Open welcome panel when clicking chat icon
     chatIcon.addEventListener('click', () => {
-      if (!chatPanel.classList.contains('active')) {
-        chatPanel.classList.add('active');
+      if (!welcomePanel.classList.contains('active') && !chatPanel.classList.contains('active')) {
+        welcomePanel.classList.add('active');
         chatIcon.classList.add('active');
-        resetChatState();
       }
     });
   
-    // Close panel functions
-    const closePanel = () => {
+    // Close welcome panel
+    const closeWelcomePanel = () => {
+      welcomePanel.classList.remove('active');
+      chatIcon.classList.remove('active');
+    };
+  
+    // Close chat panel
+    const closeChatPanel = () => {
+      chatPanel.classList.remove('active');
+      resetChatState();
+    };
+  
+    // Close all panels
+    const closeAllPanels = () => {
+      welcomePanel.classList.remove('active');
       chatPanel.classList.remove('active');
       chatIcon.classList.remove('active');
       resetChatState();
     };
     
-    // Event listeners para cerrar panel
-    panelCloseBtn.addEventListener('click', closePanel);
-    headerCloseBtn.addEventListener('click', closePanel);
+    // Event listeners para cerrar paneles
+    welcomeCloseBtn.addEventListener('click', closeWelcomePanel);
+    panelCloseBtn.addEventListener('click', closeAllPanels);
+    headerCloseBtn.addEventListener('click', closeAllPanels);
     chatCloseBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      closePanel();
+      closeAllPanels();
     });
   
-    document.addEventListener('click', (e) => {
+    // Start conversation button - opens chat panel
+    welcomeStartBtn.addEventListener('click', () => {
+      welcomePanel.classList.remove('active');
+      chatPanel.classList.add('active');
+      resetChatState();
+    });
+  
+   /* document.addEventListener('click', (e) => {
       if (!chatIcon.contains(e.target) && !chatPanel.contains(e.target)) {
         closePanel();
       }
-    });
-  
+    });*/
+    
     // Utility functions
     const appendUserMessage = (text) => {
       const userMsg = document.createElement('div');
@@ -418,6 +441,27 @@ document.addEventListener('DOMContentLoaded', function() {
     inputEl.addEventListener('keydown', (e) => { 
       if (e.key === 'Enter') sendMessage(); 
     });
+  
+    // Search functionality for help center - SIMPLIFICADA (Sección 2 comentada)
+    const welcomeSearchInput = document.querySelector('.welcome-search-input');
+    if (welcomeSearchInput) {
+      welcomeSearchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const searchTerm = e.target.value.trim();
+          if (searchTerm) {
+            // Función básica de búsqueda (simplificada)
+            alert(`Búsqueda: "${searchTerm}" - Esta funcionalidad está temporalmente deshabilitada.`);
+          }
+        }
+      });
+    }
+
+    // Función de búsqueda simplificada (comentada ya que la sección 2 está inactiva)
+    /*
+    const performHelpCenterSearch = (searchTerm) => {
+      // Código de búsqueda comentado
+    };
+    */
   
     attachUserTypeHandlers();
   });
