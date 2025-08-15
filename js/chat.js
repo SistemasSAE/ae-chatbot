@@ -232,13 +232,9 @@ document.addEventListener('DOMContentLoaded', function() {
           });
           
           b.classList.add('active');
-          const sendMessage = () => {
-            const text = inputEl.value.trim();
-            if (!text || !conversationActive) return;
           appendUserMessage(text);
-     }
+          
           setTimeout(() => {
-
             const response = processOptionSelection(text);
             appendBotMessage(response.message);
             
@@ -252,83 +248,113 @@ document.addEventListener('DOMContentLoaded', function() {
       scrollToBottom();
     }
     const generateBotResponse = (userMessage) => {
-    const message = userMessage.toLowerCase();
-    // Si la conversación está cerrada pero el usuario escribe
-    if (!conversationActive) {
-      return {
-        message: 'La conversación ha finalizado. ¿Deseas comenzar una nueva?',
-        options: ['Sí, nueva consulta', 'No, gracias']
-      };
-    }
+      const message = userMessage.toLowerCase();
+      
+      // Si la conversación está cerrada pero el usuario escribe
+      if (!conversationActive) {
+        return {
+          message: 'La conversación ha finalizado. ¿Deseas comenzar una nueva?',
+          options: ['Sí, nueva consulta', 'No, gracias']
+        };
+      }
 
-    // Manejo de tipo de usuario
-    if (!firstSelectionMade && (message.includes('representante') || message.includes('estudiante') || message.includes('profesor'))) {
-      firstSelectionMade = true;
-      currentUserType = message.includes('representante') ? 'Representante' : 
-                      message.includes('estudiante') ? 'Estudiante' : 'Profesor';
-      return {
-        message: `Perfecto, eres ${currentUserType}. ¿En qué puedo ayudarte?`,
-        options: ['Iniciar Sesión', 'Inscripciones', 'Solicitud de Cupo', 'Reportar Pago']
-      };
-    }
-  
-    if (message.includes('iniciar sesión') || message.includes('iniciar') || message.includes('sesión')) {
-      conversationActive = false;
-      return {
-        message: '¡Perfecto! Ha sido un placer ayudarte. Que tengas un excelente día.',
-        options: []
-      };
-    }
-    if (optionLower.includes('no, gracias') || optionLower.includes('nada más')) {
+      // Manejo de tipo de usuario
+      if (!firstSelectionMade && (message.includes('representante') || message.includes('estudiante') || message.includes('profesor'))) {
+        firstSelectionMade = true;
+        currentUserType = message.includes('representante') ? 'Representante' : 
+                        message.includes('estudiante') ? 'Estudiante' : 'Profesor';
+        return {
+          message: `Perfecto, eres ${currentUserType}. ¿En qué puedo ayudarte?`,
+          options: ['Iniciar Sesión', 'Inscripciones', 'Solicitud de Cupo', 'Reportar Pago']
+        };
+      }
+    
+      // Respuestas para finalizar conversación
+      if (message.includes('no, gracias') || message.includes('nada más') || message.includes('no gracias') || 
+          message.includes('no gracia') || message.includes('adios') || message.includes('adiós') || 
+          message.includes('hasta luego') || message.includes('chao') || message.includes('bye')) {
         conversationActive = false;
         return {
           message: '¡Perfecto! Ha sido un placer ayudarte. Que tengas un excelente día.',
           options: []
         };
       }
-      
-      if (optionLower.includes('necesito más ayuda')) {
+        
+      // Solicitar más ayuda
+      if (message.includes('necesito más ayuda') || message.includes('ayuda') || message.includes('otra cosa')) {
         return {
           message: 'Claro, ¿en qué más puedo ayudarte?',
           options: ['Iniciar Sesión', 'Inscripciones', 'Solicitud de Cupo', 'Reportar Pago']
         };
       }
-      
-      if (optionLower.includes('iniciar sesión') || optionLower.includes('iniciar') || optionLower.includes('sesión')) {
+        
+      // Iniciar sesión
+      if (message.includes('iniciar sesión') || message.includes('iniciar') || message.includes('sesión') || 
+          message.includes('sesion') || message.includes('login') || message.includes('acceder') || 
+          message.includes('entrar')) {
         return {
           message: 'Te ayudo con el inicio de sesión. ¿Qué necesitas específicamente?',
           options: ['Recuperar Contraseña', 'Crear Cuenta', 'Problemas de Acceso']
         };
       }
-      else if (optionLower.includes('inscripciones') || optionLower.includes('matrícula') || optionLower.includes('matricula')) {
+      // Inscripciones
+      else if (message.includes('inscripciones') || message.includes('matrícula') || message.includes('matricula') || 
+               message.includes('inscribir') || message.includes('matricular') || message.includes('registro')) {
         return {
-          message: 'Claro, con gusto te asisto con las inscripciones. ¿Qué tipo de inscripción te interesa?',
+          message: 'Claro, con gusto te asisto en el apartado de las inscripciones. ¿Qué tipo de inscripción te interesa?',
           options: ['Nuevo Ingreso', 'Reingreso']
         };
       }
-      else if (optionLower.includes('solicitud de cupo') || optionLower.includes('cupo') || optionLower.includes('vacante')) {
+
+        // Nuevo Ingreso y Reingreso
+        else if (message.includes('Nuevo Ingreso') || message.includes('Reingreso') ||  message.includes('nuevo') || message.includes('Nuevo') || message.includes('Reingreso') || message.includes('reingreso') || 
+        message.includes('nuevo ingreso')) {
+ return {
+   message: 'Gracias por tu selección. Un agente humano se pondrá en contacto contigo pronto para resolver tu consulta específica.',
+   options: ['Necesito más ayuda', 'No, gracias']
+ };
+ }
+      // Solicitud de cupo
+      else if (message.includes('solicitud de cupo') || message.includes('cupo') || message.includes('vacante') || 
+               message.includes('solicitar')) {
         return {
-          message: 'Entendido, para la solicitud de cupo, ¿necesitas información sobre el proceso o el estado de una solicitud existente?',
+          message: 'Entendido, para la solicitud de cupo, ¿Necesitas información sobre el proceso o el estado de una solicitud existente?',
           options: ['Proceso de Solicitud', 'Estado de Solicitud']
         };
       }
-      else if (optionLower.includes('reportar pago') || optionLower.includes('pago') || optionLower.includes('factura')) {
+
+       // Proceso y Estado de solicitud de cupo
+       else if (message.includes('Estado') || message.includes('Estado de Solicitud') ||  message.includes('estado de solicitud') || message.includes('Proceso de Solicitud') || message.includes('Proceso') || message.includes('proceso') || 
+       message.includes('proceso de solicitud')) {
+return {
+  message: 'Gracias por tu selección. Un agente humano se pondrá en contacto contigo pronto para resolver tu consulta específica.',
+  options: ['Necesito más ayuda', 'No, gracias']
+};
+}
+      // Reportar pago
+      else if (message.includes('reportar pago') || message.includes('pago') || message.includes('factura') || 
+               message.includes('pagar') || message.includes('comprobante') || message.includes('recibo')) {
         return {
-          message: 'Para reportar tu pago, por favor, indícame el tipo de pago que realizaste.',
+          message: 'Para reportar un pago realizado o consultar su estado, indícame a continuación el tipo que realizaste.',
           options: ['Matrícula', 'Mensualidad', 'Otro Pago']
         };
       }
       
+      // Respuesta por defecto para mensajes no reconocidos
       return {
-        message: 'Gracias por tu selección. Un agente humano se pondrá en contacto contigo pronto para resolver tu consulta específica.',
-        options: ['Necesito más ayuda', 'No, gracias']
+        message: 'No entiendo tu consulta. Para ayudarte mejor, ¿podrías seleccionar una de las opciones disponibles o ser más específico?',
+        options: ['Iniciar Sesión', 'Inscripciones', 'Solicitud de Cupo', 'Reportar Pago', 'Necesito más ayuda']
       };
     }
   
     const processOptionSelection = (option) => {
       const optionLower = option.toLowerCase();
       
-      if (optionLower.includes('no, gracias') || optionLower.includes('nada más')) {
+      // Finalizar conversación
+      if (optionLower.includes('no, gracias') || optionLower.includes('nada más') || 
+          optionLower.includes('no gracias') || optionLower.includes('adios') || 
+          optionLower.includes('adiós') || optionLower.includes('hasta luego') || 
+          optionLower.includes('chao') || optionLower.includes('bye')) {
         conversationActive = false;
         return {
           message: '¡Perfecto! Ha sido un placer ayudarte. Que tengas un excelente día.',
@@ -336,38 +362,54 @@ document.addEventListener('DOMContentLoaded', function() {
         };
       }
       
-      if (optionLower.includes('necesito más ayuda')) {
+      // Solicitar más ayuda
+      if (optionLower.includes('necesito más ayuda') || optionLower.includes('ayuda') || 
+          optionLower.includes('otra cosa') || optionLower.includes('más opciones')) {
         return {
           message: 'Claro, ¿en qué más puedo ayudarte?',
           options: ['Iniciar Sesión', 'Inscripciones', 'Solicitud de Cupo', 'Reportar Pago']
         };
       }
       
-      if (optionLower.includes('iniciar sesión') || optionLower.includes('iniciar') || optionLower.includes('sesión')) {
+      // Iniciar sesión
+      if (optionLower.includes('iniciar sesión') || optionLower.includes('iniciar') || 
+          optionLower.includes('sesión') || optionLower.includes('sesion') || 
+          optionLower.includes('login') || optionLower.includes('acceder') || 
+          optionLower.includes('entrar')) {
         return {
           message: 'Te ayudo con el inicio de sesión. ¿Qué necesitas específicamente?',
           options: ['Recuperar Contraseña', 'Crear Cuenta', 'Problemas de Acceso']
         };
       }
-      else if (optionLower.includes('inscripciones') || optionLower.includes('matrícula') || optionLower.includes('matricula')) {
+      // Inscripciones
+      else if (optionLower.includes('inscripciones') || optionLower.includes('matrícula') || 
+               optionLower.includes('matricula') || optionLower.includes('inscribir') || 
+               optionLower.includes('matricular') || optionLower.includes('registro')) {
         return {
           message: 'Claro, con gusto te asisto con las inscripciones. ¿Qué tipo de inscripción te interesa?',
           options: ['Nuevo Ingreso', 'Reingreso']
         };
       }
-      else if (optionLower.includes('solicitud de cupo') || optionLower.includes('cupo') || optionLower.includes('vacante')) {
+      // Solicitud de cupo
+      else if (optionLower.includes('solicitud de cupo') || optionLower.includes('cupo') || 
+               optionLower.includes('vacante') || optionLower.includes('solicitar') || 
+               optionLower.includes('disponibilidad') || optionLower.includes('lugar')) {
         return {
           message: 'Entendido, para la solicitud de cupo, ¿necesitas información sobre el proceso o el estado de una solicitud existente?',
           options: ['Proceso de Solicitud', 'Estado de Solicitud']
         };
       }
-      else if (optionLower.includes('reportar pago') || optionLower.includes('pago') || optionLower.includes('factura')) {
+      // Reportar pago
+      else if (optionLower.includes('reportar pago') || optionLower.includes('pago') || 
+               optionLower.includes('factura') || optionLower.includes('pagar') || 
+               optionLower.includes('comprobante') || optionLower.includes('recibo')) {
         return {
-          message: 'Para reportar tu pago, por favor, indícame el tipo de pago que realizaste.',
+          message: 'Para reportar un pago realizado, indícame a continuación el que realizaste.',
           options: ['Matrícula', 'Mensualidad', 'Otro Pago']
         };
       }
       
+      // Respuesta por defecto
       return {
         message: 'Gracias por tu selección. Un agente humano se pondrá en contacto contigo pronto para resolver tu consulta específica.',
         options: ['Necesito más ayuda', 'No, gracias']
@@ -426,7 +468,14 @@ document.addEventListener('DOMContentLoaded', function() {
       inputEl.value = '';
       
       setTimeout(() => {
-        const response = processOptionSelection(text);
+        // Usar handleFreeTextResponse para texto libre y processOptionSelection para opciones
+        let response;
+        if (firstSelectionMade) {
+          response = handleFreeTextResponse(text);
+        } else {
+          response = processOptionSelection(text);
+        }
+        
         appendBotMessage(response.message);
         
         if (response.options && response.options.length > 0) {
@@ -462,6 +511,45 @@ document.addEventListener('DOMContentLoaded', function() {
       // Código de búsqueda comentado
     };
     */
+    
+    // Función para manejar respuestas inteligentes a texto libre
+    const handleFreeTextResponse = (text) => {
+      const lowerText = text.toLowerCase();
+      
+      // Detectar saludos
+      if (lowerText.includes('hola') || lowerText.includes('buenos días') || 
+          lowerText.includes('buenas') || lowerText.includes('saludos') ||
+          lowerText.includes('buenos dias') || lowerText.includes('buenas tardes') ||
+          lowerText.includes('buenas noches')) {
+        return {
+          message: '¡Hola! ¿En qué puedo ayudarte hoy?',
+          options: ['Iniciar Sesión', 'Inscripciones', 'Solicitud de Cupo', 'Reportar Pago']
+        };
+      }
+      
+      // Detectar agradecimientos
+      if (lowerText.includes('gracias') || lowerText.includes('gracia') || 
+          lowerText.includes('thank') || lowerText.includes('thanks')) {
+        return {
+          message: '¡De nada! Me alegra haber podido ayudarte. ¿Hay algo más en lo que pueda asistirte?',
+          options: ['Sí, necesito más ayuda', 'No, gracias']
+        };
+      }
+      
+      // Detectar preguntas generales
+      if (lowerText.includes('qué') || lowerText.includes('que') || 
+          lowerText.includes('como') || lowerText.includes('cómo') ||
+          lowerText.includes('cuando') || lowerText.includes('cuándo') ||
+          lowerText.includes('donde') || lowerText.includes('dónde')) {
+        return {
+          message: 'Entiendo tu pregunta. Para darte la mejor respuesta, ¿podrías ser más específico sobre qué necesitas?',
+          options: ['Iniciar Sesión', 'Inscripciones', 'Solicitud de Cupo', 'Reportar Pago', 'Necesito más ayuda']
+        };
+      }
+      
+      // Si no se reconoce, usar la función principal
+      return generateBotResponse(text);
+    };
   
     attachUserTypeHandlers();
   });

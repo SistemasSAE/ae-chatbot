@@ -2,7 +2,7 @@
 .chat-icon {
     position: fixed;
     bottom: 20px; 
-    right: 30px;
+    right: 20px;
     width: 80px;
     height: 80px;
     cursor: pointer;
@@ -125,7 +125,7 @@
 .chat-panel {
     position: fixed;
     bottom: 110px;
-    right: 30px;
+    right: 80px;
     width: 380px;
     max-height: calc(100vh - 200px);
     min-height: 480px;
@@ -450,7 +450,7 @@
 .welcome-panel {
     position: fixed;
     bottom: 110px;
-    right: 30px;
+    right: 80px;
     width: 380px;
     max-height: calc(100vh - 200px);
     min-height: 480px;
@@ -663,7 +663,7 @@
 .welcome-icon {
     font-size: 16px;
     font-style: normal;
-    transform: rotate(45deg);
+    transform: rotate(0deg);
 }
 
 /* ===== SECCIÓN 2 - CENTRO DE AYUDA (COMENTADA HASTA QUE SE IMPLEMENTE) ===== */
@@ -763,7 +763,7 @@
 /* Responsive para Welcome Panel - Siguiendo el mismo patrón que chat-panel */
 @media (max-width: 768px) {
     .welcome-panel {
-        right: 20px;
+        right: 80px;
         bottom: 100px;
         width: 300px;
         max-height: calc(100vh - 160px);
@@ -781,7 +781,7 @@
     }
     
     .section-1 {
-        margin: -18px 18px 0 18px; /* ACTIVA - Sección 1 funcional */
+        margin: -28px 18px 0 18px; /* ACTIVA - Sección 1 funcional */
     }
     
     /* .section-2 {
@@ -841,7 +841,7 @@
 @media (max-width: 480px) {
     .welcome-panel {
         left: 15px;
-        right: 15px;
+        right: 45px;
         width: auto;
         bottom: 90px;
         max-height: calc(100vh - 140px);
