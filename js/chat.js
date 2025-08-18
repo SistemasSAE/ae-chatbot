@@ -335,7 +335,7 @@ document.addEventListener('DOMContentLoaded', function() {
       else if (message.includes('inscripciones') || message.includes('matrícula') || message.includes('matricula') || 
                message.includes('inscribir') || message.includes('matricular') || message.includes('registro')) {
         return {
-          message: 'Claro, con gusto te asisto en el apartado de las inscripciones. ¿Qué tipo de inscripción te interesa?',
+          message: 'Claro, con gusto te asisto en el apartado de las inscripciones. ¿Qué tipo de inscripción te interesa realizar?',
           options: ['Nuevo Ingreso', 'Reingreso']
         };
       }
@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', function() {
         else if (message.includes('Nuevo Ingreso') || message.includes('Reingreso') ||  message.includes('nuevo') || message.includes('Nuevo') || message.includes('Reingreso') || message.includes('reingreso') || 
         message.includes('nuevo ingreso')) {
  return {
-   message: 'Gracias por tu selección. Un agente humano se pondrá en contacto contigo pronto para resolver tu consulta específica.',
+   message: 'Gracias por tu selección. Un asesor especializado se pondrá en contacto contigo pronto para resolver tu consulta específica.',
    options: ['Necesito más ayuda', 'No, gracias']
  };
  }
@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function() {
        else if (message.includes('Estado') || message.includes('Estado de Solicitud') ||  message.includes('estado de solicitud') || message.includes('Proceso de Solicitud') || message.includes('Proceso') || message.includes('proceso') || 
        message.includes('proceso de solicitud')) {
 return {
-  message: 'Gracias por tu selección. Un agente humano se pondrá en contacto contigo pronto para resolver tu consulta específica.',
+  message: 'Gracias por tu selección. Un asesor especializado se pondrá en contacto contigo pronto para resolver tu consulta específica.',
   options: ['Necesito más ayuda', 'No, gracias']
 };
 }
@@ -429,7 +429,7 @@ return {
                optionLower.includes('vacante') || optionLower.includes('solicitar') || 
                optionLower.includes('disponibilidad') || optionLower.includes('lugar')) {
         return {
-          message: 'Entendido, para la solicitud de cupo, ¿necesitas información sobre el proceso o el estado de una solicitud existente?',
+          message: 'Entendido, para la solicitud de cupo, ¿Necesitas información sobre el proceso o el estado de una solicitud realizada?',
           options: ['Proceso de Solicitud', 'Estado de Solicitud']
         };
       }
@@ -445,7 +445,7 @@ return {
       
       // Respuesta por defecto
       return {
-        message: 'Gracias por tu selección. Un agente humano se pondrá en contacto contigo pronto para resolver tu consulta específica.',
+        message: 'Gracias por tu selección. Un asesor especializado se pondrá en contacto contigo pronto para resolver tu consulta específica.',
         options: ['Necesito más ayuda', 'No, gracias']
       };
     };
