@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const panelCloseBtn = document.getElementById('panelCloseBtn');
     const headerCloseBtn = document.getElementById('headerCloseBtn');
     const refreshBtn = document.getElementById('refreshBtn');
+    const backToWelcomeBtn = document.getElementById('backToWelcomeBtn');
     const conversationArea = document.querySelector('.conversation-area');
     const inputEl = document.querySelector('.chat-input');
     const sendBtn = document.getElementById('sendBtn');
@@ -17,11 +18,18 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentUserType = null;
     let conversationActive = true;
     let lastUserSelection = null;
+    let lastOpenPanel = null; // 'welcome' | 'chat'
   
-    // Open welcome panel when clicking chat icon
+    // Open panel when clicking chat icon (reopen last one if minimized)
     chatIcon.addEventListener('click', () => {
-      if (!welcomePanel.classList.contains('active') && !chatPanel.classList.contains('active')) {
-        welcomePanel.classList.add('active');
+      const anyActive = welcomePanel.classList.contains('active') || chatPanel.classList.contains('active');
+      if (!anyActive) {
+        if (lastOpenPanel === 'chat') {
+          chatPanel.classList.add('active');
+        } else {
+          welcomePanel.classList.add('active');
+          lastOpenPanel = 'welcome';
+        }
         chatIcon.classList.add('active');
       }
     });
@@ -37,6 +45,18 @@ document.addEventListener('DOMContentLoaded', function() {
       chatPanel.classList.remove('active');
       resetChatState();
     };
+
+    // Minimize current panel (keep state)
+    const minimizePanels = () => {
+      if (chatPanel.classList.contains('active')) {
+        chatPanel.classList.remove('active');
+        lastOpenPanel = 'chat';
+      } else if (welcomePanel.classList.contains('active')) {
+        welcomePanel.classList.remove('active');
+        lastOpenPanel = 'welcome';
+      }
+      chatIcon.classList.remove('active');
+    };
   
     // Close all panels
     const closeAllPanels = () => {
@@ -49,16 +69,30 @@ document.addEventListener('DOMContentLoaded', function() {
     // Event listeners para cerrar paneles
     welcomeCloseBtn.addEventListener('click', closeWelcomePanel);
     panelCloseBtn.addEventListener('click', closeAllPanels);
-    headerCloseBtn.addEventListener('click', closeAllPanels);
+    headerCloseBtn.addEventListener('click', minimizePanels);
     chatCloseBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       closeAllPanels();
     });
+
+    // Back to welcome from chat
+    if (backToWelcomeBtn) {
+      backToWelcomeBtn.addEventListener('click', () => {
+        if (chatPanel.classList.contains('active')) {
+          chatPanel.classList.remove('active');
+          welcomePanel.classList.add('active');
+          lastOpenPanel = 'welcome';
+          chatIcon.classList.add('active');
+        }
+      });
+    }
   
     // Start conversation button - opens chat panel
     welcomeStartBtn.addEventListener('click', () => {
       welcomePanel.classList.remove('active');
       chatPanel.classList.add('active');
+      chatIcon.classList.add('active');
+      lastOpenPanel = 'chat';
       resetChatState();
     });
   

@@ -1159,3 +1159,76 @@
       gap: 10px;
     }
   }
+
+/* Modo móvil compacto: ocupar toda la pantalla y ocultar cierres superpuestos */
+@media (max-width: 600px) {
+	/* Ocupa toda la pantalla disponible */
+	.chat-panel,
+	.welcome-panel {
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 0;
+		width: auto;
+		max-height: 100vh;
+		min-height: 100vh;
+		border-radius: 0;
+	}
+    .bot-message {
+        margin-left: 30px;
+    }
+	/* Ocultar botón azul de cerrar del icono para que no se superponga */
+	.chat-icon .chat-close-btn { display: none; }
+	/* Mientras un panel esté activo, ocultar el icono para evitar solapamiento */
+	.chat-icon.active { display: none; }
+
+	/* Ocultar el botón flotante de cerrar del panel en móvil muy pequeño */
+	.panel-close-btn { display: none !important; }
+
+	/* Asegurar que el contenido tenga altura flexible */
+	.conversation-area { padding: 16px; }
+
+	/* Prioridad de capa para que los paneles estén siempre sobre el icono */
+	.chat-panel { z-index: 1002; }
+	.welcome-panel { z-index: 1002; }
+}
+
+@media (max-width: 480px) {
+    /* Ocupa toda la pantalla disponible */
+    .chat-panel,
+    .welcome-panel {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        width: auto;
+        max-height: 100vh;
+        min-height: 100vh;
+        border-radius: 0;
+    }
+
+    .bot-message {
+        margin-left: 30px;
+    }
+    /* Ocultar botón azul de cerrar del icono para que no se superponga */
+    .chat-icon .chat-close-btn { display: none; }
+    /* Mientras un panel esté activo, ocultar el icono para evitar solapamiento */
+    .chat-icon.active { display: none; }
+
+    /* Ocultar el botón flotante de cerrar del panel en móvil muy pequeño */
+    .panel-close-btn { display: none !important; }
+
+    /* Asegurar que el contenido tenga altura flexible */
+    .conversation-area { padding: 16px; }
+
+    /* Prioridad de capa para que los paneles estén siempre sobre el icono */
+    .chat-panel { z-index: 1002; }
+    .welcome-panel { z-index: 1002; }
+}
+
+@media (max-width: 360px) {
+    .bot-message {
+        margin-left: 30px;
+    }
+    .conversation-area { padding: 12px; }
+}
