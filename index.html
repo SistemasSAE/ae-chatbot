@@ -82,6 +82,62 @@
       </div>
     </div>
 
+<!-- FAQ Button (Botón externo para preguntas frecuentes) -->
+<button class="faq-toggle-btn" id="faqToggleBtn">
+  <div class="askIcon">
+    <i class="bi bi-question-lg">?</i>
+  </div>
+</button>
+
+<!-- FAQ Panel (Panel lateral de preguntas frecuentes) -->
+<div class="faq-panel" id="faqPanel">
+  <!-- Header -->
+  <div class="faq-header">
+    <div class="d-flex justify-content-between align-items-center w-100">
+      <div class="faq-header-text">
+        <span class="fw-medium">Preguntas Frecuentes</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón para volver (ocultar panel y mostrar botón) -->
+  <button class="faq-back-btn" id="faqBackBtn" title="Volver">→</button>
+
+  <!-- FAQ Content -->
+  <div class="faq-content">
+    <div class="faq-buttons">
+      <button class="faq-btn btn btn-light w-100 text-start d-flex justify-content-between align-items-center" data-value="Como iniciar sesión">
+        <span class="btn-text">Como iniciar sesión</span>
+        <div class="btn-icon"></div>
+      </button>
+      <button class="faq-btn btn btn-light w-100 text-start d-flex justify-content-between align-items-center" data-value="Como registrar un pago">
+        <span class="btn-text">Como registrar un pago</span>
+        <div class="btn-icon"></div>
+      </button>
+      <button class="faq-btn btn btn-light w-100 text-start d-flex justify-content-between align-items-center" data-value="Como realizar inscripciones">
+        <span class="btn-text">Como realizar inscripciones</span>
+        <div class="btn-icon"></div>
+      </button>
+      <button class="faq-btn btn btn-light w-100 text-start d-flex justify-content-between align-items-center" data-value="Como visualizar">
+        <span class="btn-text">Como visualizar</span>
+        <div class="btn-icon"></div>
+      </button>
+      <button class="faq-btn btn btn-light w-100 text-start d-flex justify-content-between align-items-center" data-value="Recuperar contraseña">
+        <span class="btn-text">Recuperar contraseña</span>
+        <div class="btn-icon"></div>
+      </button>
+      <button class="faq-btn btn btn-light w-100 text-start d-flex justify-content-between align-items-center" data-value="Problemas de acceso">
+        <span class="btn-text">Problemas de acceso</span>
+        <div class="btn-icon"></div>
+      </button>
+      <button class="faq-btn btn btn-light w-100 text-start d-flex justify-content-between align-items-center" data-value="Estado de solicitud">
+        <span class="btn-text">Estado de solicitud</span>
+        <div class="btn-icon"></div>
+      </button>
+    </div>
+  </div>
+</div>
+
     <!-- Chat Panel -->
     <div class="chat-panel" id="chatPanel">
       <!-- Header -->
@@ -138,10 +194,43 @@
       <!-- Input Area: escribir y enviar con flecha -->
       <div class="input-area">
         <div class="input-group">
+          <!-- Botón FAQ dentro del chat -->
+          <button class="chat-faq-btn btn btn-outline-secondary rounded-circle" id="chatFaqBtn" title="Preguntas frecuentes">
+            <i>?</i>
+          </button>
           <input type="text" placeholder="Escribe tu pregunta...." class="chat-input form-control">
           <button class="send-btn btn btn-primary rounded-circle" id="sendBtn">
             <span>↑</span>
           </button>
+        </div>
+        
+        <!-- Panel de FAQ para el chat -->
+        <div class="chat-faq-panel" id="chatFaqPanel">
+          <div class="chat-faq-content">
+            <div class="chat-faq-buttons">
+              <button class="chat-faq-btn-item" data-value="Como iniciar sesión">
+                <span>Como iniciar sesión</span>
+              </button>
+              <button class="chat-faq-btn-item" data-value="Como registrar un pago">
+                <span>Como registrar un pago</span>
+              </button>
+              <button class="chat-faq-btn-item" data-value="Como realizar inscripciones">
+                <span>Como realizar inscripciones</span>
+              </button>
+              <button class="chat-faq-btn-item" data-value="Como visualizar">
+                <span>Como visualizar</span>
+              </button>
+              <button class="chat-faq-btn-item" data-value="Recuperar contraseña">
+                <span>Recuperar contraseña</span>
+              </button>
+              <button class="chat-faq-btn-item" data-value="Problemas de acceso">
+                <span>Problemas de acceso</span>
+              </button>
+              <button class="chat-faq-btn-item" data-value="Estado de solicitud">
+                <span>Estado de solicitud</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -156,6 +245,6 @@
 
     <!-- Bootstrap 5.3.3 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="js/chat.js"></script>
+    <script src="js/chat1.js"></script>
   </body>
 </html>

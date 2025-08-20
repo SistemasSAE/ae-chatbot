@@ -12,17 +12,35 @@ document.addEventListener('DOMContentLoaded', function() {
     const sendBtn = document.getElementById('sendBtn');
     const chatCloseBtn = document.getElementById('chatCloseBtn');
     const welcomeCloseBtn = document.getElementById('welcomeCloseBtn');
-    const welcomeStartBtn = document.getElementById('welcomeStartBtn'); // ACTIVO - Botón restaurado
-   const faqToggleBtn = document.getElementById('faqToggleBtn');
+    const welcomeStartBtn = document.getElementById('welcomeStartBtn');
+    
+    // Elementos para FAQ principal
+    const faqToggleBtn = document.getElementById('faqToggleBtn');
     const faqPanel = document.getElementById('faqPanel');
-    const faqCloseBtn = document.getElementById('faqCloseBtn');
+
+    const faqBackBtn = document.getElementById('faqBackBtn');
     const faqButtons = document.querySelectorAll('.faq-btn');
     
+    // Elementos para FAQ del chat
+    const chatFaqBtn = document.getElementById('chatFaqBtn');
+    const chatFaqPanel = document.getElementById('chatFaqPanel');
+    const chatFaqButtons = document.querySelectorAll('.chat-faq-btn-item');
+  
     let firstSelectionMade = false;
     let currentUserType = null;
     let conversationActive = true;
     let lastUserSelection = null;
     let lastOpenPanel = null; // 'welcome' | 'chat'
+  
+    // Función para mostrar/ocultar el botón FAQ según el estado del chat
+    const toggleFaqButton = () => {
+      if (chatPanel.classList.contains('active')) {
+        faqToggleBtn.style.display = 'flex';
+      } else {
+        faqToggleBtn.style.display = 'none';
+        faqPanel.classList.remove('active');
+      }
+    };
   
     // Open panel when clicking chat icon (reopen last one if minimized)
     chatIcon.addEventListener('click', () => {
@@ -36,20 +54,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         chatIcon.classList.add('active');
       }
+      toggleFaqButton();
     });
   
     // Close welcome panel
     const closeWelcomePanel = () => {
       welcomePanel.classList.remove('active');
       chatIcon.classList.remove('active');
+      toggleFaqButton();
     };
   
-    // Close chat panel
-    const closeChatPanel = () => {
-      chatPanel.classList.remove('active');
-      resetChatState();
-    };
-
     // Minimize current panel (keep state)
     const minimizePanels = () => {
       if (chatPanel.classList.contains('active')) {
@@ -60,14 +74,18 @@ document.addEventListener('DOMContentLoaded', function() {
         lastOpenPanel = 'welcome';
       }
       chatIcon.classList.remove('active');
+      toggleFaqButton();
     };
   
     // Close all panels
     const closeAllPanels = () => {
       welcomePanel.classList.remove('active');
       chatPanel.classList.remove('active');
+      faqPanel.classList.remove('active');
+      chatFaqPanel.classList.remove('active');
       chatIcon.classList.remove('active');
       resetChatState();
+      toggleFaqButton();
     };
     
     // Event listeners para cerrar paneles
@@ -79,6 +97,106 @@ document.addEventListener('DOMContentLoaded', function() {
       closeAllPanels();
     });
 
+    // Abrir panel de FAQ principal
+    faqToggleBtn.addEventListener('click', () => {
+      faqPanel.classList.add('active');
+      faqToggleBtn.style.display = 'none';
+    });
+
+    // Cerrar panel de FAQ principal con el botón de volver
+    faqBackBtn.addEventListener('click', () => {
+      faqPanel.classList.remove('active');
+      if (chatPanel.classList.contains('active')) {
+        faqToggleBtn.style.display = 'flex';
+      }
+    });
+
+    // Cerrar panel FAQ principal al hacer clic fuera de él
+    document.addEventListener('click', (e) => {
+      if (faqPanel.classList.contains('active') && 
+          !faqPanel.contains(e.target) && 
+          !faqToggleBtn.contains(e.target)) {
+        faqPanel.classList.remove('active');
+        if (chatPanel.classList.contains('active')) {
+          faqToggleBtn.style.display = 'flex';
+        }
+      }
+    });
+
+    // Alternar visibilidad del panel FAQ del chat
+    chatFaqBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      chatFaqPanel.classList.toggle('active');
+    });
+
+    // Cerrar panel FAQ del chat al hacer clic fuera
+    document.addEventListener('click', (e) => {
+      if (chatFaqPanel.classList.contains('active') && 
+          !chatFaqPanel.contains(e.target) && 
+          !chatFaqBtn.contains(e.target)) {
+        chatFaqPanel.classList.remove('active');
+      }
+    });
+
+    // Manejar clic en preguntas frecuentes del FAQ principal
+    faqButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const question = btn.getAttribute('data-value');
+        
+        // Cerrar panel de FAQ
+        faqPanel.classList.remove('active');
+        
+        // Si el chat no está abierto, abrirlo
+        if (!chatPanel.classList.contains('active')) {
+          welcomePanel.classList.remove('active');
+          chatPanel.classList.add('active');
+          chatIcon.classList.add('active');
+          lastOpenPanel = 'chat';
+          toggleFaqButton();
+        }
+        
+        // Enviar la pregunta seleccionada al chat
+        setTimeout(() => {
+          appendUserMessage(question);
+          
+          // Procesar la respuesta
+          setTimeout(() => {
+            const response = processOptionSelection(question);
+            appendBotMessage(response.message);
+            
+            if (response.options && response.options.length > 0) {
+              showSuggestedOptions(response.options);
+            }
+          }, 800);
+        }, 500);
+      });
+    });
+
+    // Manejar clic en preguntas frecuentes del FAQ del chat
+    chatFaqButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const question = btn.getAttribute('data-value');
+        
+        // Cerrar panel de FAQ del chat
+        chatFaqPanel.classList.remove('active');
+        
+        // Enviar la pregunta seleccionada al chat
+        setTimeout(() => {
+          appendUserMessage(question);
+          
+          // Procesar la respuesta
+          setTimeout(() => {
+            const response = processOptionSelection(question);
+            appendBotMessage(response.message);
+            
+            if (response.options && response.options.length > 0) {
+              showSuggestedOptions(response.options);
+            }
+          }, 800);
+        }, 100);
+      });
+    });
+
     // Back to welcome from chat
     if (backToWelcomeBtn) {
       backToWelcomeBtn.addEventListener('click', () => {
@@ -87,6 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
           welcomePanel.classList.add('active');
           lastOpenPanel = 'welcome';
           chatIcon.classList.add('active');
+          toggleFaqButton();
         }
       });
     }
@@ -98,14 +217,9 @@ document.addEventListener('DOMContentLoaded', function() {
       chatIcon.classList.add('active');
       lastOpenPanel = 'chat';
       resetChatState();
+      toggleFaqButton();
     });
   
-   /* document.addEventListener('click', (e) => {
-      if (!chatIcon.contains(e.target) && !chatPanel.contains(e.target)) {
-        closePanel();
-      }
-    });*/
-    
     // Utility functions
     const appendUserMessage = (text) => {
       const userMsg = document.createElement('div');
@@ -524,9 +638,16 @@ return {
       scrollToBottom();
     };
   
-    sendBtn.addEventListener('click', sendMessage);
+    sendBtn.addEventListener('click', () => {
+      chatFaqPanel.classList.remove('active');
+      sendMessage();
+    });
+    
     inputEl.addEventListener('keydown', (e) => { 
-      if (e.key === 'Enter') sendMessage(); 
+      if (e.key === 'Enter') {
+        chatFaqPanel.classList.remove('active');
+        sendMessage();
+      } 
     });
   
     // Search functionality for help center - SIMPLIFICADA (Sección 2 comentada)
@@ -543,13 +664,6 @@ return {
       });
     }
 
-    // Función de búsqueda simplificada (comentada ya que la sección 2 está inactiva)
-    /*
-    const performHelpCenterSearch = (searchTerm) => {
-      // Código de búsqueda comentado
-    };
-    */
-    
     // Función para manejar respuestas inteligentes a texto libre
     const handleFreeTextResponse = (text) => {
       const lowerText = text.toLowerCase();
@@ -590,4 +704,5 @@ return {
     };
   
     attachUserTypeHandlers();
+    toggleFaqButton();
   });

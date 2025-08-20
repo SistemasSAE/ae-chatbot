@@ -307,7 +307,7 @@
     border: 1px solid #e9ecef;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     line-height: 1.4;
-    margin-left: 1px; 
+    margin-left: 25px; 
     position: relative;
 }
 
@@ -391,6 +391,484 @@
 .action-buttons .btn-text { font-size: 13px; }
 .action-buttons .btn-icon { width: 16px; height: 16px; }
 
+/* FAQ Button (Botón externo para preguntas frecuentes) */
+.faq-toggle-btn {
+    position: fixed;
+    bottom: 470px;
+    right: 470px; /* Posicionado a la izquierda del chat panel */
+    width: 50px;
+    height: 50px;
+    background: #0060ef;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 96, 239, 0.4);
+    transition: all 0.3s ease;
+}
+
+/* Ocultar botón cuando el panel está activo */
+.faq-panel.active ~ .faq-toggle-btn {
+    display: none;
+}
+
+.faq-toggle-btn:hover {
+    background: #0051d1;
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 96, 239, 0.5);
+}
+
+.askIcon {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* FAQ Panel (Panel lateral de preguntas frecuentes) */
+.faq-panel {
+    position: fixed;
+    bottom: 110px;
+    right: 460px; /* Unido al chat panel */
+    width: 320px;
+    height: 480px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 997;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.faq-panel.active {
+    display: flex;
+}
+
+/* Ajustar borde redondeado para el panel izquierdo */
+.faq-header {
+    background: #0060ef;
+    padding: 16px;
+    border-radius: 20px 0 0 0;
+    flex-shrink: 0;
+}
+
+.faq-header-text span {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Botón para cerrar FAQ y mostrar botón nuevamente */
+.faq-back-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 999;
+}
+
+.faq-back-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+/* FAQ Content */
+.faq-content {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+}
+
+.faq-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.faq-btn {
+    padding: 12px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background: #f8f9fa;
+    color: #333;
+    font-size: 14px;
+    text-align: left;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-btn:hover {
+    background: #e9ecef;
+    border-color: #ccc;
+}
+
+.faq-btn.active {
+    background: #0060ef;
+    color: white;
+    border-color: #0060ef;
+}
+
+/* Chat Panel - Ajustado para unirse con FAQ */
+.chat-panel {
+    position: fixed;
+    bottom: 110px;
+    right: 80px;
+    width: 380px;
+    max-height: calc(100vh - 200px);
+    min-height: 480px;
+    background: white;
+    border-radius: 20px; /* Esquina superior derecha redondeada */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-panel.active { 
+    display: flex; 
+}
+
+/* Ajustar posición cuando ambos paneles están activos */
+.faq-panel.active + .chat-panel.active {
+    right: 80px;
+
+    border-radius: 20px;
+}
+
+/* RESPONSIVE: Ocultar botón FAQ en móviles y ajustar panel */
+@media (max-width: 600px) {
+    /* Ocultar completamente el botón FAQ flotante */
+    .faq-toggle-btn {
+        display: none !important;
+    }
+    
+    /* En móviles, el panel FAQ debe comportarse como el chat panel */
+    .faq-panel.active {
+        right: 60%;
+        transform: translateX(50%);
+        width: 90%;
+        max-width: 320px;
+        border-radius: 20px;
+        z-index: 1001;
+        bottom: 50%;
+        transform: translate(-50%, -50%);
+        height: auto;
+        max-height: 80vh;
+    }
+    
+    .faq-panel.active::after {
+        display: none;
+    }
+    
+    .faq-header {
+        border-radius: 20px 20px 0 0;
+    }
+    
+    /* Asegurar que el panel FAQ esté por encima del chat */
+    .faq-panel.active + .chat-panel.active {
+        display: none;
+    }
+    
+    /* Ajustar el contenido para móviles */
+    .faq-content {
+        padding: 12px;
+        max-height: 60vh;
+    }
+    
+    .faq-btn {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+}
+
+/* Ajustes para tablets */
+@media (max-width: 1024px) {
+    .faq-toggle-btn {
+        bottom: 430px;
+        right: 390px;
+    }
+    
+    .faq-panel {
+        bottom: 110px;
+        right: 390px;
+        width: 340px;
+        height: 450px;
+    }
+    
+    .chat-panel {
+        right: 40px;
+        width: 340px;
+    }
+    
+    .faq-panel.active + .chat-panel.active {
+        right: 40px;
+    }
+}
+
+@media (max-width: 900px) {
+    .faq-toggle-btn {
+        right: 370px;
+    }
+    
+    .faq-panel {
+        right: 370px;
+        width: 280px;
+    }
+    
+    .chat-panel {
+        width: 320px;
+    }
+}
+
+@media (max-width: 768px) {
+    .faq-toggle-btn {
+        bottom: 370px;
+        right: 370px;
+    }
+    
+    .faq-panel {
+        bottom: 100px;
+        right: 370px;
+        width: 260px;
+        height: 420px;
+    }
+    
+    .chat-panel {
+        right: 40px;
+        width: 300px;
+        max-height: calc(100vh - 160px);
+        min-height: 420px;
+    }
+    
+    .faq-panel.active + .chat-panel.active {
+        right: 40px;
+    }
+}
+
+@media (max-width: 700px) {
+    .faq-toggle-btn {
+        right: 350px;
+    }
+    
+    .faq-panel {
+        right: 280px;
+        width: 240px;
+    }
+    
+    .chat-panel {
+        width: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    .faq-toggle-btn {
+        display: none;
+    }
+    
+    .faq-panel {
+        display: none;
+    }
+    
+    .chat-panel {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        width: auto;
+        max-height: 100vh;
+        min-height: 100vh;
+        border-radius: 0;
+        transform: none;
+    }
+    
+    .chat-header {
+        border-radius: 0;
+    }
+}
+
+/* Input Area - Ajustar para el nuevo botón FAQ */
+.input-area {
+    padding: 18px;
+    border-top: 1px solid #f0f0f0;
+    position: relative;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Botón FAQ dentro del chat */
+.chat-faq-btn {
+    width: 35px !important;
+    height: 35px !important;
+    background: #f8f9fa !important;
+    border: 1px solid #e0e0e0 !important;
+    color: #666 !important;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 2;
+}
+
+.chat-faq-btn:hover {
+    background: #e9ecef !important;
+    border-color: #ccc !important;
+    color: #333 !important;
+}
+
+.chat-faq-btn i {
+    font-style: normal;
+    font-weight: bold;
+}
+
+.chat-input {
+    border: 1px solid #e0e0e0 !important;
+    border-radius: 25px !important;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+    flex: 1;
+}
+
+.chat-input:focus {
+    border-color: #0060ef !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 96, 239, 0.25) !important;
+}
+
+.send-btn {
+    width: 35px !important;
+    height: 35px !important;
+    background: #0060ef !important;
+    border: none !important;
+    color: white !important;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.send-btn:hover {
+    background: #0051d1 !important;
+}
+
+/* Panel de FAQ para el chat */
+.chat-faq-panel {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: none;
+    max-height: 200px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+}
+
+.chat-faq-panel.active {
+    display: block;
+}
+
+.chat-faq-content {
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* Scrollbar invisible para el panel de FAQ del chat */
+.chat-faq-content::-webkit-scrollbar {
+    width: 5px;
+}
+
+.chat-faq-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-faq-content::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.chat-faq-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Para Firefox */
+.chat-faq-content {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
+}
+
+.chat-faq-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.chat-faq-btn-item {
+    padding: 10px 12px;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    background: #f8f9fa;
+    color: #333;
+    font-size: 13px;
+    text-align: left;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    width: 100%;
+}
+
+.chat-faq-btn-item:hover {
+    background: #e9ecef;
+    border-color: #ddd;
+}
+
+.chat-faq-btn-item:active {
+    background: #0060ef;
+    color: white;
+    border-color: #0060ef;
+}
+
+/* Ajustar el área de conversación para el panel FAQ */
+.conversation-area {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 0;
+    margin-bottom: 0;
+}
 /* Suggested options oara mensajes de texto */
 .suggested-options { 
     display: flex; 
@@ -436,7 +914,17 @@
 }
 
 /* Input Area */
-.input-area { padding: 18px; border-top: 1px solid #f0f0f0; }
+/* Input Area - Ajustar para el nuevo botón FAQ */
+.input-area {
+    padding: 18px;
+    border-top: 1px solid #f0f0f0;
+    position: relative;
+  }
+  .input-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 .chat-input { border: 1px solid #e0e0e0 !important; border-radius: 25px !important; font-size: 14px; outline: none; transition: border-color 0.2s ease; }
 .chat-input:focus { border-color: #0060ef !important; box-shadow: 0 0 0 0.2rem rgba(0, 96, 239, 0.25) !important; }
 .send-btn { width: 35px !important; height: 35px !important; background: #0060ef !important; border: none !important; color: white !important; font-size: 18px; cursor: pointer; transition: background 0.2s ease; display: flex !important; align-items: center; justify-content: center;}
@@ -584,7 +1072,7 @@
     background: #0060ef;
     color: white;
     padding: 20px 16px;
-    text-align: center;
+    text-align: left;
     margin: 0;
     width: 100%;
     box-shadow: 0 4px 12px rgba(0, 96, 239, 0.2);
@@ -748,7 +1236,9 @@
 
 /* Chat Footer */
 .chat-footer {
-    padding: 16px 24px;
+    display: flex;
+    justify-content: center;
+    padding: 12px 21px;
     border-top: 1px solid #f0f0f0;
     text-align: center;
     flex-shrink: 0;
