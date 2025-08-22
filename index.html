@@ -25,7 +25,7 @@
       </div>
       <!-- Botón de cierre que aparece cuando el chat está activo -->
       <div class="chat-close-btn" id="chatCloseBtn">
-        <span class="close-x">×</span>
+        <img src="images/image.png" alt="Close x" class="close-x">
       </div>
     </div>
 
@@ -42,7 +42,7 @@
               <span class="fw-medium">Soy Victor, tu<br>Asistente Virtual</span>
             </div>
           </div>
-          <button class="welcome-close-btn btn btn-link text-white p-2" id="welcomeCloseBtn" title="Cerrar">
+          <button class="welcome-close-btn text-white p-2" id="welcomeCloseBtn" title="Cerrar">
             <span>×</span>
           </button>
         </div>
@@ -148,9 +148,9 @@
             </div>
           </div>
           <div class="d-flex gap-2">
-            <button class="header-btn back-btn btn btn-link text-white p-2" id="backToWelcomeBtn" title="Volver al inicio">←</button>
-            <button class="header-btn refresh-btn btn btn-link text-white p-2" id="refreshBtn" title="Reiniciar chat">↻</button>
-            <button class="header-btn minimize-btn btn btn-link text-white p-2" id="headerCloseBtn" title="Minimizar chat">–</button>
+            <button class="header-btn back-btn btn text-white p-2" id="backToWelcomeBtn" title="Volver al inicio">←</button>
+            <button class="header-btn refresh-btn btn text-white p-2" id="refreshBtn" title="Reiniciar chat">↻</button>
+            <button class="header-btn minimize-btn btn text-white p-2" id="headerCloseBtn" title="Minimizar chat">–</button>
           </div>
         </div>
       </div>
@@ -229,18 +229,53 @@
           </div>
         </div>
       </div>
+          <!-- Panel de Confirmación de Cierre -->
+          <div class="confirmation-panel" id="confirmationPanel">
+            <div class="confirmation-content">
+              <h5>¿Estás seguro de que quieres cerrar el chat?</h5>
+              <p>Se perderá el historial de esta conversación.</p>
+              <div class="confirmation-buttons">
+                <button class="confirmation-btn confirm-close-btn" id="confirmCloseBtn">Sí, cerrar</button>
+                <button class="confirmation-btn cancel-close-btn" id="cancelCloseBtn">Cancelar</button>
+              </div>
+            </div>
+          </div>
 
+          <!-- Panel de Valoración -->
+          <div class="rating-panel" id="ratingPanel">
+            <div class="rating-content">
+              <h5>¡Valora nuestra atención!</h5>
+              <p>¿Cómo calificarías tu experiencia con nuestro chatbot?</p>
+              
+              <div class="rating-stars">
+                <span class="star" data-value="1">★</span>
+                <span class="star" data-value="2">★</span>
+                <span class="star" data-value="3">★</span>
+                <span class="star" data-value="4">★</span>
+                <span class="star" data-value="5">★</span>
+              </div>
+              
+              <div class="rating-comment">
+                <textarea id="ratingComment" placeholder="Opcional: Déjanos tus comentarios..."></textarea>
+              </div>
+              
+              <div class="rating-buttons">
+                <button class="rating-btn submit-rating-btn" id="submitRatingBtn">Enviar valoración</button>
+                <button class="rating-btn skip-rating-btn" id="skipRatingBtn">Omitir</button>
+              </div>
+            </div>
+          </div>
       <!-- Footer -->
       <div class="chat-footer">
         <span>Desarrollado por: <b>AsistEscolar.com</b></span>
       </div>
 
       <!-- Close Button -->
-      <button class="panel-close-btn btn btn-primary rounded-circle" id="panelCloseBtn">×</button>
+      <button class="panel-close-btn btn rounded-circle" id="panelCloseBtn">Χ</button>
     </div>
 
     <!-- Bootstrap 5.3.3 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="js/chat1.js"></script>
+    <script src="js/chat.js"></script>
   </body>
 </html>

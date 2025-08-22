@@ -54,11 +54,7 @@
 }
 
 .close-x {
-    color: white;
-    font-size: 32px;
-    font-weight: bold;
-    line-height: 1;
-    user-select: none;
+ width: 100%;
 }
 
 /* Estado activo: ocultar imagen y mostrar botón de cierre */
@@ -931,8 +927,32 @@
 .send-btn:hover { background: #0051d1 !important; }
 
 /* Close button */
-.panel-close-btn { position:absolute; top:-15px; right:-15px; width:20px !important; height:20px !important; background:#0060ef !important; border:none !important; color:#fff !important; border-radius:50% !important; display:flex !important; align-items:center; justify-content:center; }
-.panel-close-btn:hover { background:#0051d1 !important; }
+.panel-close-btn { position:absolute; top:68.6%; right:30px; width:10px !important; height:24px !important; background-color: white; border:none !important; color:#757575 !important; border-radius:50% !important; display:flex !important; align-items:center; justify-content:center; }
+.panel-close-btn:hover {color:#fc4343 !important; }
+/* Estilos para el botón de cerrar del panel en responsive */
+.panel-close-btn {
+    display: none; /* Oculto por defecto en desktop */
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+/* Mostrar el botón solo en dispositivos móviles y cuando el panel esté activo */
+@media (max-width: 768px) {
+    .chat-panel.active .panel-close-btn {
+        display: flex;
+        top: 65px; /* Ajustar posición para que no se superponga con el header */
+    }
+}
+
+
+/* Efecto hover para mejor UX */
+.panel-close-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
 
 /* Welcome Panel Styles */
 .welcome-panel {
@@ -1722,3 +1742,201 @@
     }
     .conversation-area { padding: 12px; }
 }
+/* Asegurar que el panel de confirmación no tenga blur y esté por encima */
+.confirmation-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  }
+  
+  .confirmation-panel.active {
+    display: flex;
+  }
+  
+  .confirmation-content {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 350px;
+    width: 90%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 2001; /* Mayor z-index para estar por encima */
+  }
+  
+  .confirmation-content h5 {
+    color: #0060ef;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  
+  .confirmation-content p {
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .confirmation-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .confirmation-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .confirm-close-btn {
+    background: #dc3545;
+    color: white;
+  }
+  
+  .confirm-close-btn:hover {
+    background: #c82333;
+  }
+  
+  .cancel-close-btn {
+    background: #6c757d;
+    color: white;
+  }
+  
+  .cancel-close-btn:hover {
+    background: #5a6268;
+  }
+  
+  /* Panel de Valoración */
+  .rating-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1002;
+  }
+  
+  .rating-panel.active {
+    display: flex;
+  }
+  
+  .rating-content {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .rating-content h5 {
+    color: #0060ef;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  
+  .rating-content p {
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .rating-stars {
+    margin: 20px 0;
+    font-size: 32px;
+  }
+  
+  .star {
+    cursor: pointer;
+    color: #ddd;
+    margin: 0 5px;
+    transition: color 0.2s ease;
+  }
+  
+  .star:hover,
+  .star.active {
+    color: #ffc107;
+  }
+  
+  .rating-comment {
+    margin: 20px 0;
+  }
+  
+  .rating-comment textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    resize: vertical;
+    min-height: 80px;
+    font-family: inherit;
+  }
+  
+  .rating-comment textarea:focus {
+    outline: none;
+    border-color: #0060ef;
+  }
+  
+  .rating-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .rating-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .submit-rating-btn {
+    background: #0060ef;
+    color: white;
+  }
+  
+  .submit-rating-btn:hover {
+    background: #0051d1;
+  }
+  
+  .skip-rating-btn {
+    background: #6c757d;
+    color: white;
+  }
+  
+  .skip-rating-btn:hover {
+    background: #5a6268;
+  }
+  
+  /* Responsive */
+  @media (max-width: 480px) {
+    .confirmation-content,
+    .rating-content {
+      padding: 20px;
+      margin: 20px;
+    }
+    
+    .confirmation-buttons,
+    .rating-buttons {
+      flex-direction: column;
+    }
+    
+    .rating-stars {
+      font-size: 28px;
+    }
+  }
+  
