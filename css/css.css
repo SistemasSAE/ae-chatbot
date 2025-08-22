@@ -1,7 +1,7 @@
 /* Chat Icon Styles */
 .chat-icon {
     position: fixed;
-    bottom: 20px; 
+    bottom: 20px;
     right: 20px;
     width: 60px;
     height: 60px;
@@ -22,9 +22,6 @@
     outline-offset: -2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     position: relative;
-    top: 0;
-    left: 0;
-    overflow: hidden;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
@@ -54,10 +51,10 @@
 }
 
 .close-x {
- width: 100%;
+    width: 100%;
 }
 
-/* Estado activo: ocultar imagen y mostrar botón de cierre */
+/* Estado activo del chat icon */
 .chat-icon.active .chat-image {
     opacity: 0;
     transform: scale(0.8);
@@ -68,6 +65,7 @@
     visibility: visible;
 }
 
+/* Chat bubble */
 .chat-bubble {
     position: absolute;
     top: -30px;
@@ -88,8 +86,6 @@
     position: absolute;
     bottom: -6px;
     right: 18px;
-    width: 0;
-    height: 0;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-top: 6px solid #0060ef;
@@ -102,19 +98,18 @@
 }
 
 /* Hover effects */
-.chat-icon:hover { transform: scale(1.1); }
-.chat-icon:hover .chat-bubble { opacity: 1; transform: translateY(0) scale(1); }
+.chat-icon:hover { 
+    transform: scale(1.1); 
+}
 
-/* Cuando el chat está activo, no mostrar el bubble */
+.chat-icon:hover .chat-bubble { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+}
+
 .chat-icon.active .chat-bubble {
     opacity: 0;
     pointer-events: none;
-}
-
-.chat-box{
-    color: #FFFFFfFF;
-    font-size: 13px;
-    font-weight: 500;
 }
 
 /* Chat Panel */
@@ -133,49 +128,63 @@
     flex-direction: column;
     overflow: hidden;
 }
-.chat-panel.active { display: flex; }
 
-/* Header */
-.chat-header { 
-    background: #0060ef; 
-    padding: 16px; 
-    border-radius: 20px 20px 0 0; 
-    flex-shrink: 0; 
-}
-.header-text span { 
-    color: #fff; 
-    font-size: 14px; 
-    white-space: normal; 
-    font-weight: 500;
-    line-height: 1.3; 
-}
-
-/* Avatar con imagen */
-.avatar { 
-    width: 36px; 
-    height: 36px; 
-    background: #fff; 
-    border-radius: 50%; 
+.chat-panel.active { 
     display: flex; 
-    align-items: center; 
+}
+
+/* Header común para todos los paneles */
+.chat-header, .faq-header, .welcome-header {
+    background: #0060ef;
+    padding: 16px;
+    border-radius: 20px 20px 0 0;
+    flex-shrink: 0;
+}
+
+.faq-header {
+    border-radius: 20px 0 0 0;
+}
+
+.header-text span, .faq-header-text span, .welcome-header-text span {
+    color: #fff;
+    font-size: 14px;
+    white-space: normal;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.faq-header-text span {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Avatar común */
+.avatar, .welcome-avatar {
+    width: 36px;
+    height: 36px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
     justify-content: center;
     overflow: hidden;
-    flex-shrink: 0; /
+    flex-shrink: 0;
 }
-.avatar-image {
+
+.avatar-image, .welcome-avatar-image, .bot-avatar-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
 }
 
-/* Botones del header - Responsive y funcionales */
-.header-btn { 
-    background: transparent !important; 
-    border: none !important; 
-    color: #fff !important; 
-    font-size: 18px; 
-    border-radius: 8px !important; 
+/* Botones de header comunes */
+.header-btn, .welcome-close-btn {
+    background: transparent !important;
+    border: none !important;
+    color: #fff !important;
+    font-size: 18px;
+    border-radius: 8px !important;
     padding: 8px 10px !important;
     min-width: 36px;
     height: 36px;
@@ -186,30 +195,21 @@
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    flex-shrink: 0; 
+    flex-shrink: 0;
 }
 
-.header-btn:hover { 
-    background: rgba(255,255,255,0.15) !important; 
+.header-btn:hover, .welcome-close-btn:hover {
+    background: rgba(255,255,255,0.15) !important;
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
-.header-btn:active {
+.header-btn:active, .welcome-close-btn:active {
     transform: translateY(0);
     box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 
-/* Animación especial para el botón refresh */
-.refresh-btn {
-    transition: all 0.3s ease !important;
-}
-
-.refresh-btn:hover {
-    background: rgba(255,255,255,0.2) !important;
-}
-
-/* Tooltip para los botones */
+/* Tooltip para botones */
 .header-btn[title]:hover::after {
     content: attr(title);
     position: absolute;
@@ -226,88 +226,33 @@
     pointer-events: none;
 }
 
-/* Feedback del refresh */
-.refresh-feedback {
-    animation: slideInDown 0.3s ease;
+/* Conversation Area */
+.conversation-area {
+    flex: 1;
+    padding: 50px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 0;
 }
 
-@keyframes slideInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Responsive para botones del header */
-@media (max-width: 480px) {
-    .header-btn {
-        min-width: 32px;
-        height: 32px;
-        font-size: 16px;
-        padding: 6px 8px !important;
-    }
-    
-    .header-text span {
-        font-size: 13px;
-        line-height: 1.2;
-    }
-    
-    .avatar {
-        width: 32px; 
-        height: 32px;
-    }
-}
-
-@media (max-width: 360px) {
-    .header-btn {
-        min-width: 28px;
-        height: 28px;
-        font-size: 14px;
-        padding: 4px 6px !important;
-    }
-    
-    .header-text span {
-        font-size: 12px; 
-        line-height: 1.1;
-    }
-    
-    .avatar {
-        width: 28px; 
-        height: 28px;
-    }
-}
-
-/* Conversation Area (solo intro + 3 botones) */
-.conversation-area { 
-    flex: 1; 
-    padding: 50px; 
-    overflow-y: auto; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 16px; 
-    min-height: 0; 
-}
-
-/* Mensajes del bot */
-.bot-message { 
-    background: #f8f9fa; 
-    padding: 12px 16px; 
-    border-radius: 18px 18px 18px 4px; 
-    max-width: 90%; 
-    align-self: flex-start; 
-    font-size: 14px; 
+/* Mensajes */
+.bot-message {
+    background: #f8f9fa;
+    padding: 12px 16px;
+    border-radius: 18px 18px 18px 4px;
+    max-width: 90%;
+    align-self: flex-start;
+    font-size: 14px;
     border: 1px solid #e9ecef;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     line-height: 1.4;
-    margin-left: 25px; 
+    margin-left: 25px;
     position: relative;
+    animation: messageSlideIn 0.3s ease;
 }
 
-/* Avatar del bot en las respuestas*/
 .bot-avatar {
     position: absolute;
     left: -34px;
@@ -326,19 +271,11 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.bot-avatar-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-/* Mensajes del usuario - Estilo de chat */
 .user-selection {
     background: #0060ef;
     color: white;
     padding: 10px 12px;
-    border-radius: 18px 18px 4px 18px; 
+    border-radius: 18px 18px 4px 18px;
     max-width: 90%;
     align-self: flex-end;
     font-size: 14px;
@@ -347,6 +284,7 @@
     position: relative;
     word-wrap: break-word;
     line-height: 1.4;
+    animation: messageSlideIn 0.3s ease;
 }
 
 .user-selection span {
@@ -354,44 +292,185 @@
     font-weight: 500;
 }
 
-/* User type buttons*/
-.user-type-buttons { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 5px; 
-}
-.user-type-buttons .option-btn { 
-    flex: 0 1 auto; 
-    min-width: 90px; 
-    max-width: 125px; 
-    padding: 10px 14px !important; 
-    border-radius: 12px !important; 
-}
-.user-type-buttons .btn-text { font-size: 11px; }
-.user-type-buttons .btn-icon { width: 15px; height: 15px; }
-
-/* Action buttons: mismo formato que user-type-buttons */
-.action-buttons { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 8px; 
+/* Botones de opciones comunes */
+.user-type-buttons, .action-buttons, .suggested-options, .main-buttons, .option-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
     margin-top: 8px;
 }
-.action-buttons .option-btn { 
-    flex: 0 1 auto;
-    min-width: 90px; 
-    max-width: 120px; /* Ancho máximo para evitar que se alarguen demasiado */
-    padding: 8px 10px !important; 
-    border-radius: 12px !important; 
-}
-.action-buttons .btn-text { font-size: 13px; }
-.action-buttons .btn-icon { width: 16px; height: 16px; }
 
-/* FAQ Button (Botón externo para preguntas frecuentes) */
+.user-type-buttons, .main-buttons {
+    gap: 5px;
+}
+
+.option-btn {
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background-color: #fff;
+    color: #333;
+    font-size: 11px;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 90px;
+    max-width: 125px;
+    margin-bottom: 8px;
+}
+
+.user-type-buttons .option-btn, .main-buttons .option-btn {
+    flex: 0 1 auto;
+    padding: 10px 14px !important;
+}
+
+.action-buttons .option-btn, .suggested-options .option-btn {
+    flex: 0 1 auto;
+    min-width: 90px;
+    max-width: 120px;
+    padding: 8px 10px !important;
+}
+
+.action-buttons .btn-text, .suggested-options .btn-text {
+    font-size: 13px;
+}
+
+.suggested-options .btn-text {
+    font-size: 12px;
+}
+
+.btn-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.btn-text {
+    flex-grow: 1;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: wrap;
+}
+
+.btn-icon {
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.btn-icon::after {
+    content: "→";
+    display: block;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.user-type-buttons .btn-icon, .main-buttons .btn-icon {
+    width: 15px;
+    height: 15px;
+}
+
+/* Estados de botones */
+.option-btn.active {
+    background: #0060ef !important;
+    border-color: #0060ef !important;
+}
+
+.option-btn.active .btn-text {
+    color: #fff;
+}
+
+.option-btn.active .btn-icon::after {
+    background: #0060ef;
+}
+
+.option-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.option-btn:hover:not(.disabled):not(.active) {
+    background-color: #f8f9fa;
+    border-color: #ccc;
+}
+
+/* Input Area */
+.input-area {
+    padding: 18px;
+    border-top: 1px solid #f0f0f0;
+    position: relative;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.chat-input {
+    border: 1px solid #e0e0e0 !important;
+    border-radius: 25px !important;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+    flex: 1;
+}
+
+.chat-input:focus {
+    border-color: #0060ef !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 96, 239, 0.25) !important;
+}
+
+.send-btn, .chat-faq-btn {
+    width: 35px !important;
+    height: 35px !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.send-btn {
+    background: #0060ef !important;
+    border: none !important;
+    color: white !important;
+    font-size: 18px;
+}
+
+.send-btn:hover {
+    background: #0051d1 !important;
+}
+
+.chat-faq-btn {
+    background: #f8f9fa !important;
+    border: 1px solid #e0e0e0 !important;
+    color: #666 !important;
+    font-size: 16px;
+    z-index: 2;
+}
+
+.chat-faq-btn:hover {
+    background: #e9ecef !important;
+    border-color: #ccc !important;
+    color: #333 !important;
+}
+
+/* FAQ Button */
 .faq-toggle-btn {
     position: fixed;
     bottom: 470px;
-    right: 470px; /* Posicionado a la izquierda del chat panel */
+    right: 470px;
     width: 50px;
     height: 50px;
     background: #0060ef;
@@ -406,11 +485,6 @@
     transition: all 0.3s ease;
 }
 
-/* Ocultar botón cuando el panel está activo */
-.faq-panel.active ~ .faq-toggle-btn {
-    display: none;
-}
-
 .faq-toggle-btn:hover {
     background: #0051d1;
     transform: scale(1.05);
@@ -423,11 +497,11 @@
     font-weight: bold;
 }
 
-/* FAQ Panel (Panel lateral de preguntas frecuentes) */
+/* FAQ Panel */
 .faq-panel {
     position: fixed;
     bottom: 110px;
-    right: 460px; /* Unido al chat panel */
+    right: 460px;
     width: 320px;
     height: 480px;
     background: white;
@@ -443,21 +517,6 @@
     display: flex;
 }
 
-/* Ajustar borde redondeado para el panel izquierdo */
-.faq-header {
-    background: #0060ef;
-    padding: 16px;
-    border-radius: 20px 0 0 0;
-    flex-shrink: 0;
-}
-
-.faq-header-text span {
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-/* Botón para cerrar FAQ y mostrar botón nuevamente */
 .faq-back-btn {
     position: absolute;
     top: 16px;
@@ -482,7 +541,6 @@
     transform: scale(1.1);
 }
 
-/* FAQ Content */
 .faq-content {
     flex: 1;
     padding: 16px;
@@ -521,440 +579,7 @@
     border-color: #0060ef;
 }
 
-/* Chat Panel - Ajustado para unirse con FAQ */
-.chat-panel {
-    position: fixed;
-    bottom: 110px;
-    right: 80px;
-    width: 380px;
-    max-height: calc(100vh - 200px);
-    min-height: 480px;
-    background: white;
-    border-radius: 20px; /* Esquina superior derecha redondeada */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    z-index: 999;
-    display: none;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.chat-panel.active { 
-    display: flex; 
-}
-
-/* Ajustar posición cuando ambos paneles están activos */
-.faq-panel.active + .chat-panel.active {
-    right: 80px;
-
-    border-radius: 20px;
-}
-
-/* RESPONSIVE: Ocultar botón FAQ en móviles y ajustar panel */
-@media (max-width: 600px) {
-    /* Ocultar completamente el botón FAQ flotante */
-    .faq-toggle-btn {
-        display: none !important;
-    }
-    
-    /* En móviles, el panel FAQ debe comportarse como el chat panel */
-    .faq-panel.active {
-        right: 60%;
-        transform: translateX(50%);
-        width: 90%;
-        max-width: 320px;
-        border-radius: 20px;
-        z-index: 1001;
-        bottom: 50%;
-        transform: translate(-50%, -50%);
-        height: auto;
-        max-height: 80vh;
-    }
-    
-    .faq-panel.active::after {
-        display: none;
-    }
-    
-    .faq-header {
-        border-radius: 20px 20px 0 0;
-    }
-    
-    /* Asegurar que el panel FAQ esté por encima del chat */
-    .faq-panel.active + .chat-panel.active {
-        display: none;
-    }
-    
-    /* Ajustar el contenido para móviles */
-    .faq-content {
-        padding: 12px;
-        max-height: 60vh;
-    }
-    
-    .faq-btn {
-        padding: 10px 12px;
-        font-size: 13px;
-    }
-}
-
-/* Ajustes para tablets */
-@media (max-width: 1024px) {
-    .faq-toggle-btn {
-        bottom: 430px;
-        right: 390px;
-    }
-    
-    .faq-panel {
-        bottom: 110px;
-        right: 390px;
-        width: 340px;
-        height: 450px;
-    }
-    
-    .chat-panel {
-        right: 40px;
-        width: 340px;
-    }
-    
-    .faq-panel.active + .chat-panel.active {
-        right: 40px;
-    }
-}
-
-@media (max-width: 900px) {
-    .faq-toggle-btn {
-        right: 370px;
-    }
-    
-    .faq-panel {
-        right: 370px;
-        width: 280px;
-    }
-    
-    .chat-panel {
-        width: 320px;
-    }
-}
-
-@media (max-width: 768px) {
-    .faq-toggle-btn {
-        bottom: 370px;
-        right: 370px;
-    }
-    
-    .faq-panel {
-        bottom: 100px;
-        right: 370px;
-        width: 260px;
-        height: 420px;
-    }
-    
-    .chat-panel {
-        right: 40px;
-        width: 300px;
-        max-height: calc(100vh - 160px);
-        min-height: 420px;
-    }
-    
-    .faq-panel.active + .chat-panel.active {
-        right: 40px;
-    }
-}
-
-@media (max-width: 700px) {
-    .faq-toggle-btn {
-        right: 350px;
-    }
-    
-    .faq-panel {
-        right: 280px;
-        width: 240px;
-    }
-    
-    .chat-panel {
-        width: 280px;
-    }
-}
-
-@media (max-width: 480px) {
-    .faq-toggle-btn {
-        display: none;
-    }
-    
-    .faq-panel {
-        display: none;
-    }
-    
-    .chat-panel {
-        left: 0;
-        right: 0;
-        bottom: 0;
-        top: 0;
-        width: auto;
-        max-height: 100vh;
-        min-height: 100vh;
-        border-radius: 0;
-        transform: none;
-    }
-    
-    .chat-header {
-        border-radius: 0;
-    }
-}
-
-/* Input Area - Ajustar para el nuevo botón FAQ */
-.input-area {
-    padding: 18px;
-    border-top: 1px solid #f0f0f0;
-    position: relative;
-}
-
-.input-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-/* Botón FAQ dentro del chat */
-.chat-faq-btn {
-    width: 35px !important;
-    height: 35px !important;
-    background: #f8f9fa !important;
-    border: 1px solid #e0e0e0 !important;
-    color: #666 !important;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    z-index: 2;
-}
-
-.chat-faq-btn:hover {
-    background: #e9ecef !important;
-    border-color: #ccc !important;
-    color: #333 !important;
-}
-
-.chat-faq-btn i {
-    font-style: normal;
-    font-weight: bold;
-}
-
-.chat-input {
-    border: 1px solid #e0e0e0 !important;
-    border-radius: 25px !important;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.2s ease;
-    flex: 1;
-}
-
-.chat-input:focus {
-    border-color: #0060ef !important;
-    box-shadow: 0 0 0 0.2rem rgba(0, 96, 239, 0.25) !important;
-}
-
-.send-btn {
-    width: 35px !important;
-    height: 35px !important;
-    background: #0060ef !important;
-    border: none !important;
-    color: white !important;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background 0.2s ease;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.send-btn:hover {
-    background: #0051d1 !important;
-}
-
-/* Panel de FAQ para el chat */
-.chat-faq-panel {
-    position: absolute;
-    bottom: calc(100% + 10px);
-    left: 0;
-    right: 0;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-    z-index: 1000;
-    display: none;
-    max-height: 200px;
-    overflow: hidden;
-    border: 1px solid #e0e0e0;
-}
-
-.chat-faq-panel.active {
-    display: block;
-}
-
-.chat-faq-content {
-    padding: 10px;
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-/* Scrollbar invisible para el panel de FAQ del chat */
-.chat-faq-content::-webkit-scrollbar {
-    width: 5px;
-}
-
-.chat-faq-content::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.chat-faq-content::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-}
-
-.chat-faq-content::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-/* Para Firefox */
-.chat-faq-content {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
-}
-
-.chat-faq-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.chat-faq-btn-item {
-    padding: 10px 12px;
-    border: 1px solid #f0f0f0;
-    border-radius: 8px;
-    background: #f8f9fa;
-    color: #333;
-    font-size: 13px;
-    text-align: left;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    width: 100%;
-}
-
-.chat-faq-btn-item:hover {
-    background: #e9ecef;
-    border-color: #ddd;
-}
-
-.chat-faq-btn-item:active {
-    background: #0060ef;
-    color: white;
-    border-color: #0060ef;
-}
-
-/* Ajustar el área de conversación para el panel FAQ */
-.conversation-area {
-    flex: 1;
-    padding: 16px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    min-height: 0;
-    margin-bottom: 0;
-}
-/* Suggested options oara mensajes de texto */
-.suggested-options { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 8px; 
-    margin-top: 8px;
-}
-.suggested-options .option-btn { 
-    flex: 0 1 auto; 
-    min-width: 90px; 
-    max-width: 120px; 
-    padding: 8px 10px !important; 
-    border-radius: 12px !important; 
-}
-.suggested-options .btn-text { font-size: 12px; }
-.suggested-options .btn-icon { width: 16px; height: 16px; }
-
-/* Estado de selección: solo permitir uno y mostrar en azul */
-.user-type-buttons .option-btn.active,
-.action-buttons .option-btn.active,
-.suggested-options .option-btn.active {
-  background: #0060ef !important;
-  border-color: #0060ef !important;
-}
-.user-type-buttons .option-btn.active .btn-text,
-.action-buttons .option-btn.active .btn-text,
-.suggested-options .option-btn.active .btn-text { 
-    color: #fff; 
-}
-.user-type-buttons .option-btn.active .btn-icon::after,
-.action-buttons .option-btn.active .btn-icon::after,
-.suggested-options .option-btn.active .btn-icon::after { 
-    background: #0060ef; 
-}
-
-/* Botones deshabilitados después de la selección */
-.user-type-buttons .option-btn.disabled,
-.action-buttons .option-btn.disabled,
-.suggested-options .option-btn.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-/* Input Area */
-/* Input Area - Ajustar para el nuevo botón FAQ */
-.input-area {
-    padding: 18px;
-    border-top: 1px solid #f0f0f0;
-    position: relative;
-  }
-  .input-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-.chat-input { border: 1px solid #e0e0e0 !important; border-radius: 25px !important; font-size: 14px; outline: none; transition: border-color 0.2s ease; }
-.chat-input:focus { border-color: #0060ef !important; box-shadow: 0 0 0 0.2rem rgba(0, 96, 239, 0.25) !important; }
-.send-btn { width: 35px !important; height: 35px !important; background: #0060ef !important; border: none !important; color: white !important; font-size: 18px; cursor: pointer; transition: background 0.2s ease; display: flex !important; align-items: center; justify-content: center;}
-.send-btn:hover { background: #0051d1 !important; }
-
-/* Close button */
-.panel-close-btn { position:absolute; top:68.6%; right:30px; width:10px !important; height:24px !important; background-color: white; border:none !important; color:#757575 !important; border-radius:50% !important; display:flex !important; align-items:center; justify-content:center; }
-.panel-close-btn:hover {color:#fc4343 !important; }
-/* Estilos para el botón de cerrar del panel en responsive */
-.panel-close-btn {
-    display: none; /* Oculto por defecto en desktop */
-    border: none;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 1000;
-}
-
-/* Mostrar el botón solo en dispositivos móviles y cuando el panel esté activo */
-@media (max-width: 768px) {
-    .chat-panel.active .panel-close-btn {
-        display: flex;
-        top: 65px; /* Ajustar posición para que no se superponga con el header */
-    }
-}
-
-
-/* Efecto hover para mejor UX */
-.panel-close-btn:hover {
-    background-color: #c82333;
-    transform: scale(1.05);
-}
-
-/* Welcome Panel Styles */
+/* Welcome Panel */
 .welcome-panel {
     position: fixed;
     bottom: 110px;
@@ -968,7 +593,7 @@
     z-index: 1001;
     display: none;
     flex-direction: column;
-    overflow: hidden; 
+    overflow: hidden;
     animation: slideInUp 0.3s ease;
     justify-content: space-between;
 }
@@ -977,98 +602,20 @@
     display: flex;
 }
 
-@keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Welcome Header */
-.welcome-header {
-    background: #0060ef;
-    padding: 14px;
-    border-radius: 20px 20px 0 0;
-    flex-shrink: 0;
-}
-
-.welcome-header-text span {
-    color: #fff;
-    font-size: 13px;
-    white-space: normal;
-    font-weight: 500;
-    line-height: 1.3;
-}
-
-.welcome-avatar {
-    width: 32px;
-    height: 32px;
-    background: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    flex-shrink: 0;
-}
-
-.welcome-avatar-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.welcome-close-btn {
-    background: transparent !important;
-    border: none !important;
-    color: #fff !important;
-    font-size: 20px;
-    border-radius: 8px !important;
-    padding: 6px 8px !important;
-    min-width: 32px;
-    height: 32px;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
-}
-
-.welcome-close-btn:hover {
-    background: rgba(255,255,255,0.15) !important;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-
-.welcome-close-btn:active {
-    transform: translateY(0);
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-}
-
-/* Welcome Content */
 .welcome-content {
     flex: 1;
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 18px; /* Ajusta este valor para subir/bajar los recuadros */
+    gap: 18px;
     min-height: 0;
-    overflow-y: auto; /* Agrega scroll vertical cuando sea necesario */
-    scrollbar-width: thin; /* Para Firefox */
-    scrollbar-color: #c1c1c1 #f1f1f1; /* Para Firefox */
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #c1c1c1 #f1f1f1;
     position: relative;
-    max-height: calc(100% - 120px); /* Asegura que no ocupe todo el espacio */
+    max-height: calc(100% - 120px);
 }
 
-/* Estilos personalizados para la barra de scroll (Webkit browsers) */
 .welcome-content::-webkit-scrollbar {
     width: 6px;
 }
@@ -1087,7 +634,6 @@
     background: #a8a8a8;
 }
 
-/* Welcome Message Section - Fondo azul con texto blanco */
 .welcome-message {
     background: #0060ef;
     color: white;
@@ -1115,8 +661,6 @@
     opacity: 0.95;
 }
 
-/* Welcome Sections - Recuadros blancos */
-/* Estilos base para todas las secciones */
 .welcome-section {
     border-top: 1px solid #FFFFFF;
     padding: 20px;
@@ -1125,7 +669,6 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* ===== SECCIÓN 1 - COMENZAR CONVERSACIÓN (ACTIVA) ===== */
 .section-1 {
     margin: -30px 20px 0 20px;
 }
@@ -1171,73 +714,18 @@
 .welcome-icon {
     font-size: 16px;
     font-style: normal;
-    transform: rotate(0deg);
 }
 
-/* ===== SECCIÓN 2 - CENTRO DE AYUDA (COMENTADA HASTA QUE SE IMPLEMENTE) ===== */
-/* 
-.section-2 {
-    margin: 0 20px 0 20px;
-}
-
-.welcome-section h5 {
-    color: #333;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 14px;
-    margin-top: 0;
-}
-
-/* Search Section */
-.welcome-search {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.search-icon {
-    position: absolute;
-    left: 14px;
-    color: #999;
-    font-size: 14px;
-    font-style: normal;
-    z-index: 1;
-}
-
-.welcome-search-input {
-    width: 100%;
-    padding: 12px 14px 12px 42px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 14px;
-    outline: none;
-    transition: all 0.2s ease;
-    background: #f8f9fa;
-    color: #333;
-}
-
-.welcome-search-input:focus {
-    border-color: #0060ef;
-    box-shadow: 0 0 0 0.2rem rgba(0, 96, 239, 0.15);
-    background: white;
-}
-
-.welcome-search-input::placeholder {
-    color: #999;
-    font-weight: 400;
-}
-*/
-
-/* Welcome Footer */
-.welcome-footer {
+.welcome-footer, .chat-footer {
     padding: 10px 18px;
     border-top: 1px solid #f0f0f0;
     text-align: center;
     flex-shrink: 0;
     background: #f8f9fa;
     margin-top: auto;
-    position: relative;
-    z-index: 1;
+}
+
+.welcome-footer {
     border-radius: 0 0 20px 20px;
     box-shadow: inset 0 1px 0 rgba(0,0,0,0.05);
     min-height: 40px;
@@ -1246,61 +734,391 @@
     justify-content: center;
 }
 
-.welcome-footer span {
+.welcome-footer span, .chat-footer span {
     color: #999;
     font-size: 11px;
     display: block;
-    line-height: 4;
-    text-align: center;
 }
 
-/* Chat Footer */
-.chat-footer {
-    display: flex;
-    justify-content: center;
-    padding: 12px 21px;
-    border-top: 1px solid #f0f0f0;
-    text-align: center;
-    flex-shrink: 0;
-    background: #f8f9fa;
+.welcome-footer span {
+    line-height: 4;
 }
 
 .chat-footer span {
-    color: #999;
     font-size: 12px;
 }
 
-/* Responsive para Welcome Panel - Siguiendo el mismo patrón que chat-panel */
+/* Panel de FAQ para el chat */
+.chat-faq-panel {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: none;
+    max-height: 200px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+}
+
+.chat-faq-panel.active {
+    display: block;
+}
+
+.chat-faq-content {
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.chat-faq-content::-webkit-scrollbar {
+    width: 5px;
+}
+
+.chat-faq-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-faq-content::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.chat-faq-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.chat-faq-content {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
+}
+
+.chat-faq-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.chat-faq-btn-item {
+    padding: 10px 12px;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    background: #f8f9fa;
+    color: #333;
+    font-size: 13px;
+    text-align: left;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    width: 100%;
+}
+
+.chat-faq-btn-item:hover {
+    background: #e9ecef;
+    border-color: #ddd;
+}
+
+.chat-faq-btn-item:active {
+    background: #0060ef;
+    color: white;
+    border-color: #0060ef;
+}
+
+/* Close button */
+.panel-close-btn {
+    position: absolute;
+    top: 70%;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    color: rgb(121, 121, 121);
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    transition: all 0.2s ease;
+}
+
+.panel-close-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+    color: #ff4545;
+}
+/* Asegurar que el botón sea visible en todos los dispositivos */
+.chat-panel.active .panel-close-btn,
+.welcome-panel.active .panel-close-btn {
+    display: flex;
+}
+ 
+/* Paneles de confirmación y rating */
+.confirmation-panel, .rating-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.confirmation-panel.active, .rating-panel.active {
+    display: flex;
+}
+
+.confirmation-content, .rating-content {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 350px;
+    width: 90%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 2001;
+}
+
+.rating-content {
+    max-width: 400px;
+}
+
+.confirmation-content h5, .rating-content h5 {
+    color: #0060ef;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.confirmation-content p, .rating-content p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.confirmation-buttons, .rating-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.confirmation-btn, .rating-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.confirm-close-btn {
+    background: #dc3545;
+    color: white;
+}
+
+.confirm-close-btn:hover {
+    background: #c82333;
+}
+
+.cancel-close-btn {
+    background: #6c757d;
+    color: white;
+}
+
+.cancel-close-btn:hover {
+    background: #5a6268;
+}
+
+.submit-rating-btn {
+    background: #0060ef;
+    color: white;
+}
+
+.submit-rating-btn:hover {
+    background: #0051d1;
+}
+
+.skip-rating-btn {
+    background: #6c757d;
+    color: white;
+}
+
+.skip-rating-btn:hover {
+    background: #5a6268;
+}
+
+.rating-stars {
+    margin: 20px 0;
+    font-size: 32px;
+}
+
+.star {
+    cursor: pointer;
+    color: #ddd;
+    margin: 0 5px;
+    transition: color 0.2s ease;
+}
+
+.star:hover, .star.active {
+    color: #ffc107;
+}
+
+.rating-comment {
+    margin: 20px 0;
+}
+
+.rating-comment textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    resize: vertical;
+    min-height: 80px;
+    font-family: inherit;
+}
+
+.rating-comment textarea:focus {
+    outline: none;
+    border-color: #0060ef;
+}
+
+/* Animaciones */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes messageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.refresh-feedback {
+    animation: slideInDown 0.3s ease;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+    .faq-toggle-btn {
+        bottom: 430px;
+        right: 390px;
+    }
+    
+    .faq-panel {
+        bottom: 110px;
+        right: 390px;
+        width: 340px;
+        height: 450px;
+    }
+    
+    .chat-panel {
+        right: 40px;
+        width: 340px;
+    }
+    
+    .faq-panel.active + .chat-panel.active {
+        right: 40px;
+    }
+}
+
+@media (max-width: 900px) {
+    .faq-toggle-btn {
+        right: 370px;
+    }
+    
+    .faq-panel {
+        right: 370px;
+        width: 280px;
+    }
+    
+    .chat-panel {
+        width: 320px;
+    }
+    
+    .faq-toggle-btn {
+        display: none;
+    }
+}
+
 @media (max-width: 768px) {
+    .faq-toggle-btn {
+        bottom: 370px;
+        right: 370px;
+    }
+    
+    .faq-panel {
+        bottom: 100px;
+        right: 370px;
+        width: 260px;
+        height: 420px;
+    }
+    
+    .chat-panel, .welcome-panel {
+        right: 40px;
+        width: 300px;
+        max-height: calc(100vh - 160px);
+        min-height: 420px;
+    }
+    
     .welcome-panel {
         right: 80px;
         bottom: 100px;
         width: 300px;
-        max-height: calc(100vh - 160px);
         min-height: 380px;
     }
     
-    .welcome-content {
-        padding: 0;
-        gap: 18px;
-        overflow-y: auto; /* Asegura scroll en móviles */
+    .faq-panel.active + .chat-panel.active {
+        right: 40px;
     }
     
-    .welcome-section {
-        padding: 18px;
+    .conversation-area {
+        padding: 16px;
     }
     
-    .section-1 {
-        margin: -28px 18px 0 18px; /* ACTIVA - Sección 1 funcional */
+    .header-btn, .welcome-close-btn {
+        min-width: 32px;
+        height: 32px;
+        font-size: 16px;
+        padding: 6px 8px !important;
     }
     
-    /* .section-2 {
-        margin: 0 18px 0 18px;
-    } */
+    .header-text span, .welcome-header-text span {
+        font-size: 13px;
+        line-height: 1.2;
+    }
     
-    .welcome-section h5 {
-        font-size: 14px;
-        margin-bottom: 12px;
+    .avatar, .welcome-avatar {
+        width: 32px;
+        height: 32px;
     }
     
     .welcome-close-btn {
@@ -1310,14 +1128,21 @@
         padding: 5px 7px !important;
     }
     
-    .welcome-header-text span {
-        font-size: 12px;
-        line-height: 1.2;
+    .welcome-content {
+        gap: 18px;
     }
     
-    .welcome-avatar {
-        width: 30px;
-        height: 30px;
+    .welcome-section {
+        padding: 18px;
+    }
+    
+    .section-1 {
+        margin: -28px 18px 0 18px;
+    }
+    
+    .welcome-section h5 {
+        font-size: 14px;
+        margin-bottom: 12px;
     }
     
     .welcome-message h4 {
@@ -1328,27 +1153,151 @@
         font-size: 14px;
     }
     
-    /* Chat panel responsive */
-    .chat-panel { 
-        right: 20px; 
-        bottom: 100px; 
-        width: 320px; 
-        max-height: calc(100vh - 160px); 
+    .chat-icon {
+        bottom: 15px;
+        right: 20px;
     }
     
-    .chat-icon { 
-        bottom: 15px; 
-        right: 20px; 
-    }
-    
-    .user-type-buttons .option-btn,
-    .action-buttons .option-btn { 
-        flex: 0 1 calc(50% - 8px); 
+    .user-type-buttons .option-btn, .action-buttons .option-btn {
+        flex: 0 1 calc(50% - 8px);
         max-width: calc(50% - 8px);
+    }
+    
+    .chat-panel.active .panel-close-btn {
+        display: flex;
+        top: 65px;
+    }
+}
+
+@media (max-width: 700px) {
+    .faq-toggle-btn {
+        right: 350px;
+    }
+    
+    .faq-panel {
+        right: 280px;
+        width: 240px;
+    }
+    
+    .chat-panel {
+        width: 280px;
+    }
+}
+
+@media (max-width: 600px) {
+    .faq-toggle-btn {
+        display: none !important;
+    }
+    
+    .faq-panel.active {
+        right: 60%;
+        transform: translateX(50%);
+        width: 90%;
+        max-width: 320px;
+        border-radius: 20px;
+        z-index: 1001;
+        bottom: 50%;
+        transform: translate(-50%, -50%);
+        height: auto;
+        max-height: 80vh;
+    }
+    .panel-close-btn {
+    display: flex;
+}
+    .faq-panel.active::after {
+        display: none;
+    }
+    
+    .faq-header {
+        border-radius: 20px 20px 0 0;
+    }
+    
+    .faq-panel.active + .chat-panel.active {
+        display: none;
+    }
+    
+    .faq-content {
+        padding: 12px;
+        max-height: 60vh;
+    }
+    
+    .faq-btn {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+    
+    .option-btn {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .option-buttons {
+        flex-direction: wrap;
+        gap: 10px;
+    }
+    
+    /* Modo móvil compacto */
+    .chat-panel, .welcome-panel {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        width: auto;
+        max-height: 100vh;
+        min-height: 100vh;
+        border-radius: 0;
+    }
+    
+    .bot-message {
+        margin-left: 30px;
+    }
+    
+    .chat-icon .chat-close-btn {
+        display: none;
+    }
+    
+    .chat-icon.active {
+        display: none;
+    }
+    
+    .panel-close-btn {
+        display: none !important;
+    }
+    
+    .conversation-area {
+        padding: 16px;
+    }
+    
+    .chat-panel {
+        z-index: 1002;
+    }
+    
+    .welcome-panel {
+        z-index: 1002;
     }
 }
 
 @media (max-width: 480px) {
+    .faq-toggle-btn, .faq-panel {
+        display: none;
+    }
+    
+    .chat-panel, .welcome-panel {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        width: auto;
+        max-height: 100vh;
+        min-height: 100vh;
+        border-radius: 0;
+    }
+    
+    .chat-header {
+        border-radius: 0;
+    }
+    
     .welcome-panel {
         left: 15px;
         right: 45px;
@@ -1361,20 +1310,11 @@
     .welcome-content {
         padding: 0;
         gap: 16px;
-        overflow-y: auto; /* Asegura scroll en móviles pequeños */
     }
     
     .welcome-section {
         padding: 18px;
     }
-    
-    /* .section-1 {
-        margin: -16px 18px 0 18px;
-    } */
-    
-    /* .section-2 {
-        margin: 0 18px 0 18px;
-    } */
     
     .welcome-section h5 {
         font-size: 14px;
@@ -1411,34 +1351,61 @@
         font-size: 13px;
     }
     
-    /* .welcome-start-btn {
-        padding: 12px 18px;
-        font-size: 14px;
-    } */
-    
     .welcome-footer {
         padding: 12px 18px;
         border-top: 1px solid #c7c7c7;
     }
     
-    /* Chat panel responsive */
-    .chat-panel { 
-        left: 15px; 
-        right: 15px; 
-        width: auto; 
-        bottom: 90px; 
-        max-height: calc(100vh - 140px); 
+    .chat-panel {
+        left: 15px;
+        right: 15px;
+        width: auto;
+        bottom: 90px;
+        max-height: calc(100vh - 140px);
     }
     
-    .chat-icon { 
-        bottom: 10px; 
-        right: 15px; 
+    .chat-icon {
+        bottom: 10px;
+        right: 15px;
     }
     
-    .user-type-buttons .option-btn,
-    .action-buttons .option-btn { 
-        flex: 0 1 100%; 
+    .header-btn {
+        min-width: 28px;
+        height: 28px;
+        font-size: 14px;
+        padding: 4px 6px !important;
+    }
+    
+    .header-text span {
+        font-size: 12px;
+        line-height: 1.1;
+    }
+    
+    .avatar {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .user-type-buttons .option-btn, .action-buttons .option-btn {
+        flex: 0 1 100%;
         max-width: 100%;
+    }
+    
+    .bot-message {
+        margin-left: 30px;
+    }
+    
+    .confirmation-content, .rating-content {
+        padding: 20px;
+        margin: 20px;
+    }
+    
+    .confirmation-buttons, .rating-buttons {
+        flex-direction: column;
+    }
+    
+    .rating-stars {
+        font-size: 28px;
     }
 }
 
@@ -1452,22 +1419,12 @@
     }
     
     .welcome-content {
-        padding: 0;
         gap: 14px;
-        overflow-y: auto; /* Asegura scroll en móviles muy pequeños */
     }
     
     .welcome-section {
         padding: 16px;
     }
-    
-    /* .section-1 {
-        margin: -14px 14px 0 14px;
-    } */
-    
-    /* .section-2 {
-        margin: 0 14px 0 14px;
-    } */
     
     .welcome-section h5 {
         font-size: 13px;
@@ -1504,439 +1461,32 @@
         font-size: 12px;
     }
     
-    /* .welcome-start-btn {
-        padding: 11px 16px;
-        font-size: 13px;
-    } */
-    
-    .welcome-search-input {
-        padding: 10px 12px 10px 38px;
-        font-size: 13px;
-    }
-    
-    .search-icon {
-        left: 12px;
-        font-size: 14px;
-    }
-    
     .welcome-footer {
         padding: 10px 14px;
     }
     
-    /* Chat panel responsive */
-    .chat-panel { 
-        left: 10px; 
-        right: 10px; 
-        bottom: 80px; 
-        max-height: calc(100vh - 120px); 
+    .chat-panel {
+        left: 10px;
+        right: 10px;
+        bottom: 80px;
+        max-height: calc(100vh - 120px);
     }
     
-    .chat-icon { 
-        bottom: 8px; 
-        right: 10px; 
-    }
-}
-
-/* Animación para mensajes nuevos */
-.user-selection, .bot-message {
-    animation: messageSlideIn 0.3s ease;
-}
-
-@keyframes messageSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-.main-buttons { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 5px; 
-}
-.main-buttons .option-btn { 
-    flex: 0 1 auto; 
-    min-width: 90px; 
-    max-width: 125px; 
-    padding: 6px 6px !important; 
-    border-radius: 12px !important; 
-}
-.main-buttons .btn-text { font-size: 11px; }
-.main-buttons .btn-icon { width: 15px; height: 15px; }
-
-  /* Contenedor principal de botones */
-.option-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 12px 0;
-    width: 100%;
-  }
-  /* Estilos base para los botones */
-  .option-btn {
-    padding: 10px 14px;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    background-color: #fff;
-    color: #333;
-    font-size: 11px;
-    font-weight: 500;
-    text-align: center;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 90px;
-    max-width: 120px;
-    margin-bottom: 8px;
-  }
-  
-  /* Efecto hover */
-  .option-btn:hover:not(.disabled):not(.active) {
-    background-color: #f8f9fa;
-    border-color: #ccc;
-  }
-  
-  /* Estado activo */
-  .option-btn.active {
-    background-color: #e9f5ff;
-    border-color: #007bff;
-    color: #007bff;
-  }
-  
-  /* Estado deshabilitado */
-  .option-btn.disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    background-color: #f8f9fa;
-  }
-  
-  /* Contenido del botón */
-  .btn-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
-  
-  /* Texto del botón */
-  .btn-text {
-    flex-grow: 1;
-    text-align: left;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: wrap;
-  }
-  
-  /* Icono del botón (usando pseudo-elemento) */
-  .btn-icon {
-    width: 16px;
-    height: 16px;
-    margin-left: 8px;
-    flex-shrink: 0;
-    position: relative;
-  }
-  
-  .btn-icon::after {
-    content: "→";
-    display: block;
-    font-size: 14px;
-    line-height: 16px;
-  }
-  
-  .option-btn.active .btn-icon::after {
-    color: #007bff;
-  }
-  
-  .option-btn.disabled .btn-icon::after {
-    color: #999;
-  }
-  
-  /* Ajustes responsivos */
-  @media (max-width: 600px) {
-    .option-btn {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
+    .chat-icon {
+        bottom: 8px;
+        right: 10px;
     }
     
-    .option-buttons {
-      flex-direction: wrap;
-      gap: 10px;
+    .conversation-area {
+        padding: 12px;
     }
-  }
-
-/* Modo móvil compacto: ocupar toda la pantalla y ocultar cierres superpuestos */
-@media (max-width: 600px) {
-	/* Ocupa toda la pantalla disponible */
-	.chat-panel,
-	.welcome-panel {
-		left: 0;
-		right: 0;
-		bottom: 0;
-		top: 0;
-		width: auto;
-		max-height: 100vh;
-		min-height: 100vh;
-		border-radius: 0;
-	}
+    
     .bot-message {
         margin-left: 30px;
     }
-	/* Ocultar botón azul de cerrar del icono para que no se superponga */
-	.chat-icon .chat-close-btn { display: none; }
-	/* Mientras un panel esté activo, ocultar el icono para evitar solapamiento */
-	.chat-icon.active { display: none; }
-
-	/* Ocultar el botón flotante de cerrar del panel en móvil muy pequeño */
-	.panel-close-btn { display: none !important; }
-
-	/* Asegurar que el contenido tenga altura flexible */
-	.conversation-area { padding: 16px; }
-
-	/* Prioridad de capa para que los paneles estén siempre sobre el icono */
-	.chat-panel { z-index: 1002; }
-	.welcome-panel { z-index: 1002; }
 }
 
-@media (max-width: 480px) {
-    /* Ocupa toda la pantalla disponible */
-    .chat-panel,
-    .welcome-panel {
-        left: 0;
-        right: 0;
-        bottom: 0;
-        top: 0;
-        width: auto;
-        max-height: 100vh;
-        min-height: 100vh;
-        border-radius: 0;
-    }
-
-    .bot-message {
-        margin-left: 30px;
-    }
-    /* Ocultar botón azul de cerrar del icono para que no se superponga */
-    .chat-icon .chat-close-btn { display: none; }
-    /* Mientras un panel esté activo, ocultar el icono para evitar solapamiento */
-    .chat-icon.active { display: none; }
-
-    /* Ocultar el botón flotante de cerrar del panel en móvil muy pequeño */
-    .panel-close-btn { display: none !important; }
-
-    /* Asegurar que el contenido tenga altura flexible */
-    .conversation-area { padding: 16px; }
-
-    /* Prioridad de capa para que los paneles estén siempre sobre el icono */
-    .chat-panel { z-index: 1002; }
-    .welcome-panel { z-index: 1002; }
-}
-
-@media (max-width: 360px) {
-    .bot-message {
-        margin-left: 30px;
-    }
-    .conversation-area { padding: 12px; }
-}
-/* Asegurar que el panel de confirmación no tenga blur y esté por encima */
-.confirmation-panel {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
+/* Ocultar botón FAQ cuando el panel está activo */
+.faq-panel.active ~ .faq-toggle-btn {
     display: none;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-  }
-  
-  .confirmation-panel.active {
-    display: flex;
-  }
-  
-  .confirmation-content {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    text-align: center;
-    max-width: 350px;
-    width: 90%;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    z-index: 2001; /* Mayor z-index para estar por encima */
-  }
-  
-  .confirmation-content h5 {
-    color: #0060ef;
-    margin-bottom: 10px;
-    font-weight: 600;
-  }
-  
-  .confirmation-content p {
-    color: #666;
-    margin-bottom: 20px;
-  }
-  
-  .confirmation-buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-  }
-  
-  .confirmation-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.2s ease;
-  }
-  
-  .confirm-close-btn {
-    background: #dc3545;
-    color: white;
-  }
-  
-  .confirm-close-btn:hover {
-    background: #c82333;
-  }
-  
-  .cancel-close-btn {
-    background: #6c757d;
-    color: white;
-  }
-  
-  .cancel-close-btn:hover {
-    background: #5a6268;
-  }
-  
-  /* Panel de Valoración */
-  .rating-panel {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 90%;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 1002;
-  }
-  
-  .rating-panel.active {
-    display: flex;
-  }
-  
-  .rating-content {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    text-align: center;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  }
-  
-  .rating-content h5 {
-    color: #0060ef;
-    margin-bottom: 10px;
-    font-weight: 600;
-  }
-  
-  .rating-content p {
-    color: #666;
-    margin-bottom: 20px;
-  }
-  
-  .rating-stars {
-    margin: 20px 0;
-    font-size: 32px;
-  }
-  
-  .star {
-    cursor: pointer;
-    color: #ddd;
-    margin: 0 5px;
-    transition: color 0.2s ease;
-  }
-  
-  .star:hover,
-  .star.active {
-    color: #ffc107;
-  }
-  
-  .rating-comment {
-    margin: 20px 0;
-  }
-  
-  .rating-comment textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    resize: vertical;
-    min-height: 80px;
-    font-family: inherit;
-  }
-  
-  .rating-comment textarea:focus {
-    outline: none;
-    border-color: #0060ef;
-  }
-  
-  .rating-buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-  }
-  
-  .rating-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.2s ease;
-  }
-  
-  .submit-rating-btn {
-    background: #0060ef;
-    color: white;
-  }
-  
-  .submit-rating-btn:hover {
-    background: #0051d1;
-  }
-  
-  .skip-rating-btn {
-    background: #6c757d;
-    color: white;
-  }
-  
-  .skip-rating-btn:hover {
-    background: #5a6268;
-  }
-  
-  /* Responsive */
-  @media (max-width: 480px) {
-    .confirmation-content,
-    .rating-content {
-      padding: 20px;
-      margin: 20px;
-    }
-    
-    .confirmation-buttons,
-    .rating-buttons {
-      flex-direction: column;
-    }
-    
-    .rating-stars {
-      font-size: 28px;
-    }
-  }
-  
+}
