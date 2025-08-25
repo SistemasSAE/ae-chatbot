@@ -1216,7 +1216,7 @@
     }
     .chat-panel.active .panel-close-btn {
         display: flex;
-        top: 75%;
+        top: 68%;
     }
 }
 
@@ -1252,10 +1252,10 @@
         height: auto;
         max-height: 80vh;
     }
-    .panel-close-btn {
-    display: flex;
-    z-index: 2001;
-}
+    .chat-panel.active .panel-close-btn {
+        display: flex;
+        top: 76%;
+    }
     .faq-panel.active::after {
         display: none;
     }
@@ -1287,9 +1287,6 @@
     .option-buttons {
         flex-direction: wrap;
         gap: 10px;
-    }
-    .rating-panel.active {
-        left: 40px;
     }
     /* Modo móvil compacto */
     .chat-panel, .welcome-panel {
@@ -1528,7 +1525,10 @@
         width: 26px;
         height: 26px;
     }
-    
+    .chat-panel.active .panel-close-btn {
+        display: flex;
+        top: 73%;    
+    }
     .welcome-message {
         padding: 16px 12px;
         margin: 0;
