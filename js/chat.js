@@ -181,20 +181,16 @@ document.addEventListener('DOMContentLoaded', function() {
   const resetChatCompletely = () => {
     // Cerrar todos los paneles
     welcomePanel.classList.remove('active');
-    chatPanel.classList.remove('active');
     faqPanel.classList.remove('active');
     chatFaqPanel.classList.remove('active');
     confirmationPanel.classList.remove('active');
     chatIcon.classList.remove('active');
-    
-    // Reiniciar estado completo
-    resetChatState();
+    console.log(conversationActive)
     toggleFaqButton();
     
     // Restablecer variables de estado
     firstSelectionMade = false;
     currentUserType = null;
-    conversationActive = true;
     lastUserSelection = null;
     lastOpenPanel = null;
   };
@@ -532,13 +528,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const message = userMessage.toLowerCase();
     
     // Si la conversación está cerrada pero el usuario escribe
-    if (!conversationActive) {
+    if (conversationActive===false) {
       return {
         message: 'La conversación ha finalizado. ¿Deseas comenzar una nueva?',
         options: ['Sí, nueva consulta', 'No, gracias']
       };
     }
-
+else if (conversationActive=== true) {
     // Manejo de tipo de usuario
     if (!firstSelectionMade && (message.includes('representante') || message.includes('estudiante') || message.includes('profesor'))) {
       firstSelectionMade = true;
@@ -552,7 +548,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
     // Detectar finalización de conversación - MOSTRAR PANEL DE VALORACIÓN
     if (message.includes('no, gracias') || message.includes('nada más') || message.includes('no gracias') || 
-        message.includes('no gracia') || message.includes('adios') || message.includes('adiós') || 
+    message.includes('no gracia') || message.includes('adios') || message.includes('adiós') || 
         message.includes('hasta luego') || message.includes('chao') || message.includes('bye')) {
       conversationActive = false;
       
@@ -565,8 +561,8 @@ document.addEventListener('DOMContentLoaded', function() {
       }, 1500);
       
       return {
-        message: '',
-        options: []
+        message: 'Si deseas abrir otra conversación por favor escribe "Necesito más ayuda" o seleccione el botón que se muestra a continuación, si no cierre el chat si ya termino de consultar.',
+        options: ['Necesito más ayuda']
       };
     }
       
@@ -639,6 +635,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
   }
 
+}
   const processOptionSelection = (option) => {
     const optionLower = option.toLowerCase();
     
@@ -829,8 +826,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Detectar agradecimientos
-    if (lowerText.includes('gracias') || lowerText.includes('gracia') || 
-        lowerText.includes('thank') || lowerText.includes('thanks')) {
+    if (lowerText.includes===('gracias') || lowerText.includes===('gracia') || 
+    lowerText.includes===('Gracias') || lowerText.includes===('Gracia')) {
       return {
         message: '¡De nada! Me alegra haber podido ayudarte. ¿Hay algo más en lo que pueda asistirte?',
         options: ['Sí, necesito más ayuda', 'No, gracias']
