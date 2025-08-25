@@ -862,8 +862,8 @@
     position: fixed;
     top: -10%;
     left: 30.3%;
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 90%;
     justify-content: center;
     align-items: center;
     z-index: 2000;
@@ -879,14 +879,14 @@
     padding: 25px;
     border-radius: 15px;
     text-align: center;
-    max-width: 350px;
+    max-width: 400px;
     width: 90%;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     z-index: 2001;
 }
 
 .rating-content {
-    max-width: 400px;
+    max-width: 350px;
 }
 
 .confirmation-content h5, .rating-content h5 {
@@ -1046,6 +1046,15 @@
     .faq-panel.active + .chat-panel.active {
         right: 40px;
     }
+    .rating-panel.active, .confirmation-panel.active {
+        left: 48%;
+        width: 60%;
+        height: 60%;
+        top:0;
+        font-size: 14px;
+        display: flex;
+        justify-items: center;
+    }
 }
 
 @media (max-width: 900px) {
@@ -1064,6 +1073,20 @@
     
     .faq-toggle-btn {
         display: none;
+    }
+    .rating-panel.active {
+        left: 50%;
+        width: 50%;
+        height: 50%;
+        top:10%;
+        font-size: 12px;
+    }
+    .confirmation-panel.active {
+        left: 50%;
+        width: 50%;
+        height: 50%;
+        top:0;
+        font-size: 12px;
     }
 }
 
@@ -1160,10 +1183,23 @@
         flex: 0 1 calc(50% - 8px);
         max-width: calc(50% - 8px);
     }
-    
+    .rating-panel.active {
+        left: 49%;
+        width: 50%;
+        height: 50%;
+        top:20%;
+        font-size: 12px;
+    }
+    .confirmation-panel.active {
+        left: 49%;
+        width: 50%;
+        height: 50%;
+        top:20%;
+        font-size: 12px;
+    }
     .chat-panel.active .panel-close-btn {
         display: flex;
-        top: 65px;
+        top: 75%;
     }
 }
 
@@ -1201,6 +1237,7 @@
     }
     .panel-close-btn {
     display: flex;
+    z-index: 2001;
 }
     .faq-panel.active::after {
         display: none;
@@ -1234,7 +1271,9 @@
         flex-direction: wrap;
         gap: 10px;
     }
-    
+    .rating-panel.active {
+        left: 40px;
+    }
     /* Modo móvil compacto */
     .chat-panel, .welcome-panel {
         left: 0;
@@ -1260,7 +1299,8 @@
     }
     
     .panel-close-btn {
-        display: none !important;
+        position: absolute;
+        top: 70%;
     }
     
     .conversation-area {
@@ -1273,6 +1313,20 @@
     
     .welcome-panel {
         z-index: 1002;
+    }
+    .rating-panel.active {
+        left: 30%;
+        width: 50%;
+        height: 50%;
+        top:20%;
+        font-size: 12px;
+    }
+    .confirmation-panel.active {
+        left: 30%;
+        width: 50%;
+        height: 50%;
+        top:20%;
+        font-size: 12px;
     }
 }
 
@@ -1373,7 +1427,9 @@
         font-size: 14px;
         padding: 4px 6px !important;
     }
-    
+    .rating-panel.active {
+        left: 40px;
+    }
     .header-text span {
         font-size: 12px;
         line-height: 1.1;
@@ -1393,9 +1449,19 @@
         margin-left: 30px;
     }
     
-    .confirmation-content, .rating-content {
-        padding: 20px;
-        margin: 20px;
+    .rating-panel.active {
+        left: 20%;
+        width: 60%;
+        height: 50%;
+        top:20%;
+        font-size: 12px;
+    }
+    .confirmation-panel.active {
+        left: 20%;
+        width: 60%;
+        height: 50%;
+        top:20%;
+        font-size: 12px;
     }
     
     .confirmation-buttons, .rating-buttons {
@@ -1462,7 +1528,9 @@
     .welcome-footer {
         padding: 10px 14px;
     }
-    
+    .rating-panel.active {
+    left: 40px;
+    }
     .chat-panel {
         left: 10px;
         right: 10px;
