@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
     chatPanel.classList.remove('active', 'blurred');
     faqPanel.classList.remove('active');
     chatFaqPanel.classList.remove('active');
-    chatIcon.classList.remove('active');
+    chatIcon.classList.add('active');
     confirmationPanel.classList.remove('active');
     resetChatState();
     toggleFaqButton();
@@ -854,12 +854,13 @@ chatCloseBtn.addEventListener('click', (e) => {
   e.stopPropagation(); // Detener la propagación del evento
   console.log('Chat close button clicked');
   closeAllPanels();
+  closeWelcomePanel(); 
 });
 
 welcomeCloseBtn.addEventListener('click', (e) => {
   e.stopPropagation(); // Detener la propagación del evento
   console.log('Welcome close button clicked');
-  closeAllPanels(); // Esto debería abrir el confirmation panel
+  closeWelcomePanel(); // Esto debería abrir el confirmation panel
 });
 
 headerCloseBtn.addEventListener('click', (e) => {
