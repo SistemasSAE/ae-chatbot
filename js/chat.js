@@ -58,9 +58,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const anyActive = welcomePanel.classList.contains('active') || chatPanel.classList.contains('active');
     if (!anyActive) {
-      if (lastOpenPanel === 'chat') {
+      // Si no hay panel activo, verificar si debemos reiniciar o mostrar el último
+      if (lastOpenPanel === 'chat' && conversationActive) {
         chatPanel.classList.add('active');
       } else {
+        // Reiniciar completamente mostrando el panel de bienvenida
+        resetChatCompletely();
         welcomePanel.classList.add('active');
         lastOpenPanel = 'welcome';
       }
@@ -69,10 +72,13 @@ document.addEventListener('DOMContentLoaded', function() {
     toggleFaqButton();
   });
 
-  // Close welcome panel
+  // Close welcome panel - MODIFICADA para condicional
   const closeWelcomePanel = () => {
     welcomePanel.classList.remove('active');
-    chatIcon.classList.remove('active');
+    // Solo quitar la clase active si el chatPanel también está inactivo
+    if (!chatPanel.classList.contains('active')) {
+      chatIcon.classList.remove('active');
+    }
     toggleFaqButton();
   };
 
@@ -85,7 +91,11 @@ document.addEventListener('DOMContentLoaded', function() {
       welcomePanel.classList.remove('active');
       lastOpenPanel = 'welcome';
     }
-    chatIcon.classList.remove('active');
+    
+    // Solo quitar la clase active si ningún panel está visible
+    if (!welcomePanel.classList.contains('active') && !chatPanel.classList.contains('active')) {
+      chatIcon.classList.remove('active');
+    }
     toggleFaqButton();
   };
 
@@ -101,22 +111,36 @@ document.addEventListener('DOMContentLoaded', function() {
     confirmationPanel.classList.add('active');
   };
 
-  // Cerrar definitivamente (después de confirmación) - Modificado para quitar blur
+  // Cerrar definitivamente (después de confirmación)
   const confirmClose = () => {
-    welcomePanel.classList.add('active');
-    chatPanel.classList.remove('active', 'blurred');
+    // Remover blur de los paneles
+    chatPanel.classList.remove('blurred');
+    welcomePanel.classList.remove('blurred');
+    
+    // Cerrar todos los paneles
+    welcomePanel.classList.remove('active');
+    chatPanel.classList.remove('active');
     faqPanel.classList.remove('active');
     chatFaqPanel.classList.remove('active');
-    chatIcon.classList.add('active');
     confirmationPanel.classList.remove('active');
-    resetChatState();
+    
+    // Solo quitar la clase active si el chatPanel está inactivo
+    if (!chatPanel.classList.contains('active')) {
+      chatIcon.classList.remove('active');
+    }
+    
+    // Reiniciar completamente el estado del chat
+    resetChatCompletely();
     toggleFaqButton();
+    
+    // Mostrar panel de valoración
+    showRatingPanel();
   };
 
-  // Cancelar cierre - Modificado para quitar blur
+  // Cancelar cierre
   const cancelClose = () => {
     confirmationPanel.classList.remove('active');
-      // Remover blur de los paneles
+    // Remover blur de los paneles
     chatPanel.classList.remove('blurred');
     welcomePanel.classList.remove('blurred');
   };
@@ -181,18 +205,28 @@ document.addEventListener('DOMContentLoaded', function() {
   const resetChatCompletely = () => {
     // Cerrar todos los paneles
     welcomePanel.classList.remove('active');
+    chatPanel.classList.remove('active');
     faqPanel.classList.remove('active');
     chatFaqPanel.classList.remove('active');
     confirmationPanel.classList.remove('active');
-    chatIcon.classList.remove('active');
-    console.log(conversationActive)
-    toggleFaqButton();
+    ratingPanel.classList.remove('active');
+    
+    // Solo quitar la clase active si el chatPanel está inactivo
+    if (!chatPanel.classList.contains('active')) {
+      chatIcon.classList.remove('active');
+    }
     
     // Restablecer variables de estado
     firstSelectionMade = false;
     currentUserType = null;
+    conversationActive = true;
     lastUserSelection = null;
     lastOpenPanel = null;
+    
+    // Limpiar área de conversación
+    conversationArea.innerHTML = '';
+    
+    toggleFaqButton();
   };
 
   // Abrir panel de FAQ principal
@@ -329,6 +363,7 @@ document.addEventListener('DOMContentLoaded', function() {
         welcomePanel.classList.add('active');
         lastOpenPanel = 'welcome';
         chatIcon.classList.add('active');
+        resetChatState();
         toggleFaqButton();
       }
     });
@@ -534,108 +569,108 @@ document.addEventListener('DOMContentLoaded', function() {
         options: ['Sí, nueva consulta', 'No, gracias']
       };
     }
-else if (conversationActive=== true) {
-    // Manejo de tipo de usuario
-    if (!firstSelectionMade && (message.includes('representante') || message.includes('estudiante') || message.includes('profesor'))) {
-      firstSelectionMade = true;
-      currentUserType = message.includes('representante') ? 'Representante' : 
-                      message.includes('estudiante') ? 'Estudiante' : 'Profesor';
-      return {
-        message: `Perfecto, eres ${currentUserType}. ¿En qué puedo ayudarte?`,
-        options: ['Iniciar Sesión', 'Inscripciones', 'Solicitud de Cupo', 'Reportar Pago']
-      };
-    }
-  
-    // Detectar finalización de conversación - MOSTRAR PANEL DE VALORACIÓN
-    if (message.includes('no, gracias') || message.includes('nada más') || message.includes('no gracias') || 
-    message.includes('no gracia') || message.includes('adios') || message.includes('adiós') || 
-        message.includes('hasta luego') || message.includes('chao') || message.includes('bye')) {
-      conversationActive = false;
-      
-      // Mostrar mensaje final
-      appendBotMessage('¡Perfecto! Ha sido un placer ayudarte. Que tengas un excelente día.');
-      
-      // Mostrar panel de valoración después de un breve delay
-      setTimeout(() => {
-        showRatingPanel();
-      }, 1500);
-      
-      return {
-        message: 'Si deseas abrir otra conversación por favor escribe "Necesito más ayuda" o seleccione el botón que se muestra a continuación, si no cierre el chat si ya termino de consultar.',
-        options: ['Necesito más ayuda']
-      };
-    }
-      
-    // Solicitar más ayuda
-    if (message.includes('necesito más ayuda') || message.includes('ayuda') || message.includes('otra cosa')) {
-      return {
-        message: 'Claro, ¿en qué más puedo ayudarte?',
-        options: ['Iniciar Sesión', 'Inscripciones', 'Solicitud de Cupo', 'Reportar Pago']
-      };
-    }
-      
-    // Iniciar sesión
-    if (message.includes('iniciar sesión') || message.includes('iniciar') || message.includes('sesión') || 
-        message.includes('sesion') || message.includes('login') || message.includes('acceder') || 
-        message.includes('entrar')) {
-      return {
-        message: 'Te ayudo con el inicio de sesión. ¿Qué necesitas específicamente?',
-        options: ['Recuperar Contraseña', 'Crear Cuenta', 'Problemas de Acceso']
-      };
-    }
-    // Inscripciones
-    else if (message.includes('inscripciones') || message.includes('matrícula') || message.includes('matricula') || 
-             message.includes('inscribir') || message.includes('matricular') || message.includes('registro')) {
-      return {
-        message: 'Claro, con gusto te asisto en el apartado de las inscripciones. ¿Qué tipo de inscripción te interesa realizar?',
-        options: ['Nuevo Ingreso', 'Reingreso']
-      };
-    }
-
-    // Nuevo Ingreso y Reingreso
-    else if (message.includes('Nuevo Ingreso') || message.includes('Reingreso') ||  message.includes('nuevo') || message.includes('Nuevo') || message.includes('Reingreso') || message.includes('reingreso') || 
-    message.includes('nuevo ingreso')) {
-      return {
-        message: 'Gracias por tu selección. Un asesor especializado se pondrá en contacto contigo pronto para resolver tu consulta específica.',
-        options: ['Necesito más ayuda', 'No, gracias']
-      };
-    }
+    else if (conversationActive=== true) {
+      // Manejo de tipo de usuario
+      if (!firstSelectionMade && (message.includes('representante') || message.includes('estudiante') || message.includes('profesor'))) {
+        firstSelectionMade = true;
+        currentUserType = message.includes('representante') ? 'Representante' : 
+                        message.includes('estudiante') ? 'Estudiante' : 'Profesor';
+        return {
+          message: `Perfecto, eres ${currentUserType}. ¿En qué puedo ayudarte?`,
+          options: ['Iniciar Sesión', 'Inscripciones', 'Solicitud de Cupo', 'Reportar Pago']
+        };
+      }
     
-    // Solicitud de cupo
-    else if (message.includes('solicitud de cupo') || message.includes('cupo') || message.includes('vacante') || 
-             message.includes('solicitar')) {
-      return {
-        message: 'Entendido, para la solicitud de cupo, ¿Necesitas información sobre el proceso o el estado de una solicitud existente?',
-        options: ['Proceso de Solicitud', 'Estado de Solicitud']
-      };
-    }
+      // Detectar finalización de conversación - MOSTRAR PANEL DE VALORACIÓN
+      if (message.includes('no, gracias') || message.includes('nada más') || message.includes('no gracias') || 
+      message.includes('no gracia') || message.includes('adios') || message.includes('adiós') || 
+          message.includes('hasta luego') || message.includes('chao') || message.includes('bye')) {
+        conversationActive = false;
+        
+        // Mostrar mensaje final
+        appendBotMessage('¡Perfecto! Ha sido un placer ayudarte. Que tengas un excelente día.');
+        
+        // Mostrar panel de valoración después de un breve delay
+        setTimeout(() => {
+          showRatingPanel();
+        }, 1500);
+        
+        return {
+          message: 'Si deseas abrir otra conversación por favor escribe "Necesito más ayuda" o seleccione el botón que se muestra a continuación, si no cierre el chat si ya termino de consultar.',
+          options: ['Necesito más ayuda']
+        };
+      }
+        
+      // Solicitar más ayuda
+      if (message.includes('necesito más ayuda') || message.includes('ayuda') || message.includes('otra cosa')) {
+        return {
+          message: 'Claro, ¿en qué más puedo ayudarte?',
+          options: ['Iniciar Sesión', 'Inscripciones', 'Solicitud de Cupo', 'Reportar Pago']
+        };
+      }
+        
+      // Iniciar sesión
+      if (message.includes('iniciar sesión') || message.includes('iniciar') || message.includes('sesión') || 
+          message.includes('sesion') || message.includes('login') || message.includes('acceder') || 
+          message.includes('entrar')) {
+        return {
+          message: 'Te ayudo con el inicio de sesión. ¿Qué necesitas específicamente?',
+          options: ['Recuperar Contraseña', 'Crear Cuenta', 'Problemas de Acceso']
+        };
+      }
+      // Inscripciones
+      else if (message.includes('inscripciones') || message.includes('matrícula') || message.includes('matricula') || 
+              message.includes('inscribir') || message.includes('matricular') || message.includes('registro')) {
+        return {
+          message: 'Claro, con gusto te asisto en el apartado de las inscripciones. ¿Qué tipo de inscripción te interesa realizar?',
+          options: ['Nuevo Ingreso', 'Reingreso']
+        };
+      }
 
-    // Proceso y Estado de solicitud de cupo
-    else if (message.includes('Estado') || message.includes('Estado de Solicitud') ||  message.includes('estado de solicitud') || message.includes('Proceso de Solicitud') || message.includes('Proceso') || message.includes('proceso') || 
-    message.includes('proceso de solicitud')) {
-      return {
-        message: 'Gracias por tu selección. Un asesor especializado se pondrá en contacto contigo pronto para resolver tu consulta específica.',
-        options: ['Necesito más ayuda', 'No, gracias']
-      };
-    }
-    
-    // Reportar pago
-    else if (message.includes('reportar pago') || message.includes('pago') || message.includes('factura') || 
-             message.includes('pagar') || message.includes('comprobante') || message.includes('recibo')) {
-      return {
-        message: 'Para reportar un pago realizado o consultar su estado, indícame a continuación el tipo que realizaste.',
-        options: ['Matrícula', 'Mensualidad', 'Otro Pago']
-      };
-    }
-    
-    // Respuesta por defecto para mensajes no reconocidos
-    return {
-      message: 'No entiendo tu consulta. Para ayudarte mejor, ¿podrías seleccionar una de las opciones disponibles o ser más específico?',
-      options: ['Iniciar Sesión', 'Inscripciones', 'Solicitud de Cupo', 'Reportar Pago', 'Necesito más ayuda']
-    };
-  }
+      // Nuevo Ingreso y Reingreso
+      else if (message.includes('Nuevo Ingreso') || message.includes('Reingreso') ||  message.includes('nuevo') || message.includes('Nuevo') || message.includes('Reingreso') || message.includes('reingreso') || 
+      message.includes('nuevo ingreso')) {
+        return {
+          message: 'Gracias por tu selección. Un asesor especializado se pondrá en contacto contigo pronto para resolver tu consulta específica.',
+          options: ['Necesito más ayuda', 'No, gracias']
+        };
+      }
+      
+      // Solicitud de cupo
+      else if (message.includes('solicitud de cupo') || message.includes('cupo') || message.includes('vacante') || 
+              message.includes('solicitar')) {
+        return {
+          message: 'Entendido, para la solicitud de cupo, ¿Necesitas información sobre el proceso o el estado de una solicitud existente?',
+          options: ['Proceso de Solicitud', 'Estado de Solicitud']
+        };
+      }
 
-}
+      // Proceso y Estado de solicitud de cupo
+      else if (message.includes('Estado') || message.includes('Estado de Solicitud') ||  message.includes('estado de solicitud') || message.includes('Proceso de Solicitud') || message.includes('Proceso') || message.includes('proceso') || 
+      message.includes('proceso de solicitud')) {
+        return {
+          message: 'Gracias por tu selección. Un asesor especializado se pondrá en contacto contigo pronto para resolver tu consulta específica.',
+          options: ['Necesito más ayuda', 'No, gracias']
+        };
+      }
+      
+      // Reportar pago
+      else if (message.includes('reportar pago') || message.includes('pago') || message.includes('factura') || 
+              message.includes('pagar') || message.includes('comprobante') || message.includes('recibo')) {
+        return {
+          message: 'Para reportar un pago realizado o consultar su estado, indícame a continuación el tipo que realizaste.',
+          options: ['Matrícula', 'Mensualidad', 'Otro Pago']
+        };
+      }
+      
+      // Respuesta por defecto para mensajes no reconocidos
+      return {
+        message: 'No entiendo tu consulta. Para ayudarte mejor, ¿podrías seleccionar una de las opciones disponibles o ser más específico?',
+        options: ['Iniciar Sesión', 'Inscripciones', 'Solicitud de Cupo', 'Reportar Pago', 'Necesito más ayuda']
+      };
+    }
+  };
+
   const processOptionSelection = (option) => {
     const optionLower = option.toLowerCase();
     
@@ -681,8 +716,8 @@ else if (conversationActive=== true) {
     }
     // Inscripciones
     else if (optionLower.includes('inscripciones') || optionLower.includes('matrícula') || 
-             optionLower.includes('matricula') || optionLower.includes('inscribir') || 
-             optionLower.includes('matricular') || optionLower.includes('registro')) {
+              optionLower.includes('matricula') || optionLower.includes('inscribir') || 
+              optionLower.includes('matricular') || optionLower.includes('registro')) {
       return {
         message: 'Claro, con gusto te asisto con las inscripciones. ¿Qué tipo de inscripción te interesa?',
         options: ['Nuevo Ingreso', 'Reingreso']
@@ -690,8 +725,8 @@ else if (conversationActive=== true) {
     }
     // Solicitud de cupo
     else if (optionLower.includes('solicitud de cupo') || optionLower.includes('cupo') || 
-             optionLower.includes('vacante') || optionLower.includes('solicitar') || 
-             optionLower.includes('disponibilidad') || optionLower.includes('lugar')) {
+              optionLower.includes('vacante') || optionLower.includes('solicitar') || 
+              optionLower.includes('disponibilidad') || optionLower.includes('lugar')) {
       return {
         message: 'Entendido, para la solicitud de cupo, ¿Necesitas información sobre el proceso o el estado de una solicitud realizada?',
         options: ['Proceso de Solicitud', 'Estado de Solicitud']
@@ -699,8 +734,8 @@ else if (conversationActive=== true) {
     }
     // Reportar pago
     else if (optionLower.includes('reportar pago') || optionLower.includes('pago') || 
-             optionLower.includes('factura') || optionLower.includes('pagar') || 
-             optionLower.includes('comprobante') || optionLower.includes('recibo')) {
+              optionLower.includes('factura') || optionLower.includes('pagar') || 
+              optionLower.includes('comprobante') || optionLower.includes('recibo')) {
       return {
         message: 'Para reportar un pago realizado, indícame a continuación el que realizaste.',
         options: ['Matrícula', 'Mensualidad', 'Otro Pago']
@@ -826,8 +861,7 @@ else if (conversationActive=== true) {
     }
     
     // Detectar agradecimientos
-    if (lowerText.includes===('gracias') || lowerText.includes===('gracia') || 
-    lowerText.includes===('Gracias') || lowerText.includes===('Gracia')) {
+    if (lowerText.includes('gracias') || lowerText.includes('gracia')) {
       return {
         message: '¡De nada! Me alegra haber podido ayudarte. ¿Hay algo más en lo que pueda asistirte?',
         options: ['Sí, necesito más ayuda', 'No, gracias']
@@ -849,62 +883,50 @@ else if (conversationActive=== true) {
     return generateBotResponse(text);
   };
 
-// Añadir event listeners para los botones de cierre - CON EVENT STOPPING
-chatCloseBtn.addEventListener('click', (e) => {
-  e.stopPropagation(); // Detener la propagación del evento
-  console.log('Chat close button clicked');
-  closeAllPanels();
-  closeWelcomePanel(); 
-});
+  // Añadir event listeners para los botones de cierre - CON EVENT STOPPING
+  chatCloseBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // Detener la propagación del evento
+    console.log('Chat close button clicked');
+    closeAllPanels();
+   closeWelcomePanel();
+  });
 
-welcomeCloseBtn.addEventListener('click', (e) => {
-  e.stopPropagation(); // Detener la propagación del evento
-  console.log('Welcome close button clicked');
-  closeWelcomePanel(); // Esto debería abrir el confirmation panel
-});
+  welcomeCloseBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // Detener la propagación del evento
+    console.log('Welcome close button clicked');
+    closeAllPanels();
+    closeWelcomePanel();
+  });
 
-headerCloseBtn.addEventListener('click', (e) => {
-  e.stopPropagation(); // Detener la propagación del evento
-  console.log('Header close button clicked');
-  minimizePanels();
-});
+  headerCloseBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // Detener la propagación del evento
+    console.log('Header close button clicked');
+    minimizePanels();
+  });
 
-panelCloseBtn.addEventListener('click', (e) => {
-  e.stopPropagation(); // Detener la propagación del evento
-  console.log('Panel close button clicked');
-  closeAllPanels();
-});
+  panelCloseBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // Detener la propagación del evento
+    console.log('Panel close button clicked');
+    closeAllPanels();
+  });
 
-// También necesitamos prevenir que el clic en el botón de cerrar active el chat icon
-chatIcon.addEventListener('click', (e) => {
-  // Evitar que se active si se hace clic en el botón de cerrar
-  if (e.target.closest('.chat-close-btn')) {
-    e.stopPropagation();
-    return;
-  }
-  
-  const anyActive = welcomePanel.classList.contains('active') || chatPanel.classList.contains('active');
-  if (!anyActive) {
-    if (lastOpenPanel === 'chat') {
-      chatPanel.classList.add('active');
-    } else {
-      welcomePanel.classList.add('active');
-      lastOpenPanel = 'welcome';
-    }
-    chatIcon.classList.add('active');
-  }
+  // También necesitamos prevenir que el clic en el botón de cerrar active el chat icon
+  const chatCloseButtons = document.querySelectorAll('.chat-close-btn');
+  chatCloseButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  });
+
+  // Inicializar
+  resetChatState();
   toggleFaqButton();
-});
 
-// Inicializar
-attachUserTypeHandlers();
-toggleFaqButton();
+  // Asegurarse de que el botón FAQ esté oculto en móviles al cargar
+  if (window.innerWidth <= 600) {
+    faqToggleBtn.style.display = 'none';
+  }
 
-// Asegurarse de que el botón FAQ esté oculto en móviles al cargar
-if (window.innerWidth <= 600) {
-  faqToggleBtn.style.display = 'none';
-}
-
-// Escuchar cambios de tamaño de ventana para ajustar el botón FAQ
-window.addEventListener('resize', toggleFaqButton);
+  // Escuchar cambios de tamaño de ventana para ajustar el botón FAQ
+  window.addEventListener('resize', toggleFaqButton);
 });
