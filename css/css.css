@@ -603,6 +603,7 @@
 }
 
 .welcome-content {
+    background-color:#fffff9;
     flex: 1;
     padding: 0;
     display: flex;
@@ -718,7 +719,6 @@
 
 .welcome-footer, .chat-footer {
     padding: 10px 18px;
-    border-top: 1px solid #f0f0f0;
     text-align: center;
     flex-shrink: 0;
     background: #f8f9fa;
@@ -727,7 +727,6 @@
 
 .welcome-footer {
     border-radius: 0 0 20px 20px;
-    box-shadow: inset 0 1px 0 rgba(0,0,0,0.05);
     min-height: 40px;
     display: flex;
     align-items: center;
