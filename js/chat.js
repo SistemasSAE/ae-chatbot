@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Cancelar cierre - Modificado para quitar blur
   const cancelClose = () => {
     confirmationPanel.classList.remove('active');
-    // Remover blur de los paneles
+      // Remover blur de los paneles
     chatPanel.classList.remove('blurred');
     welcomePanel.classList.remove('blurred');
   };
