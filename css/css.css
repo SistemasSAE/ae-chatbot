@@ -1235,6 +1235,9 @@
 }
 
 @media (max-width: 600px) {
+    .chat-header, .faq-header, .welcome-header {
+        border-radius: 0 0 0 0;
+    }
     .faq-toggle-btn {
         display: none !important;
     }
@@ -1293,12 +1296,9 @@
         right: 0;
         bottom: 0;
         top: 0;
-        width: auto;
-        max-height: 100vh;
-        min-height: 100vh;
         border-radius: 0;
     }
-    
+
     .bot-message {
         margin-left: 30px;
     }
