@@ -417,7 +417,6 @@ document.addEventListener('DOMContentLoaded', function() {
     lastUserSelection = null;
     conversationArea.innerHTML = '';
     
-    appendBotMessage('Este es el comienzo de su conversación con nosotros.');
     appendBotMessage('¡Bienvenido👋🏻! ¿Podrías indicar qué tipo de usuario eres?');
     
     conversationArea.insertAdjacentHTML('beforeend', `
@@ -581,7 +580,7 @@ document.addEventListener('DOMContentLoaded', function() {
           options: ['Iniciar Sesión', 'Inscripciones', 'Solicitud de Cupo', 'Reportar Pago']
         };
       }
-    
+
       // Detectar finalización de conversación - MOSTRAR PANEL DE VALORACIÓN
       if (message.includes('no, gracias') || message.includes('nada más') || message.includes('no gracias') || 
       message.includes('no gracia') || message.includes('adios') || message.includes('adiós') || 
@@ -627,7 +626,13 @@ document.addEventListener('DOMContentLoaded', function() {
           options: ['Nuevo Ingreso', 'Reingreso']
         };
       }
-
+  // Pregunta sobre profesores y notas - DETECCIÓN MEJORADA
+  if (message.includes('profesor') && (message.includes('nota') || message.includes('subir') || message.includes('cargar'))) {
+    return {
+      message: 'Ingresar al acceso del plantel; estando allí, dirigirse al menú de configuración (donde está el nombre de la institución), dar clic en la opción 1, datos de la institución, y luego ubicarse en los campos "USUARIO" y "CONTRASEÑA". Una vez que ya esté modificado, dar clic en guardar.',
+      options: ['Necesito más ayuda']
+    };
+  }
       // Nuevo Ingreso y Reingreso
       else if (message.includes('Nuevo Ingreso') || message.includes('Reingreso') ||  message.includes('nuevo') || message.includes('Nuevo') || message.includes('Reingreso') || message.includes('reingreso') || 
       message.includes('nuevo ingreso')) {
@@ -731,6 +736,13 @@ document.addEventListener('DOMContentLoaded', function() {
       return {
         message: 'Entendido, para la solicitud de cupo, ¿Necesitas información sobre el proceso o el estado de una solicitud realizada?',
         options: ['Proceso de Solicitud', 'Estado de Solicitud']
+      };
+    }
+    // Solicitud de cupo
+    else if (optionLower.includes('por qué los profesores no pueden cargar notas') || optionLower.includes('Por qué los profesores no pueden cargar notas')) {
+      return {
+        message: 'Ingresar al acceso del plantel; estando allí, dirigirse al menú de configuración (donde está el nombre de la institución), dar clic en la opción 1, datos de la institución, y luego ubicarse en los campos “USUARIO” y “CONTRASEÑA”. Una vez que ya esté modificado, dar clic en guardar.',
+        options: ['Necesito más ayuda']
       };
     }
     // Reportar pago

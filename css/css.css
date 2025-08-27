@@ -3,8 +3,8 @@
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     cursor: pointer;
     z-index: 1000;
     transition: transform 0.3s ease;
@@ -76,9 +76,7 @@
     padding: 6px 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     white-space: nowrap;
-    opacity: 0;
-    transform: translateY(5px) scale(0.8);
-    transition: all 0.4s ease;
+
 }
 
 .chat-bubble::after {
@@ -136,11 +134,16 @@
 /* Header común para todos los paneles */
 .chat-header, .faq-header, .welcome-header {
     background: #0060ef;
+    height: 100px;
     padding: 16px;
     border-radius: 20px 20px 0 0;
     flex-shrink: 0;
 }
-
+.welcome-header {
+    padding: 16px 16px 0px 16px;
+    height: 71px;
+    border-radius: 20px 0 0 0;
+}
 .faq-header {
     border-radius: 20px 0 0 0;
 }
@@ -180,6 +183,7 @@
 
 /* Botones de header comunes */
 .header-btn, .welcome-close-btn {
+    top: -9px;
     background: transparent !important;
     border: none !important;
     color: #fff !important;
@@ -245,8 +249,6 @@
     max-width: 90%;
     align-self: flex-start;
     font-size: 14px;
-    border: 1px solid #e9ecef;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     line-height: 1.4;
     margin-left: 25px;
     position: relative;
@@ -280,7 +282,6 @@
     align-self: flex-end;
     font-size: 14px;
     margin-left: auto;
-    box-shadow: 0 2px 8px rgba(0, 96, 239, 0.3);
     position: relative;
     word-wrap: break-word;
     line-height: 1.4;
@@ -417,6 +418,7 @@
 }
 
 .chat-input {
+    display: none;
     border: 1px solid #e0e0e0 !important;
     border-radius: 25px !important;
     font-size: 14px;
@@ -430,7 +432,7 @@
     box-shadow: 0 0 0 0.2rem rgba(0, 96, 239, 0.25) !important;
 }
 
-.send-btn, .chat-faq-btn {
+/*.send-btn,*/ .chat-faq-btn {
     width: 35px !important;
     height: 35px !important;
     display: flex !important;
@@ -442,6 +444,7 @@
 }
 
 .send-btn {
+    display: none;
     background: #0060ef !important;
     border: none !important;
     color: white !important;
@@ -449,6 +452,7 @@
 }
 
 .send-btn:hover {
+    display: none;
     background: #0051d1 !important;
 }
 
@@ -469,21 +473,22 @@
 /* FAQ Button */
 .faq-toggle-btn {
     position: fixed;
-    bottom: 470px;
-    right: 470px;
+    bottom: 440px;
+    right: 460px;
     width: 50px;
     height: 50px;
     background: #0060ef;
     border: none;
-    border-radius: 50%;
+    border-radius: 15px 0 0 15px;
     cursor: pointer;
     z-index: 998;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 12px rgba(0, 96, 239, 0.4);
     transition: all 0.3s ease;
 }
+
 
 .faq-toggle-btn:hover {
     background: #0051d1;
@@ -500,10 +505,10 @@
 /* FAQ Panel */
 .faq-panel {
     position: fixed;
-    bottom: 110px;
-    right: 460px;
+    bottom: 250px;
+    right: 470px;
     width: 320px;
-    height: 480px;
+    height: 340px;
     background: white;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -642,7 +647,6 @@
     text-align: left;
     margin: 0;
     width: 100%;
-    box-shadow: 0 4px 12px rgba(0, 96, 239, 0.2);
     border-radius: 0;
 }
 
@@ -667,7 +671,6 @@
     padding: 20px;
     background: white;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .section-1 {
@@ -828,14 +831,14 @@
 /* Close button */
 .panel-close-btn {
     position: absolute;
-    top: 70%;
-    right: 20px;
-    width: 30px;
-    height: 30px;
-    background: rgba(255, 255, 255, 0.2);
+    top: 55px;
+    right: 50px;
+    width: 35px;
+    height: 35px;
+    background:transparent;
     border: none;
-    border-radius: 50%;
-    color: rgb(121, 121, 121);
+    border-radius: 5px 5px 5px 5px;
+    color: rgb(255, 255, 255);
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
@@ -858,25 +861,22 @@
  
 /* Paneles de confirmación y rating */
 .confirmation-panel {
-    position: fixed;
-    top: -10%;
-    left: 35.3%;
-    width: 90%;
-    height: 90%;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
+    bottom: 150px;
+    right: 30px;
+    width: 330px;
+    height: 220px;
     z-index: 2000;
     display: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
  .rating-panel {
-    position: fixed;
-    top: -10%;
-    left: 30.3%;
+    position: absolute;
+    bottom: 50px;
+    right: -0px;
     width: 100%;
-    height: 90%;
-    justify-content: center;
-    align-items: center;
+    height: 330px;
     z-index: 2000;
     display: none;
 }
@@ -887,17 +887,17 @@
 
 .confirmation-content, .rating-content {
     background: white;
-    padding: 25px;
-    border-radius: 15px;
+    padding: 10px;
+    border-radius: 0px;
     text-align: center;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 380px;
     z-index: 2001;
 }
-
+.confirmation-content{
+    max-width: 500px;
+}
 .rating-content {
-    max-width: 350px;
+    max-width: 500px;
 }
 
 .confirmation-content h5, .rating-content h5 {
@@ -1038,15 +1038,14 @@
 /* RESPONSIVE DESIGN */
 @media (max-width: 1024px) {
     .faq-toggle-btn {
-        bottom: 430px;
-        right: 390px;
+        bottom: 440px;
+        right: 380px;
     }
-    
     .faq-panel {
-        bottom: 110px;
+        bottom: 260px;
         right: 390px;
         width: 340px;
-        height: 450px;
+        height: 330px;
     }
     
     .chat-panel {
@@ -1108,20 +1107,20 @@
 
 @media (max-width: 768px) {
     .faq-toggle-btn {
-        bottom: 370px;
+        bottom: 413px;
         right: 370px;
     }
     
     .faq-panel {
-        bottom: 100px;
-        right: 370px;
-        width: 260px;
-        height: 420px;
+        bottom: 242px;
+        right: 380px;
+        width: 330px;
+        height: 320px;
     }
     
     .chat-panel, .welcome-panel {
         right: 40px;
-        width: 300px;
+        width: 330px;
         max-height: calc(100vh - 160px);
         min-height: 420px;
     }
@@ -1150,7 +1149,7 @@
     
     .header-text span, .welcome-header-text span {
         font-size: 13px;
-        line-height: 1.2;
+        line-height: 0.8;
     }
     
     .avatar, .welcome-avatar {
@@ -1161,7 +1160,7 @@
     .welcome-close-btn {
         min-width: 30px;
         height: 30px;
-        font-size: 18px;
+        font-size: 30px;
         padding: 5px 7px !important;
     }
     
@@ -1221,12 +1220,12 @@
 
 @media (max-width: 700px) {
     .faq-toggle-btn {
-        right: 350px;
+        right: 320px;
     }
     
     .faq-panel {
-        right: 280px;
-        width: 240px;
+        right: 330px;
+        width: 20px;
     }
     
     .chat-panel {
@@ -1392,13 +1391,13 @@
     .welcome-close-btn {
         min-width: 28px;
         height: 28px;
-        font-size: 16px;
+        font-size: 25px;
         padding: 4px 6px !important;
     }
     
     .welcome-header-text span {
         font-size: 11px;
-        line-height: 1.1;
+        line-height: 0.8;
     }
     
     .welcome-avatar {
@@ -1513,13 +1512,13 @@
     .welcome-close-btn {
         min-width: 26px;
         height: 26px;
-        font-size: 15px;
+        font-size: 20px;
         padding: 3px 5px !important;
     }
     
     .welcome-header-text span {
         font-size: 10px;
-        line-height: 1.0;
+        line-height: 0.8
     }
     
     .welcome-avatar {
