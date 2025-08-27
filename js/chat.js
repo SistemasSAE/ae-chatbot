@@ -177,17 +177,20 @@ document.addEventListener('DOMContentLoaded', function() {
       comment: comment
     });
     
-    // Cerrar panel de valoración
+    // Cerrar panel de valoración y abrir el chat de bienvenida
     ratingPanel.classList.remove('active');
-    
+    welcomePanel.classList.add ('active');
     // Reiniciar chat completamente
     resetChatCompletely();
+    
   });
 
   // Omitir valoración
   skipRatingBtn.addEventListener('click', () => {
     ratingPanel.classList.remove('active');
+    welcomePanel.classList.add ('active');
     resetChatCompletely();
+   
   });
 
   // Función para mostrar panel de valoración
