@@ -119,7 +119,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Cerrar todos los paneles
     welcomePanel.classList.remove('active');
-    chatPanel.classList.remove('active');
     faqPanel.classList.remove('active');
     chatFaqPanel.classList.remove('active');
     confirmationPanel.classList.remove('active');
@@ -129,12 +128,11 @@ document.addEventListener('DOMContentLoaded', function() {
       chatIcon.classList.remove('active');
     }
     
-    // Reiniciar completamente el estado del chat
-    resetChatCompletely();
     toggleFaqButton();
     
-    // Mostrar panel de valoración
-    showRatingPanel();
+    setTimeout(() => {
+      showRatingPanel();
+    }, 1000);
   };
 
   // Cancelar cierre
@@ -178,18 +176,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Cerrar panel de valoración y abrir el chat de bienvenida
+    chatPanel.classList.remove('active')
     ratingPanel.classList.remove('active');
-    welcomePanel.classList.add ('active');
-    // Reiniciar chat completamente
-    resetChatCompletely();
-    
+    welcomePanel.classList.add('active');
+    resetChatState();
   });
 
   // Omitir valoración
   skipRatingBtn.addEventListener('click', () => {
     ratingPanel.classList.remove('active');
     welcomePanel.classList.add ('active');
-    resetChatCompletely();
+    chatPanel.classList.remove('active')
+    resetChatState();
    
   });
 

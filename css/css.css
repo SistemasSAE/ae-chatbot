@@ -1443,6 +1443,7 @@
     }
     .rating-panel.active {
         left: 40px;
+        z-index: 2002;
     }
     .header-text span {
         font-size: 12px;
