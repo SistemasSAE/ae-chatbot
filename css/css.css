@@ -1146,7 +1146,7 @@
         right: 40px;
         width: 330px;
         max-height: calc(100vh - 160px);
-        min-height: 420px;
+        min-height: 480px;
     }
     
     .welcome-panel {
@@ -1245,7 +1245,7 @@
     
     .faq-panel {
         right: 330px;
-        width: 20px;
+        width: 258px;
     }
     
     .chat-panel {
@@ -1272,6 +1272,7 @@
         transform: translate(-50%, -50%);
         height: auto;
         max-height: 80vh;
+        display: none;
     }
     .faq-panel.active::after {
         display: none;
@@ -1281,7 +1282,7 @@
         border-radius: 20px 20px 0 0;
     }
     
-    .faq-panel.active + .chat-panel.active {
+    .faq-panel.active .chat-panel.active {
         display: none;
     }
     
