@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const ratingComment = document.getElementById('ratingComment');
   const submitRatingBtn = document.getElementById('submitRatingBtn');
   const skipRatingBtn = document.getElementById('skipRatingBtn');
+  const floatingMsg = document.getElementById('floating-message-bot')
 
   let firstSelectionMade = false;
   let currentUserType = null;
@@ -35,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
   let lastUserSelection = null;
   let lastOpenPanel = null; // 'welcome' | 'chat'
   let currentRating = 0;
-
   const toggleFaqButton = () => {
     if (window.innerWidth <= 600) {
       faqToggleBtn.style.display = 'none';
@@ -122,7 +122,6 @@ document.addEventListener('DOMContentLoaded', function() {
     faqPanel.classList.remove('active');
     chatFaqPanel.classList.remove('active');
     confirmationPanel.classList.remove('active');
-    
     // Solo quitar la clase active si el chatPanel está inactivo
     if (!chatPanel.classList.contains('active')) {
       chatIcon.classList.remove('active');
@@ -132,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     setTimeout(() => {
       showRatingPanel();
-    }, 1000);
+    }, 50);
   };
 
   // Cancelar cierre
@@ -176,8 +175,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Cerrar panel de valoración y abrir el chat de bienvenida
-    chatPanel.classList.remove('active')
+    chatPanel.classList.remove('active');
     ratingPanel.classList.remove('active');
+
     welcomePanel.classList.add('active');
     resetChatState();
   });
@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
   skipRatingBtn.addEventListener('click', () => {
     ratingPanel.classList.remove('active');
     welcomePanel.classList.add ('active');
-    chatPanel.classList.remove('active')
+    chatPanel.classList.remove('active');
     resetChatState();
    
   });
@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
     chatFaqPanel.classList.remove('active');
     confirmationPanel.classList.remove('active');
     ratingPanel.classList.remove('active');
-    
+    floatingMsg.classList.add('active');
     // Solo quitar la clase active si el chatPanel está inactivo
     if (!chatPanel.classList.contains('active')) {
       chatIcon.classList.remove('active');
@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Cerrar panel de FAQ (especialmente importante en móviles)
       faqPanel.classList.remove('active');
-      
+
       // Si estamos en móvil, asegurarse de que el chat esté visible
       if (window.innerWidth <= 600) {
         // En móviles, el FAQ panel reemplaza al chat, así que necesitamos mostrar el chat
@@ -304,6 +304,7 @@ document.addEventListener('DOMContentLoaded', function() {
           welcomePanel.classList.remove('active');
           chatPanel.classList.add('active');
           chatIcon.classList.add('active');
+          floatingMsg.classList.remove('active');
           lastOpenPanel = 'chat';
           toggleFaqButton();
         }
@@ -317,7 +318,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Enviar la pregunta seleccionada al chat
       setTimeout(() => {
         appendUserMessage(question);
-        
+        floatingMsg.classList.remove('active');
         // Procesar la respuesta
         setTimeout(() => {
           const response = processOptionSelection(question);
@@ -347,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
           const response = processOptionSelection(question);
           appendBotMessage(response.message);
-          
+          floatingMsg.classList.remove('active');
           if (response.options && response.options.length > 0) {
             showSuggestedOptions(response.options);
           }
@@ -375,6 +376,7 @@ document.addEventListener('DOMContentLoaded', function() {
     welcomePanel.classList.remove('active');
     chatPanel.classList.add('active');
     chatIcon.classList.add('active');
+    floatingMsg.classList.add('active');
     lastOpenPanel = 'chat';
     resetChatState();
     toggleFaqButton();
@@ -416,9 +418,10 @@ document.addEventListener('DOMContentLoaded', function() {
     conversationActive = true;
     lastUserSelection = null;
     conversationArea.innerHTML = '';
-    
-    appendBotMessage('¡Bienvenido👋🏻! ¿Podrías indicar qué tipo de usuario eres?');
-    
+
+// Agregar mensaje del bot
+appendBotMessage('¡Bienvenido👋🏻! ¿Podrías indicar qué tipo de usuario eres?');
+
     conversationArea.insertAdjacentHTML('beforeend', `
       <div class="option-buttons user-type-buttons">
         <button class="option-btn btn btn-light w-100 text-start d-flex justify-content-between align-items-center" data-value="Representante">
@@ -485,7 +488,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const userType = btn.getAttribute('data-value');
         currentUserType = userType;
         const text = btn.querySelector('.btn-text')?.textContent || userType;
-        
+        floatingMsg.classList.remove('active');
         appendUserMessage(text);
         
         buttons.forEach(otherBtn => {
@@ -575,6 +578,7 @@ document.addEventListener('DOMContentLoaded', function() {
         firstSelectionMade = true;
         currentUserType = message.includes('representante') ? 'Representante' : 
                         message.includes('estudiante') ? 'Estudiante' : 'Profesor';
+        floatingMsg.classList.remove('active');
         return {
           message: `Perfecto, eres ${currentUserType}. ¿En qué puedo ayudarte?`,
           options: ['Iniciar Sesión', 'Inscripciones', 'Solicitud de Cupo', 'Reportar Pago']
@@ -834,12 +838,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   sendBtn.addEventListener('click', () => {
     chatFaqPanel.classList.remove('active');
+    floatingMsg.classList.remove('active');
     sendMessage();
   });
   
   inputEl.addEventListener('keydown', (e) => { 
     if (e.key === 'Enter') {
       chatFaqPanel.classList.remove('active');
+      floatingMsg.classList.remove('active');
       sendMessage();
     } 
   });
