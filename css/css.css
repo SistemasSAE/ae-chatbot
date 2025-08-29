@@ -186,8 +186,7 @@
     bottom: 110px;
     right: 80px;
     width: 380px;
-    max-height: calc(100vh - 200px);
-    min-height: 480px;
+    max-height: 480px;
     background: white;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);

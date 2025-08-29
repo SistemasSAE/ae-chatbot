@@ -194,6 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ratingPanel.classList.remove('active');
     welcomePanel.classList.add ('active');
     chatPanel.classList.remove('active');
+    faqToggleBtn.classList.remove
     resetChatState();
    
   });
