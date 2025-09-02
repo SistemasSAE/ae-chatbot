@@ -469,7 +469,6 @@
 }
 .blurred {
     filter: blur(2px); 
-    
 }
 .btn-text {
     flex-grow: 1;
@@ -545,6 +544,7 @@
     outline: none;
     transition: border-color 0.2s ease;
     flex: 1;
+    
 }
 
 .chat-input:focus {
