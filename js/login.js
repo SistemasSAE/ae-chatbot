@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // Bloquear interacción con el chatbot
             const chatElements = document.querySelectorAll('.chat-panel, .welcome-panel, .chat-icon, .faq-toggle-btn');
             chatElements.forEach(el => {
-                el.classList.add('blurred');
                 el.style.pointerEvents = 'none';
                 el.style.opacity = '0.5';
             });
