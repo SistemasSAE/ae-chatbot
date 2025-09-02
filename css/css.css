@@ -544,7 +544,7 @@
     outline: none;
     transition: border-color 0.2s ease;
     flex: 1;
-    
+
 }
 
 .chat-input:focus {

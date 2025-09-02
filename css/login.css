@@ -17,7 +17,6 @@
 
 .login-panel.active {
     display: flex;
-    filter: none;
 }
 .login-header {
     padding: 4px;
