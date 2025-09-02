@@ -24,7 +24,7 @@ function initConfirmationPanel() {
     const confirmClose = () => {
         if (chatPanel) chatPanel.classList.remove('blurred');
         if (welcomePanel) welcomePanel.classList.remove('blurred');
-        
+        chatIcon.style.animation = '';
         if (welcomePanel) welcomePanel.classList.remove('active');
         if (faqPanel) faqPanel.classList.remove('active');
         if (chatFaqPanel) chatFaqPanel.classList.remove('active');
