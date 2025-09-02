@@ -12,8 +12,10 @@ function initConfirmationPanel() {
     window.closeAllPanels = () => {
         if (chatPanel && chatPanel.classList.contains('active')) {
             chatPanel.classList.add('blurred');
+            faqToggleBtn.style.display = 'none';
         } else if (welcomePanel && welcomePanel.classList.contains('active')) {
             welcomePanel.classList.add('blurred');
+            faqToggleBtn.style.display = 'none';
         }
         
         if (confirmationPanel) confirmationPanel.classList.add('active');
