@@ -58,7 +58,6 @@ function initWelcomePanel() {
     // Cerrar panel de bienvenida
     welcomeCloseBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        closeAllPanels();
         confirmationPanel.classList.remove('active');
         ratingPanel.classList.remove('active');
         chatFaqPanel.classList.remove('active');

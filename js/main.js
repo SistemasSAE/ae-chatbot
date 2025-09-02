@@ -71,8 +71,7 @@ function setupGlobalEventListeners() {
             !confirmationPanel.contains(e.target)) {
             confirmationPanel.classList.remove('active');
             if (faqToggleBtn) faqToggleBtn.style.display = 'flex';
-            chatPanel.classList.remove('blurred');
-            welcomePanel.classList.remove('blurred');
+
         }
         
         if (ratingPanel.classList.contains('active') && 
@@ -113,20 +112,26 @@ function toggleFaqButton() {
     }
 }
 
-// Función para minimizar paneles
+// Función para minimizar paneles (versión corregida)
 function minimizePanels() {
     if (chatPanel.classList.contains('active')) {
         chatPanel.classList.remove('active');
         lastOpenPanel = 'chat';
+        if (faqToggleBtn) faqToggleBtn.style.display = 'none';
     } else if (welcomePanel.classList.contains('active')) {
         welcomePanel.classList.remove('active');
         lastOpenPanel = 'welcome';
+        if (faqToggleBtn) faqToggleBtn.style.display = 'none';
     }
     
+    // Si ningún panel está activo, quitar la clase active del icono
     if (!welcomePanel.classList.contains('active') && !chatPanel.classList.contains('active')) {
         chatIcon.classList.remove('active');
+        if (faqToggleBtn) faqToggleBtn.style.display = 'none';
+        // Restaurar animación del icono si es necesario
         chatIcon.style.animation = '';
     }
+    
     toggleFaqButton();
 }
 

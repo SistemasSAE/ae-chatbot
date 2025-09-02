@@ -20,12 +20,13 @@ function initConfirmationPanel() {
     };
     // Confirmar cierre
     const confirmClose = () => {
-        chatIcon.style.animation = '';
+        if (chatPanel) chatPanel.classList.remove('blurred');
+        if (welcomePanel) welcomePanel.classList.remove('blurred');
         if (welcomePanel) welcomePanel.classList.remove('active');
         if (faqPanel) faqPanel.classList.remove('active');
         if (chatFaqPanel) chatFaqPanel.classList.remove('active');
         if (confirmationPanel) confirmationPanel.classList.remove('active');
-        
+        if (faqToggleBtn) faqToggleBtn.style.display = 'none';
         if (chatPanel && !chatPanel.classList.contains('active')) {
             chatIcon.classList.remove('active');
         }
@@ -40,6 +41,8 @@ function initConfirmationPanel() {
     const cancelClose = () => {
         if (confirmationPanel) confirmationPanel.classList.remove('active');
         if (faqToggleBtn) faqToggleBtn.style.display = 'flex';
+        if (chatPanel) chatPanel.classList.remove('blurred');
+        if (welcomePanel) welcomePanel.classList.remove('blurred');
     };
 
     if (confirmCloseBtn) confirmCloseBtn.addEventListener('click', confirmClose);

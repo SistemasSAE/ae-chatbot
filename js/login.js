@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // Restaurar interacción con el chatbot
             const chatElements = document.querySelectorAll('.chat-panel, .welcome-panel, .chat-icon, .faq-toggle-btn');
             chatElements.forEach(el => {
-                el.classList.remove('blurred');
                 el.style.pointerEvents = '';
                 el.style.opacity = '';
             });
