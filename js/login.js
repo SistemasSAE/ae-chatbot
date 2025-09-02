@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 el.style.opacity = '0.5';
             });
         };
-    
         // Función para cerrar el panel de login (segura)
         window.closeLoginPanel = function() {
             if (!loginPanel) return;

@@ -20,7 +20,6 @@ function initWelcomePanel() {
         }
         toggleFaqButton();
     };
-
     // Abrir panel cuando se hace click en el icono del chat (restaurar último panel abierto)
     const chatIconEl = document.getElementById('chatIcon');
     if (chatIconEl) {

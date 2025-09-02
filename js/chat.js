@@ -25,7 +25,6 @@ function initChatPanel() {
             chatIcon.style.animation = '';
         }
     };
-
     // Volver al panel de bienvenida
     if (backToWelcomeBtn) {
         backToWelcomeBtn.addEventListener('click', () => {

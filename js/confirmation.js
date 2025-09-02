@@ -20,7 +20,6 @@ function initConfirmationPanel() {
         
         if (confirmationPanel) confirmationPanel.classList.add('active');
     };
-
     // Confirmar cierre
     const confirmClose = () => {
         if (chatPanel) chatPanel.classList.remove('blurred');

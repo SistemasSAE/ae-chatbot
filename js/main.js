@@ -11,7 +11,6 @@ let currentRating = 0;
 // Elementos globales
 let chatIcon, welcomePanel, chatPanel, conversationArea, inputEl, sendBtn, floatingMsg, faqToggleBtn, faqPanel;
 let confirmationPanel, ratingPanel, chatFaqPanel, welcomeCloseBtn, welcomeStartBtn, chatFaqBtn;
-
 // Inicializar la aplicación cuando el DOM esté cargado
 document.addEventListener('DOMContentLoaded', function() {
     console.debug('main: DOMContentLoaded - initializing panels');
