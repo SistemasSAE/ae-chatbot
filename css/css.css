@@ -3,8 +3,8 @@
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     cursor: pointer;
     z-index: 1000;
     transition: transform 0.3s ease;
@@ -19,7 +19,7 @@
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    outline: 2px solid #0060ef;
+    outline: 2px solid #0010fd;
     outline-offset: -2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     position: relative;
@@ -33,7 +33,7 @@
     top: -30px;
     left: -50px;
     background: white;
-    border: 2px solid #0060ef;
+    border: 2px solid #0010fd;
     border-radius: 18px;
     padding: 6px 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -65,7 +65,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: #0060ef;
+    background: #0010fd;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -114,13 +114,14 @@
     }
 }
 .chat-close-btn:hover {
-    background: #0051d1;
+    background: #0010fd;
     transform: scale(1.05);
     box-shadow: 0 6px 16px rgba(0, 96, 239, 0.5);
 }
 
 .close-x {
-    width: 100%;
+    
+    width: 70%;
 }
 
 /* Estado activo del chat icon */
