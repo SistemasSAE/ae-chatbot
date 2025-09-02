@@ -468,7 +468,8 @@
     width: 100%;
 }
 .blurred {
-    filter: blur(2px);
+    filter: blur(2px); 
+    
 }
 .btn-text {
     flex-grow: 1;

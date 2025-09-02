@@ -17,8 +17,8 @@
 
 .login-panel.active {
     display: flex;
+    
 }
-
 .login-header {
     padding: 4px;
     border-radius: 20px 20px 0 0;
