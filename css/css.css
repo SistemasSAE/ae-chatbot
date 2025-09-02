@@ -467,7 +467,9 @@
     justify-content: center;
     width: 100%;
 }
-
+.blurred {
+    filter: blur(5px);
+}
 .btn-text {
     flex-grow: 1;
     text-align: left;
@@ -952,8 +954,8 @@
 /* Paneles de confirmación y rating */
 .confirmation-panel {
     position: absolute;
-    bottom: 150px;
-    right: 30px;
+    bottom: 250px;
+    right: 110px;
     width: 330px;
     height: 220px;
     z-index: 2000;
