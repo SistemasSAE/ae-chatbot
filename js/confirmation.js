@@ -33,7 +33,6 @@ function initConfirmationPanel() {
         if (chatPanel && !chatPanel.classList.contains('active')) {
             chatIcon.classList.remove('active');
         }
-        
         toggleFaqButton();
         if (faqToggleBtn) faqToggleBtn.style.display = 'none';
         setTimeout(() => {
