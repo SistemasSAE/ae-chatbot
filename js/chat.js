@@ -15,7 +15,7 @@ function initChatPanel() {
     const chatCloseBtn = document.getElementById('chatCloseBtn');
 
     // Minimizar panel de chat
-    const minimizeChatPanel = () => {
+    const minimizeChatPanels = () => {
         if (chatPanel.classList.contains('active')) {
             chatPanel.classList.remove('active');
             lastOpenPanel = 'chat';
@@ -34,6 +34,10 @@ function initChatPanel() {
                 chatPanel.classList.remove('active');
                 welcomePanel.classList.add('active');
                 faqToggleBtn.style.display = 'none';
+                confirmationPanel.classList.remove('active');
+                ratingPanel.classList.remove('active');
+                chatFaqPanel.classList.remove('active');
+                faqPanel.classList.remove('active');
                 lastOpenPanel = 'welcome';
                 chatIcon.classList.add('active');
                 resetChatState();
@@ -56,7 +60,7 @@ function initChatPanel() {
     // Minimizar chat
     headerCloseBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        minimizePanels();
+        minimizeChatPanels();
     });
 
     // Cerrar panel de chat

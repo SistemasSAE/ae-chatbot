@@ -13,6 +13,7 @@ function initWelcomePanel() {
         welcomePanel.classList.remove('active');
         if (!chatPanel.classList.contains('active')) {
             chatIcon.classList.remove('active');
+            
         }
         if (!welcomePanel.classList.contains('active') && !chatPanel.classList.contains('active')) {
             chatIcon.style.animation = '';
@@ -59,6 +60,13 @@ function initWelcomePanel() {
     welcomeCloseBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         closeAllPanels();
+        confirmationPanel.classList.remove('active');
+        ratingPanel.classList.remove('active');
+        chatFaqPanel.classList.remove('active');
+        faqPanel.classList.remove('active');
+        faqBackBtn.classList.remove('active');
+        welcomePanel.classList.remove('blurred');
+        chatPanel.classList.remove('blurred');
         chatIcon.style.animation = '';
         closeWelcomePanel();
     });
