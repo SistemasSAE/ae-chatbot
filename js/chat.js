@@ -118,6 +118,5 @@ if (chatCloseBtn) {
             // Si el welcome panel está activo, cerrarlo directamente
             closeWelcomePanel();
         }
-    });
-                              }
+    });                           }
 }
