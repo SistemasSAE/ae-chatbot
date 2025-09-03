@@ -159,7 +159,7 @@
     right: 18px;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 6px solid #0060ef;
+    border-top: 6px solid #0010fd;
 }
 
 .chat-bubble span {
@@ -251,7 +251,7 @@
 .chat-header, .faq-header, .welcome-header {
     background: #0060ef;
     height: 100px;
-    padding: 16px;
+    padding: 34px;
     border-radius: 20px 20px 0 0;
     flex-shrink: 0;
 }
@@ -266,7 +266,7 @@
 
 .header-text span, .faq-header-text span, .welcome-header-text span {
     color: #fff;
-    font-size: 14px;
+    font-size: 18px;
     white-space: normal;
     font-weight: 500;
     line-height: 1.3;
@@ -1243,13 +1243,13 @@
     }
     
     .header-text span, .welcome-header-text span {
-        font-size: 13px;
+        font-size: 18px;
         line-height: 0.8;
     }
     
     .avatar, .welcome-avatar {
-        width: 32px;
-        height: 32px;
+        width: 42px;
+        height: 42px;
     }
     
     .welcome-close-btn {
@@ -1435,7 +1435,7 @@
     }
     .chat-header, .faq-header, .welcome-header {
         background: #0060ef;
-        padding: 16px;
+        padding: 34px 16px;
         border-radius: 0 0 0 0;
         flex-shrink: 0;
     }
@@ -1482,17 +1482,18 @@
     }
     
     .welcome-header-text span {
-        font-size: 11px;
+        font-size: 18px;
         line-height: 0.8;
     }
     
     .welcome-avatar {
-        width: 28px;
-        height: 28px;
+        width: 34px;
+        height: 34px;
     }
     
     .welcome-message {
-        padding: 18px 14px;
+        padding: 0px 14px 0px;
+        height: 70px;
         margin: 0;
     }
     
@@ -1532,13 +1533,13 @@
         z-index: 2002;
     }
     .header-text span {
-        font-size: 12px;
+        font-size: 16px;
         line-height: 1.1;
     }
     
     .avatar {
-        width: 28px;
-        height: 28px;
+        width: 40px;
+        height: 40px;
     }
     
     .user-type-buttons .option-btn, .action-buttons .option-btn {
@@ -1603,25 +1604,25 @@
     }
     
     .welcome-header-text span {
-        font-size: 10px;
+        font-size: 16px;
         line-height: 0.8
     }
     
     .welcome-avatar {
-        width: 26px;
-        height: 26px;
+        width: 36px;
+        height: 36px;
     }
     .welcome-message {
-        padding: 16px 12px;
+        padding: 0px 12px 0px;
         margin: 0;
     }
     
     .welcome-message h4 {
-        font-size: 15px;
+        font-size: 16px;
     }
     
     .welcome-message p {
-        font-size: 12px;
+        font-size: 13px;
     }
     
     .welcome-footer {

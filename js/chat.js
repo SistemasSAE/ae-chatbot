@@ -1,6 +1,3 @@
-// Variables globales para el panel de chat (referencias definidas in `main.js`)
-// ...existing code...
-
 // Inicializar panel de chat
 function initChatPanel() {
     console.debug('initChatPanel called');
@@ -14,58 +11,50 @@ function initChatPanel() {
     panelCloseBtn = document.getElementById('panelCloseBtn');
     const chatCloseBtn = document.getElementById('chatCloseBtn');
 
-    chatIcon.addEventListener('click', (e) => {
-        // Evitar que se active si se hace clic en el botón de cerrar
-        if (e.target.closest('.chat-close-btn')) return;
-        
-        const anyActive = welcomePanel.classList.contains('active') || chatPanel.classList.contains('active');
-        if (!anyActive) {
-            // Siempre mostrar el panel de bienvenida al hacer clic en el icono
-            resetChatCompletely();
+// Volver al panel de bienvenida
+if (backToWelcomeBtn) {
+    backToWelcomeBtn.addEventListener('click', () => {
+        console.debug('chat: backToWelcomeBtn clickeado');
+        if (chatPanel.classList.contains('active')) {
+            chatPanel.classList.remove('active');
             welcomePanel.classList.add('active');
+            faqToggleBtn.style.display = 'none';
+            confirmationPanel.classList.remove('active');
+            ratingPanel.classList.remove('active');
+            chatFaqPanel.classList.remove('active');
+            faqPanel.classList.remove('active');
             lastOpenPanel = 'welcome';
             chatIcon.classList.add('active');
-            chatIcon.style.animation = 'none';
+            resetChatState();
+            
+            // Remover marcas de estado
+            sessionStorage.removeItem('manuallyClosed');
+            sessionStorage.removeItem('minimized');
         }
-        toggleFaqButton();
     });
-    // Volver al panel de bienvenida
-    if (backToWelcomeBtn) {
-        backToWelcomeBtn.addEventListener('click', () => {
-            console.debug('chat: backToWelcomeBtn clicked');
-            if (chatPanel.classList.contains('active')) {
-                chatPanel.classList.remove('active');
-                welcomePanel.classList.add('active');
-                faqToggleBtn.style.display = 'none';
-                confirmationPanel.classList.remove('active');
-                ratingPanel.classList.remove('active');
-                chatFaqPanel.classList.remove('active');
-                faqPanel.classList.remove('active');
-                lastOpenPanel = 'welcome';
-                chatIcon.classList.add('active');
-                resetChatState();
-            }
-        });
-    }
+}
 
-    // Reiniciar chat
-    refreshBtn.addEventListener('click', () => {
-    console.debug('chat: refreshBtn clicked');
-        refreshBtn.style.transform = 'rotate(180deg)';
-        refreshBtn.style.transition = 'transform 0.3s ease';
-        resetChatState();
-        setTimeout(() => {
-            refreshBtn.style.transform = 'rotate(0deg)';
-        }, 300);
-        showRefreshFeedback();
-    });
+// Reiniciar chat
+refreshBtn.addEventListener('click', () => {
+    console.debug('chat: refreshBtn clickeado');
+    refreshBtn.style.transform = 'rotate(180deg)';
+    refreshBtn.style.transition = 'transform 0.3s ease';
+    resetChatState();
+    setTimeout(() => {
+        refreshBtn.style.transform = 'rotate(0deg)';
+    }, 300);
+    showRefreshFeedback();
+    
+    // Remover marcas de estado
+    sessionStorage.removeItem('manuallyClosed');
+    sessionStorage.removeItem('minimized');
+});
 
-    // Minimizar chat
-    headerCloseBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        minimizePanels();
-    });
-
+   // Minimizar chat
+headerCloseBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    minimizePanels();
+});
     // Cerrar panel de chat
     panelCloseBtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -103,7 +92,7 @@ function initChatPanel() {
             chatFaqPanel.classList.remove('active');
         }
         floatingMsg.classList.remove('active');
-    console.debug('chat: sendBtn clicked');
+        console.debug('chat: sendBtn clicked');
         sendMessage();
     });
     
@@ -117,12 +106,18 @@ function initChatPanel() {
         } 
     });
 
-    // Cerrar chat desde el icono
-    if (chatCloseBtn) {
-        chatCloseBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
+  // Cerrar chat desde el icono
+if (chatCloseBtn) {
+    chatCloseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        if (chatPanel.classList.contains('active')) {
+            // Si el chat panel está activo, mostrar confirmación de cierre
             closeAllPanels();
-        });
-    }
+        } else if (welcomePanel.classList.contains('active')) {
+            // Si el welcome panel está activo, cerrarlo directamente
+            closeWelcomePanel();
+        }
+    });
+                              }
 }
-// ...existing code...

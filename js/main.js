@@ -133,6 +133,9 @@ function minimizePanels() {
     }
     
     toggleFaqButton();
+    
+    // Marcar que se minimizó manualmente
+    sessionStorage.setItem('minimized', 'true');
 }
 
 // Función para cerrar el panel de bienvenida
@@ -182,6 +185,10 @@ function resetChatCompletely() {
     if (conversationArea) conversationArea.innerHTML = '';
     
     toggleFaqButton();
+    
+    // Remover marcas de estado
+    sessionStorage.removeItem('manuallyClosed');
+    sessionStorage.removeItem('minimized');
 }
 
 // Función para mostrar opciones principales
@@ -383,6 +390,7 @@ function attachUserTypeHandlers() {
     });
 }
 
+
 // Función para reiniciar el estado del chat
 function resetChatState() {
     firstSelectionMade = false;
@@ -416,6 +424,9 @@ function resetChatState() {
     if (inputEl) inputEl.value = '';
     attachUserTypeHandlers();
     if (conversationArea) conversationArea.scrollTop = 0;
+    
+    // Remover marca de cierre manual al reiniciar el chat
+    sessionStorage.removeItem('manuallyClosed');
 }
 
 // Función para manejar respuestas de texto libre
