@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Función para abrir el panel de login (segura)
         window.openLoginPanel = function() {
             if (!loginPanel) return;
+            
+            // Actualizar el título con el tipo de usuario actual
+            updateLoginTitle();
+            
             loginPanel.classList.add('active');
             document.body.style.overflow = 'hidden'; // Prevenir scroll
     
@@ -122,7 +126,21 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
+    // Función para actualizar el título del login con el tipo de usuario
+function updateLoginTitle() {
+    const userTypeText = document.getElementById('currentUserTypeText');
+    const loginTitle = document.getElementById('loginTitle');
     
+    if (userTypeText && currentUserType) {
+        userTypeText.textContent = " " + currentUserType;
+        // Asegurarse de que el título sea visible
+        if (loginTitle) loginTitle.style.display = '';
+    } else if (userTypeText) {
+        userTypeText.textContent = '';
+        // Ocultar el título si no hay tipo de usuario
+        if (loginTitle) loginTitle.style.display = 'none';
+    }
+}
     // Función global para abrir desde los botones FAQ
     function openLoginFromFAQ() {
         if (typeof openLoginPanel === 'function') {

@@ -26,7 +26,7 @@
       </div>
       <!-- Botón de cierre que aparece cuando el chat está activo -->
       <div class="chat-close-btn" id="chatCloseBtn">
-        <svg xmlns="http://www.w3.org/2000/svg" alt="Close x" class="close-x" width="50" height="50" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+        <svg xmlns="http://www.w3.org/2000/svg" alt="Close x" class="close-x" width="35" height="35" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
           <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
         </svg>
       </div>
@@ -85,7 +85,7 @@
 
       <!-- Footer -->
       <div class="welcome-footer">
-        <span>Desarrollado por: <b>AsistEscolar.com</b></span>
+        <a href="https://asistescolar.com/">Desarrollado por: <b>AsistEscolar.com</b></a>
       </div>
     </div>
 
@@ -147,10 +147,10 @@
 <!-- Panel de Confirmación de Cierre -->
 <div class="confirmation-panel" id="confirmationPanel">
   <div class="confirmation-content">
-    <h5>¿Estás seguro de que quieres cerrar el chat?</h5>
-    <p>Se perderá el historial de esta conversación.</p>
+    <h5>¿Estás seguro de cerrar el chat?</h5>
+    <p>Nuestra conversación finalizará al cerrar la ventana.</p>
     <div class="confirmation-buttons">
-      <button class="confirmation-btn confirm-close-btn" id="confirmCloseBtn">Sí, cerrar</button>
+      <button class="confirmation-btn confirm-close-btn" id="confirmCloseBtn">Aceptar</button>
       <button class="confirmation-btn cancel-close-btn" id="cancelCloseBtn">Cancelar</button>
     </div>
   </div>
@@ -206,15 +206,22 @@
         <div class="option-buttons user-type-buttons">
           <button class="option-btn btn btn-light w-100 text-start d-flex justify-content-between align-items-center" data-value="Representante">
             <span class="btn-text">Representante</span>
-            <div class="btn-icon"></div>
+            <div class="btn-icon"><p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+              <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+            </svg></p>
+          </div>
           </button>
           <button class="option-btn btn btn-light w-100 text-start d-flex justify-content-between align-items-center" data-value="Estudiante">
             <span class="btn-text">Estudiante</span>
-            <div class="btn-icon"></div>
+            <div class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+              <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+            </svg></div>
           </button>
           <button class="option-btn btn btn-light w-100 text-start d-flex justify-content-between align-items-center" data-value="Profesor">
             <span class="btn-text">Profesor</span>
-            <div class="btn-icon"></div>
+            <div class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+              <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+            </svg></div>
           </button>
         </div>
       </div>
@@ -224,15 +231,15 @@
         <div class="input-group">
           <!-- Botón FAQ dentro del chat -->
           <button class="chat-faq-btn btn btn-outline-secondary rounded-circle" id="chatFaqBtn" title="Preguntas frecuentes">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-lg" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-question-lg" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M4.475 5.458c-.284 0-.514-.237-.47-.517C4.28 3.24 5.576 2 7.825 2c2.25 0 3.767 1.36 3.767 3.215 0 1.344-.665 2.288-1.79 2.973-1.1.659-1.414 1.118-1.414 2.01v.03a.5.5 0 0 1-.5.5h-.77a.5.5 0 0 1-.5-.495l-.003-.2c-.043-1.221.477-2.001 1.645-2.712 1.03-.632 1.397-1.135 1.397-2.028 0-.979-.758-1.698-1.926-1.698-1.009 0-1.71.529-1.938 1.402-.066.254-.278.461-.54.461h-.777M7.496 14c.622 0 1.095-.474 1.095-1.09 0-.618-.473-1.092-1.095-1.092-.606 0-1.087.474-1.087 1.091S6.89 14 7.496 14"/>
             </svg>
           </button>
-            <button class="login-open-btn btn btn-primary rounded-circle" id="loginOpenBtn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
-              <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2M2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+            <button class="login-open-btn btn btn-primary rounded-circle" id="loginOpenBtn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-lock" viewBox="0 0 16 16">
+              <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5v-1a2 2 0 0 1 .01-.2 4.49 4.49 0 0 1 1.534-3.693Q8.844 9.002 8 9c-5 0-6 3-6 4m7 0a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1"/>
             </svg>
           </button>
-          <input type="text" placeholder="Escribe tu pregunta...." class="chat-input form-control">
+          <input type="text" placeholder="Escribe tu pregunta...." class="chat-input form-control" id="chatText">
           <button class="send-btn btn btn-primary rounded-circle" id="sendBtn">
             <span>↑</span>
           </button>
@@ -284,18 +291,18 @@
               </div>
               
               <div class="rating-comment">
-                <textarea id="ratingComment" placeholder="Opcional: Déjanos tus comentarios..."></textarea>
+                <textarea id="ratingComment" placeholder="Déjanos tus comentarios..."></textarea>
               </div>
               
               <div class="rating-buttons">
-                <button class="rating-btn skip-rating-btn" id="skipRatingBtn">Omitir</button>
+
                 <button class="rating-btn submit-rating-btn" id="submitRatingBtn">Enviar valoración</button>
               </div>
             </div>
           </div>
       <!-- Footer -->
       <div class="chat-footer">
-        <span>Desarrollado por: <b>AsistEscolar.com</b></span>
+        <a href="https://asistescolar.com/">Desarrollado por: <b>AsistEscolar.com</b></a>
       </div>
 
     </div>
@@ -306,9 +313,11 @@
         <div class="login-logo">
           <img src="images/logosae.png" alt="Logo" class="login-logo-img">
         </div>
-        <button class="login-close-btn" id="loginCloseBtn">×</button>
+        <button class="login-close-btn" id="loginCloseBtn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+          <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+        </svg></button>
       </div>
-      <h5>Iniciar sesión</h5>
+<h5 id="loginTitle">Iniciar sesión - <span id="currentUserTypeText" class="user-type-text"></span></h5>
       <div class="login-form">
         <div class="login-input-with-icon">
           <input type="text" placeholder="Usuario" id="loginUser">

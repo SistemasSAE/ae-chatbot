@@ -8,7 +8,6 @@ function initRatingPanel() {
     stars = document.querySelectorAll('.star');
     ratingComment = document.getElementById('ratingComment');
     submitRatingBtn = document.getElementById('submitRatingBtn');
-    skipRatingBtn = document.getElementById('skipRatingBtn');
 
     // Sistema de valoración por estrellas
         if (stars && stars.length > 0) {
@@ -46,17 +45,6 @@ function initRatingPanel() {
         resetChatState();
     });
             console.debug('valoration: submit listener attached');
-        }
-
-    // Omitir valoración
-        if (skipRatingBtn) {
-            skipRatingBtn.addEventListener('click', () => {
-        ratingPanel.classList.remove('active');
-        welcomePanel.classList.add ('active');
-        chatPanel.classList.remove('active');
-        resetChatState();
-    });
-            console.debug('valoration: skip listener attached');
         }
 }
 

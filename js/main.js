@@ -74,11 +74,6 @@ function setupGlobalEventListeners() {
 
         }
         
-        if (ratingPanel.classList.contains('active') && 
-            !ratingPanel.contains(e.target)) {
-            ratingPanel.classList.remove('active');
-        }
-        
         if (chatFaqPanel.classList.contains('active') && 
             !chatFaqPanel.contains(e.target) && 
             !chatFaqBtn.contains(e.target)) {
@@ -150,7 +145,7 @@ function closeWelcomePanel() {
     toggleFaqButton();
 }
 
-// Función para mostrar el panel de valoración
+// Función para mostrar el panel de valoración (en main.js)
 function showRatingPanel() {
     const stars = document.querySelectorAll('.star');
     const ratingComment = document.getElementById('ratingComment');
@@ -159,6 +154,7 @@ function showRatingPanel() {
     if (ratingComment) ratingComment.value = '';
     currentRating = 0;
     
+    // Solo mostrar el panel de valoración, no afectar el estado del chat
     ratingPanel.classList.add('active');
 }
 
@@ -371,6 +367,10 @@ function attachUserTypeHandlers() {
             
             const userType = btn.getAttribute('data-value');
             currentUserType = userType;
+              // Actualizar el título del login con el nuevo tipo de usuario
+              if (typeof updateLoginTitle === 'function') {
+                updateLoginTitle();
+            }
             const text = btn.querySelector('.btn-text')?.textContent || userType;
             if (floatingMsg) floatingMsg.classList.remove('active');
             appendUserMessage(text);
@@ -385,6 +385,16 @@ function attachUserTypeHandlers() {
             setTimeout(() => {
                 appendBotMessage(`Perfecto, eres ${text}. ¿En qué puedo ayudarte?`);
                 showMainOptions();
+                
+                // Habilitar el botón de login del FAQ después de seleccionar el tipo de usuario
+                const loginOpenBtn = document.getElementById('loginOpenBtn');
+                if (loginOpenBtn) {
+                    loginOpenBtn.classList.remove('disabled');
+                    loginOpenBtn.style.pointerEvents = 'auto';
+                    loginOpenBtn.style.opacity = '1';
+                    loginOpenBtn.title = 'Iniciar sesión';
+                    loginOpenBtn.removeAttribute('disabled');
+                }
             }, 1000);
         };
     });
@@ -395,6 +405,11 @@ function attachUserTypeHandlers() {
 function resetChatState() {
     firstSelectionMade = false;
     currentUserType = null;
+    
+    // Limpiar el tipo de usuario en el título del login
+    if (typeof updateLoginTitle === 'function') {
+        updateLoginTitle();
+    }
     conversationActive = true;
     lastUserSelection = null;
     if (conversationArea) conversationArea.innerHTML = '';
@@ -407,15 +422,21 @@ function resetChatState() {
             <div class="option-buttons user-type-buttons">
                 <button class="option-btn btn btn-light w-100 text-start d-flex justify-content-between align-items-center" data-value="Representante">
                     <span class="btn-text">Representante</span>
-                    <div class="btn-icon"></div>
+                    <div class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+  <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+</svg></div>
                 </button>
                 <button class="option-btn btn btn-light w-100 text-start d-flex justify-content-between align-items-center" data-value="Estudiante">
                     <span class="btn-text">Estudiante</span>
-                    <div class="btn-icon"></div>
+                    <div class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+  <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+</svg></div>
                 </button>
                 <button class="option-btn btn btn-light w-100 text-start d-flex justify-content-between align-items-center" data-value="Profesor">
                     <span class="btn-text">Profesor</span>
-                    <div class="btn-icon"></div>
+                    <div class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+  <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+</svg></div>
                 </button>
             </div>
         `);
@@ -425,10 +446,19 @@ function resetChatState() {
     attachUserTypeHandlers();
     if (conversationArea) conversationArea.scrollTop = 0;
     
+    // Deshabilitar el botón de login del FAQ al reiniciar el chat
+    const loginOpenBtn = document.getElementById('loginOpenBtn');
+    if (loginOpenBtn) {
+        loginOpenBtn.classList.add('disabled');
+        loginOpenBtn.style.pointerEvents = 'none';
+        loginOpenBtn.style.opacity = '0.6';
+        loginOpenBtn.title = 'Selecciona primero tu tipo de usuario';
+        loginOpenBtn.setAttribute('disabled', 'disabled');
+    }
+    
     // Remover marca de cierre manual al reiniciar el chat
     sessionStorage.removeItem('manuallyClosed');
 }
-
 // Función para manejar respuestas de texto libre
 function handleFreeTextResponse(text) {
     const lowerText = text.toLowerCase();

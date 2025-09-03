@@ -4,7 +4,7 @@
     bottom: 110px;
     right: 80px;
     width: 380px;
-    height: 260px;
+    height: 300px;
     border-radius: 0px 0px 20px 20px;
     background: white;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
@@ -65,7 +65,10 @@
     position: relative;
     width: 330px;
 }
-
+.user-type-text {
+    margin-left: 5px;
+    font-weight: bold;
+}
 .login-input-with-icon input {
     width: 330px;
     padding: 12px 15px 12px 45px;
@@ -138,6 +141,8 @@
     font-size: 24px;
     cursor: pointer;
     padding: 0;
+    right: 14px;
+    position: relative;
     width: 36px;
     height: 36px;
     display: flex;
@@ -148,7 +153,7 @@
 }
 
 .login-close-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgb(255, 219, 219);
     transform: translateY(-1px);
 }
 

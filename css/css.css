@@ -251,8 +251,8 @@
 /* Header común para todos los paneles */
 .faq-header, .chat-header {
     background: #0060ef;
-    height: 80px;
-    padding: 20px;
+    height: 60px;
+    padding: 5px 17px;
     border-radius: 20px 20px 0 0;
     flex-shrink: 0;
 } 
@@ -282,7 +282,7 @@
 }
 
 .faq-header-text span {
-    font-size: 21px;
+    font-size: 18px;
     font-weight: 600;
     height: 100px;
     position: absolute;
@@ -311,7 +311,7 @@
 }
 
 /* Botones de header comunes */
-.header-btn, .welcome-close-btn {
+.header-btn, .welcome-close-btn, .faq-back-btn {
     top: 0px;
     background: transparent !important;
     border: none !important;
@@ -331,19 +331,19 @@
     flex-shrink: 0;
 }
 
-.header-btn:hover, .welcome-close-btn:hover {
+.header-btn:hover, .welcome-close-btn:hover, .faq-back-btn:hover  {
     background: rgba(255,255,255,0.15) !important;
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
-.header-btn:active, .welcome-close-btn:active {
+.header-btn:active, .welcome-close-btn:active, .faq-back-btn:active {
     transform: translateY(0);
     box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 
 /* Tooltip para botones */
-.header-btn[title]:hover::after {
+.header-btn[title]:hover::after, .faq-back-btn[title]:hover::after {
     content: attr(title);
     position: absolute;
     bottom: -30px;
@@ -489,6 +489,7 @@
 
 .btn-icon {
     width: 16px;
+    color: #0060ef;
     height: 16px;
     margin-left: 8px;
     flex-shrink: 0;
@@ -496,7 +497,6 @@
 }
 
 .btn-icon::after {
-    content: "→";
     display: block;
     font-size: 14px;
     line-height: 16px;
@@ -601,7 +601,7 @@
 /* FAQ Button */
 .faq-toggle-btn {
     position: absolute;
-    bottom: 460px;
+    bottom: 480px;
     right: 460px;
     width: 35px;
     height: 50px;
@@ -615,13 +615,6 @@
     justify-content: center;
     box-shadow: 0 4px 12px rgba(0, 96, 239, 0.4);
     transition: all 0.3s ease;
-}
-
-
-.faq-toggle-btn:hover {
-    background: #0051d1;
-    transform: scale(1.05);
-    box-shadow: 0 6px 16px rgba(0, 96, 239, 0.5);
 }
 
 .askIcon {
@@ -795,6 +788,7 @@
 .welcome-section {
     border-top: 1px solid #FFFFFF;
     padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     background: white;
     border-radius: 12px;
 }
@@ -861,18 +855,32 @@
     align-items: center;
     justify-content: center;
 }
+#loginOpenBtn.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: not-allowed;
+    background-color: #f8f9fa;
+    color: #6c757d;
+}
 
-.welcome-footer span, .chat-footer span {
+.faq-btn.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+.welcome-footer a, .chat-footer a {
     color: #999;
+    text-decoration: none;
+    font-size: 12px;
     font-size: 11px;
     display: block;
 }
 
-.welcome-footer span {
+.welcome-footer a {
     line-height: 4;
 }
 
-.chat-footer span {
+.chat-footer a {
     font-size: 12px;
 }
 
@@ -977,7 +985,7 @@
     bottom: 50px;
     right: -0px;
     width: 100%;
-    height: 330px;
+    height: 370px;
     z-index: 2000;
     display: none;
 }
@@ -1052,15 +1060,6 @@
 
 .submit-rating-btn:hover {
     background: #0051d1;
-}
-
-.skip-rating-btn {
-    background: #6c757d;
-    color: white;
-}
-
-.skip-rating-btn:hover {
-    background: #5a6268;
 }
 
 .rating-stars {
@@ -1139,7 +1138,7 @@
 /* RESPONSIVE DESIGN */
 @media (max-width: 1024px) {
     .faq-toggle-btn {
-        bottom: 460px;
+        bottom: 480px;
         right: 470px;
     }
     .faq-panel {
@@ -1161,8 +1160,8 @@
     .rating-panel.active {
         left: 0%;
         width: 100%;
-        height: 72%;
-        top:21%;
+        height: 380px;
+        top:13%;
         font-size: 12px;
     }
     .confirmation-panel.active {
@@ -1174,14 +1173,14 @@
 
 @media (max-width: 900px) {
     .faq-toggle-btn {
-        bottom: 460px;
+        bottom: 480px;
         right: 470px;
     }
     
     .faq-panel {
         bottom: 260px;
         right: 480px;
-        width: 230px;
+        width: 260px;
     }
     .faq-header-text span {
         font-size: 17px;
@@ -1198,8 +1197,8 @@
     .rating-panel.active {
         left: 0%;
         width: 100%;
-        height: 71%;
-        top:21%;
+        height: 80%;
+        top:13%;
         font-size: 12px;
     }
     .confirmation-panel.active {
@@ -1305,8 +1304,8 @@
     .rating-panel.active {
         left: 0%;
         width: 100%;
-        height: 71%;
-        top:21%;
+        height: 80%;
+        top:13%;
         font-size: 12px;
     }
     .confirmation-panel.active {
@@ -1322,7 +1321,7 @@
     }
     
     .faq-panel {
-        right: 330px;
+        right: 430px;
         width: 258px;
     }
     
@@ -1339,6 +1338,7 @@
 @media (max-width: 600px) {
     .chat-header, .faq-header, .welcome-header {
         border-radius: 0 0 0 0;
+        padding: 10px 16px;
     }
     .faq-toggle-btn {
         display: none !important;
@@ -1425,8 +1425,8 @@
     .rating-panel.active {
         left: 0%;
         width: 100%;
-        height: 72%;
-        top:20%;
+        height: 80%;
+        top:12%;
         font-size: 12px;
     }
     .confirmation-panel.active {
@@ -1444,7 +1444,7 @@
     }
     .chat-header, .faq-header, .welcome-header {
         background: #0060ef;
-        padding: 34px 16px;
+        padding: 10px 16px;
         border-radius: 0 0 0 0;
         flex-shrink: 0;
     }
@@ -1563,8 +1563,8 @@
     .rating-panel.active {
         left: 0%;
         width: 100%;
-        height: 72%;
-        top:20%;
+        height: 83%;
+        top:10%;
         font-size: 12px;
     }
     .confirmation-panel.active {
@@ -1640,8 +1640,8 @@
     .rating-panel.active {
         left: 0%;
         width: 100%;
-        height: 72%;
-        top:20%;
+        height: 83%;
+        top:10%;
         font-size: 11px;
     }
     .confirmation-panel.active {
