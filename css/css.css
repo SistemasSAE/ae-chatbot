@@ -249,25 +249,33 @@
 }
 
 /* Header común para todos los paneles */
-.chat-header, .faq-header, .welcome-header {
+.faq-header, .chat-header {
     background: #0060ef;
-    height: 100px;
-    padding: 34px;
+    height: 80px;
+    padding: 20px;
     border-radius: 20px 20px 0 0;
     flex-shrink: 0;
-}
+} 
 .welcome-header {
-    padding: 16px 16px 0px 16px;
-    height: 71px;
-    border-radius: 20px 0 0 0;
+    background: #0060ef;
+    height: 80px;
+    padding: 16px 16px 16px 16px;
+    border-radius: 20px 20px 0 0;
+    flex-shrink: 0;
 }
 .faq-header {
     border-radius: 20px 0 0 0;
 }
-
-.header-text span, .faq-header-text span, .welcome-header-text span {
+.header-text span {
     color: #fff;
     font-size: 18px;
+    white-space: normal;
+    font-weight: 500;
+    line-height: 1.3;
+}
+ .faq-header-text span, .welcome-header-text span {
+    color: #fff;
+    font-size: 14px;
     white-space: normal;
     font-weight: 500;
     line-height: 1.3;
@@ -304,7 +312,7 @@
 
 /* Botones de header comunes */
 .header-btn, .welcome-close-btn {
-    top: -9px;
+    top: 0px;
     background: transparent !important;
     border: none !important;
     color: #fff !important;
@@ -593,7 +601,7 @@
 /* FAQ Button */
 .faq-toggle-btn {
     position: absolute;
-    bottom: 440px;
+    bottom: 460px;
     right: 460px;
     width: 35px;
     height: 50px;
@@ -761,7 +769,7 @@
 .welcome-message {
     background: #0060ef;
     color: white;
-    padding: 0px 20px 16px;
+    padding: 5px 20px 25px;
     text-align: left;
     margin: 0;
     width: 100%;
@@ -1131,7 +1139,7 @@
 /* RESPONSIVE DESIGN */
 @media (max-width: 1024px) {
     .faq-toggle-btn {
-        bottom: 440px;
+        bottom: 460px;
         right: 470px;
     }
     .faq-panel {
@@ -1166,7 +1174,7 @@
 
 @media (max-width: 900px) {
     .faq-toggle-btn {
-        bottom: 440px;
+        bottom: 460px;
         right: 470px;
     }
     
@@ -1203,7 +1211,7 @@
 
 @media (max-width: 768px) {
     .faq-toggle-btn {
-        bottom: 441px;
+        bottom: 460px;
         right: 370px;
     }
     
@@ -1310,7 +1318,7 @@
 
 @media (max-width: 700px) {
     .faq-toggle-btn {
-        right: 320px;
+        right: 420px;
     }
     
     .faq-panel {
@@ -1319,7 +1327,7 @@
     }
     
     .chat-panel {
-        width: 280px;
+        width: 380px;
     }
     .confirmation-panel.active {
         width: 270px;
@@ -1493,7 +1501,7 @@
     }
     
     .welcome-message {
-        padding: 0px 14px 0px;
+        padding: 0px 14px 14px;
         height: 70px;
         margin: 0;
     }
