@@ -362,7 +362,7 @@
 /* Conversation Area */
 .conversation-area {
     flex: 1;
-    padding: 0px 50px;
+    padding: 0px 26px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -1076,20 +1076,34 @@ scale: 1.05;
     background: #0051d1;
 }
 
+/* Mejoras visuales para las estrellas con hover */
 .rating-stars {
     margin: 20px 0;
     font-size: 32px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
 }
 
 .star {
     cursor: pointer;
     color: #ddd;
-    margin: 0 5px;
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
+    padding: 5px;
 }
 
-.star:hover, .star.active {
+.star:hover {
+    transform: scale(1.2);
+}
+
+.star.active {
     color: #ffc107;
+    text-shadow: 0 0 8px rgba(255, 193, 7, 0.5);
+}
+
+/* Efecto de transición suave para el cambio de color */
+.star {
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .rating-comment {
