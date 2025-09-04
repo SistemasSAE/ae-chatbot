@@ -362,7 +362,7 @@
 /* Conversation Area */
 .conversation-area {
     flex: 1;
-    padding: 0px 26px;
+    padding: 0px 29px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
