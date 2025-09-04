@@ -1047,8 +1047,16 @@ scale: 1.05;
 .rating-content {
     max-width: 700px;
 }
-
-.confirmation-content h5, .rating-content h5 {
+.confirmation-content h5 {
+    color: #0060ef;
+    text-align: left;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+.rating-content h5 {
     color: #0060ef;
     padding-top: 20px;
     padding-left: 10px;
@@ -1057,6 +1065,7 @@ scale: 1.05;
     font-size: 18px;
 }
 .confirmation-content p {
+    text-align: left;
     color: #666;
     font-size: 16px;
     margin-bottom: 20px;
@@ -1091,12 +1100,12 @@ scale: 1.05;
 }
 
 .confirm-close-btn {
-    background: #dc3545;
+    background: #0060ef;
     color: white;
 }
 
 .confirm-close-btn:hover {
-    background: #c82333;
+    background: #0060ef;
 }
 
 .cancel-close-btn {
