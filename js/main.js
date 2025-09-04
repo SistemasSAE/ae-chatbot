@@ -70,6 +70,7 @@ function setupGlobalEventListeners() {
         if (confirmationPanel.classList.contains('active') && 
             !confirmationPanel.contains(e.target)) {
             confirmationPanel.classList.remove('active');
+            chatPanel.classList.remove('dimmed');
             if (faqToggleBtn) faqToggleBtn.style.display = 'flex';
 
         }
@@ -147,6 +148,7 @@ function closeWelcomePanel() {
 
 // Función para mostrar el panel de valoración (en main.js)
 function showRatingPanel() {
+    faqToggleBtn.style.display = 'none';
     const stars = document.querySelectorAll('.star');
     const ratingComment = document.getElementById('ratingComment');
     

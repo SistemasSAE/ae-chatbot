@@ -545,7 +545,7 @@
 }
 
 .chat-input {
-    display: none;
+    display: flex;
     border: 1px solid #e0e0e0 !important;
     border-radius: 25px !important;
     font-size: 14px;
@@ -560,7 +560,7 @@
     box-shadow: 0 0 0 0.2rem rgba(0, 96, 239, 0.25) !important;
 }
 
-/*.send-btn,*/ .chat-faq-btn {
+.chat-faq-btn {
     width: 35px !important;
     height: 35px !important;
     display: flex !important;
@@ -572,16 +572,21 @@
 }
 
 .send-btn {
-    display: none;
-    background: #0060ef !important;
-    border: none !important;
-    color: white !important;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0060ef;
+    border: none;          
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: white;
     font-size: 18px;
 }
 
 .send-btn:hover {
-    display: none;
-    background: #0051d1 !important;
+    background: #0051d1;
 }
 
 .chat-faq-btn {
@@ -945,7 +950,7 @@
     border-radius: 8px;
     background: #f8f9fa;
     color: #333;
-    font-size: 16px;
+    font-size: 14px;
     text-align: left;
     transition: all 0.2s ease;
     cursor: pointer;
@@ -973,21 +978,37 @@ scale: 1.05;
     border-color: #0060ef;
 }
 
-
+.fondo-oscuro {
+    bottom: 110px;
+    right: 40px;
+    width: 380px;
+    height: 480px;
+    display: none;
+    background: rgba(0, 0, 0, 0.13);
+}
+.fondo-oscuro.active {
+    display: flex;
+}
 /* Asegurar que el botón sea visible en todos los dispositivos */
 .chat-panel.active, .welcome-panel.active{
     display: flex;
 }
- 
+ /* Efecto de oscurecimiento para el panel de chat cuando está activa la confirmación */
+.chat-panel.dimmed {
+    filter: brightness(0.7);
+    transition: filter 0.3s ease;
+}
+
 /* Paneles de confirmación y rating */
 .confirmation-panel {
     position: absolute;
-    bottom: 250px;
-    right: 110px;
-    width: 330px;
+    bottom: 230px;
+    right: 150px;
+    width: 250px;
     height: 220px;
     z-index: 2000;
     display: none;
+    filter: none !important;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -1004,8 +1025,15 @@ scale: 1.05;
 .confirmation-panel.active, .rating-panel.active {
     display: flex;
 }
-
-.confirmation-content, .rating-content {
+.confirmation-content {
+    background: white;
+    padding: 5px;
+    border-radius: 10px;
+    text-align: center;
+    width: 700px;
+    z-index: 2001;
+}
+ .rating-content {
     background: white;
     padding: 10px;
     border-radius: 0px;
@@ -1022,12 +1050,18 @@ scale: 1.05;
 
 .confirmation-content h5, .rating-content h5 {
     color: #0060ef;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     margin-bottom: 10px;
-    font-weight: 600;
+    font-size: 18px;
 }
 .confirmation-content p {
     color: #666;
+    font-size: 16px;
     margin-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
  .rating-content p {
     color: #666;
@@ -1039,8 +1073,15 @@ scale: 1.05;
     gap: 10px;
     justify-content: center;
 }
-
-.confirmation-btn, .rating-btn {
+.confirmation-btn{
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+ .rating-btn {
     padding: 10px 20px;
     border: none;
     border-radius: 8px;
@@ -1193,7 +1234,8 @@ scale: 1.05;
         font-size: 12px;
     }
     .confirmation-panel.active {
-    width: 330px;
+    width: 220px;
+    height: 220px;
     right: 90px;
     }
 }
@@ -1338,8 +1380,8 @@ scale: 1.05;
     }
     .confirmation-panel.active {
         width: 280px;
-        right: 110px;
-        font-size: 12px;
+        right: 70px;
+        font-size: 14px;
     }
 }
 
@@ -1359,7 +1401,7 @@ scale: 1.05;
     .confirmation-panel.active {
         width: 270px;
         right: 70px;
-        font-size: 12px;
+        font-size: 13px;
     }
 }
 

@@ -3,7 +3,7 @@
 
 // Inicializar panel de valoración
 function initRatingPanel() {
-        console.debug('initRatingPanel called');
+    console.debug('initRatingPanel called');
     ratingPanel = document.getElementById('ratingPanel');
     stars = document.querySelectorAll('.star');
     ratingComment = document.getElementById('ratingComment');

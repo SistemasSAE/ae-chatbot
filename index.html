@@ -150,11 +150,12 @@
     <h5>¿Estás seguro de cerrar el chat?</h5>
     <p>Nuestra conversación finalizará al cerrar la ventana.</p>
     <div class="confirmation-buttons">
-      <button class="confirmation-btn confirm-close-btn" id="confirmCloseBtn">Aceptar</button>
       <button class="confirmation-btn cancel-close-btn" id="cancelCloseBtn">Cancelar</button>
+      <button class="confirmation-btn confirm-close-btn" id="confirmCloseBtn">Aceptar</button>
     </div>
   </div>
 </div>
+  <div class="fondo-oscuro" id="fondoOscuro"> </div>
     <!-- Chat Panel -->
     <div class="chat-panel" id="chatPanel">
       <!-- Header -->
@@ -240,8 +241,10 @@
             </svg>
           </button>
           <input type="text" placeholder="Escribe tu pregunta...." class="chat-input form-control" id="chatText">
-          <button class="send-btn btn btn-primary rounded-circle" id="sendBtn">
-            <span>↑</span>
+          <button class="send-btn rounded-circle" id="sendBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+              <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+            </svg>
           </button>
         </div>
     
