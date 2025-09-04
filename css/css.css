@@ -1234,9 +1234,9 @@ scale: 1.05;
         font-size: 12px;
     }
     .confirmation-panel.active {
-    width: 220px;
+    width: 280px;
     height: 220px;
-    right: 90px;
+    right: 110px;
     }
 }
 
