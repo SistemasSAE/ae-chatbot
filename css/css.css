@@ -284,10 +284,10 @@
 .faq-header-text span {
     font-size: 18px;
     font-weight: 600;
-    height: 100px;
+    height: 30px;
     position: absolute;
     display: flex;
-    top: 30px;
+    top: 20px;
 }
 
 /* Avatar común */
@@ -588,14 +588,15 @@
     background: #f8f9fa !important;
     border: 1px solid #e0e0e0 !important;
     color: #666 !important;
-    font-size: 16px;
-    z-index: 2;
+    font-size: 20px;
+    z-index: 1000;
 }
 
 .chat-faq-btn:hover {
     background: #e9ecef !important;
     border-color: #ccc !important;
     color: #333 !important;
+    scale: 1.05;
 }
 
 /* FAQ Button */
@@ -643,7 +644,7 @@
 
 .faq-back-btn {
     position: absolute;
-    top: 30px;
+    top: 17px;
     right: 16px;
     background:  #0060ef;
     border: none;
@@ -944,7 +945,7 @@
     border-radius: 8px;
     background: #f8f9fa;
     color: #333;
-    font-size: 13px;
+    font-size: 16px;
     text-align: left;
     transition: all 0.2s ease;
     cursor: pointer;
@@ -956,6 +957,16 @@
     border-color: #ddd;
 }
 
+.login-open-btn {
+ width: 36px;
+ height: 36px;
+ color: white;
+ border: 1px solid #0060ef;
+ background: #0060ef
+}
+.login-open-btn:hover {
+scale: 1.05;
+}
 .chat-faq-btn-item:active {
     background: #0060ef;
     color: white;
@@ -1014,10 +1025,13 @@
     margin-bottom: 10px;
     font-weight: 600;
 }
-
-.confirmation-content p, .rating-content p {
+.confirmation-content p {
     color: #666;
     margin-bottom: 20px;
+}
+ .rating-content p {
+    color: #666;
+    margin-bottom: -20px;
 }
 
 .confirmation-buttons, .rating-buttons {
@@ -1143,7 +1157,7 @@
     }
     .faq-panel {
         bottom: 260px;
-        right: 490px;
+        right: 480px;
         width: 300px;
         height: 330px;
     }
@@ -1317,20 +1331,20 @@
 
 @media (max-width: 700px) {
     .faq-toggle-btn {
-        right: 420px;
+        right: 360px;
     }
     
     .faq-panel {
-        right: 430px;
-        width: 258px;
+        right: 370px;
+        width: 240px;
     }
     
     .chat-panel {
-        width: 380px;
+        width: 320px;
     }
     .confirmation-panel.active {
         width: 270px;
-        right: 45px;
+        right: 70px;
         font-size: 12px;
     }
 }
