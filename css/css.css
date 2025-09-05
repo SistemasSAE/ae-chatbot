@@ -745,7 +745,7 @@
     scrollbar-width: thin;
     scrollbar-color: #c1c1c1 #f1f1f1;
     position: relative;
-    max-height: calc(100% - 120px);
+    max-height: calc(100% - 80px);
 }
 
 .welcome-content::-webkit-scrollbar {
