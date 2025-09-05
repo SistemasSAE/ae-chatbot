@@ -1693,7 +1693,6 @@ scale: 1.05;
         top:28%;
         font-size: 12px;
     }
-    
     .confirmation-buttons, .rating-buttons {
         flex-direction: column;
     }
