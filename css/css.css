@@ -1328,7 +1328,7 @@ scale: 1.05;
     padding: 16px;
     padding-left: calc(16px + env(safe-area-inset-left, 0px));
     padding-right: calc(16px + env(safe-area-inset-right, 0px));
-    max-height: calc(90vh - env(safe-area-top, 0px) - env(safe-area-bottom, 0px) - 100px);
+    max-height: calc(80vh - env(safe-area-top, 0px) - env(safe-area-bottom, 0px) - 65px);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
@@ -1501,9 +1501,15 @@ scale: 1.05;
         display: none;
     }
     
-    .conversation-area {
-        padding: 16px;
-    }
+     /* Área de conversación ajustada */
+  .conversation-area {
+    padding: 16px;
+    padding-left: calc(16px + env(safe-area-inset-left, 0px));
+    padding-right: calc(16px + env(safe-area-inset-right, 0px));
+    max-height: calc(80vh - env(safe-area-top, 0px) - env(safe-area-bottom, 0px) - 100px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
     
     .chat-panel {
         z-index: 1002;
@@ -1778,9 +1784,15 @@ scale: 1.05;
         right: 10px;
     }
     
-    .conversation-area {
-        padding: 12px;
-    }
+     /* Área de conversación ajustada */
+  .conversation-area {
+    padding: 16px;
+    padding-left: calc(16px + env(safe-area-inset-left, 0px));
+    padding-right: calc(16px + env(safe-area-inset-right, 0px));
+    max-height: calc(75vh - env(safe-area-top, 0px) - env(safe-area-bottom, 0px) - 100px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
     
     .bot-message {
         margin-left: 30px;
