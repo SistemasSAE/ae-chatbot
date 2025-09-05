@@ -1326,9 +1326,6 @@ scale: 1.05;
   /* Área de conversación ajustada */
   .conversation-area {
     padding: 16px;
-    padding-left: calc(16px + env(safe-area-inset-left, 0px));
-    padding-right: calc(16px + env(safe-area-inset-right, 0px));
-    max-height: calc(61vh - env(safe-area-top, 0px) - env(safe-area-bottom, 0px));
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
@@ -1576,7 +1573,11 @@ scale: 1.05;
     .welcome-section {
         padding: 18px;
     }
-    
+    .conversation-area {
+        padding-left: calc(16px + env(safe-area-inset-left, 0px));
+        padding-right: calc(16px + env(safe-area-inset-right, 0px));
+        max-height: calc(61vh - env(safe-area-top, 0px) - env(safe-area-bottom, 0px));
+    }
     .welcome-section h5 {
         font-size: 14px;
         margin-bottom: 12px;
