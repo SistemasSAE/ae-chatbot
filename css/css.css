@@ -1616,7 +1616,7 @@ scale: 1.05;
         border-top: 1px solid #c7c7c7;
     }
     .input-area {    
-        position: relative;
+        position: fixed;
         bottom: env(safe-area-inset-left, 0px);
         left: env(safe-area-inset-left, 0px);
         right: env(safe-area-inset-right, 0px);
