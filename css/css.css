@@ -1319,9 +1319,15 @@ scale: 1.05;
         right: 40px;
     }
     
-    .conversation-area {
-        padding: 16px;
-    }
+  /* Área de conversación ajustada */
+  .conversation-area {
+    padding: 16px;
+    padding-left: calc(16px + env(safe-area-inset-left, 0px));
+    padding-right: calc(16px + env(safe-area-inset-right, 0px));
+    max-height: calc(100vh - env(safe-area-top, 0px) - env(safe-area-bottom, 0px) - 140px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
     
     .header-btn, .welcome-close-btn {
         min-width: 32px;
@@ -1585,12 +1591,12 @@ scale: 1.05;
         width: 34px;
         height: 34px;
     }
-        /* Footer ajustado para safe area */
-        .welcome-footer, .chat-footer {
-            padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
-            padding-left: calc(18px + env(safe-area-inset-left, 0px));
-            padding-right: calc(18px + env(safe-area-inset-right, 0px));
-        }
+     /* Footer ajustado para safe area */
+    .welcome-footer, .chat-footer {
+        padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+        padding-left: calc(18px + env(safe-area-inset-left, 0px));
+        padding-right: calc(18px + env(safe-area-inset-right, 0px));
+     }
     .welcome-message {
         padding: 0px 14px 14px;
         height: 70px;
@@ -1610,13 +1616,12 @@ scale: 1.05;
         border-top: 1px solid #c7c7c7;
     }
     .input-area {
-        position: fixed;
-        bottom: env(safe-area-inset-bottom, 0px);
+        padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
         left: env(safe-area-inset-left, 0px);
         right: env(safe-area-inset-right, 0px);
         padding: 12px 16px;
-        padding-left: calc(16px + env(safe-area-inset-left, 0px));
-        padding-right: calc(16px + env(safe-area-inset-right, 0px));
+        padding-left: calc(36px + env(safe-area-inset-left, 0px));
+        padding-right: calc(30px + env(safe-area-inset-right, 0px));
         background: white;
         border-top: 1px solid #e0e0e0;
         z-index: 1000;
@@ -1778,6 +1783,36 @@ scale: 1.05;
     padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
     padding-left: calc(18px + env(safe-area-inset-left, 0px));
     padding-right: calc(18px + env(safe-area-inset-right, 0px));
+}
+/* Ajustes específicos para dispositivos muy pequeños */
+@media (max-width: 350px) {
+    .chat-icon {
+        width: 60px;
+        height: 60px;
+        bottom: calc(15px + env(safe-area-inset-bottom, 0px));
+        right: calc(15px + env(safe-area-inset-right, 0px));
+    }
+    
+    .header-text span, .welcome-header-text span {
+        font-size: 16px;
+    }
+    
+    .conversation-area {
+        padding: 12px;
+        padding-left: calc(12px + env(safe-area-inset-left, 0px));
+        padding-right: calc(12px + env(safe-area-inset-right, 0px));
+    }
+    
+    .bot-message, .user-selection {
+        font-size: 13px;
+        padding: 10px 14px;
+    }
+    
+    .option-btn {
+        padding: 10px 14px;
+        font-size: 13px;
+        min-height: 42px;
+    }
 }
 @media (max-width: 180px) {
     .confirmation-panel.active {
