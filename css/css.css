@@ -856,7 +856,7 @@
 
 .welcome-footer {
     border-radius: 0 0 20px 20px;
-    min-height: 40px;
+    min-height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1507,6 +1507,14 @@ scale: 1.05;
         height: 80%;
         top:12%;
         font-size: 12px;
+    }
+    .welcome-footer, .chat-footer {
+        padding: 10px 18px;
+        padding-bottom: 40px;
+        text-align: center;
+        flex-shrink: 0;
+        background: #f8f9fa;
+        margin-top: auto;
     }
     .confirmation-panel.active {
     width: 80%;
