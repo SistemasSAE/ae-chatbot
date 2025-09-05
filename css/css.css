@@ -854,7 +854,12 @@
     background: #f8f9fa;
     margin-top: auto;
 }
-
+.chat-footer {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .welcome-footer {
     border-radius: 0 0 20px 20px;
     min-height: 60px;
@@ -886,7 +891,6 @@
 .welcome-footer a {
     line-height: 4;
 }
-
 .chat-footer a {
     font-size: 12px;
 }
@@ -1321,11 +1325,10 @@ scale: 1.05;
     
   /* Área de conversación ajustada */
   .conversation-area {
-
     padding: 16px;
     padding-left: calc(16px + env(safe-area-inset-left, 0px));
     padding-right: calc(16px + env(safe-area-inset-right, 0px));
-    max-height: calc(96vh - env(safe-area-top, 0px) - env(safe-area-bottom, 0px) - 140px);
+    max-height: calc(100vh - env(safe-area-top, 0px) - env(safe-area-bottom, 0px) - 140px);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
@@ -1518,9 +1521,9 @@ scale: 1.05;
     }
     /* Footer ajustado para safe area */
     .welcome-footer, .chat-footer {
-        padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
-        padding-left: calc(18px + env(safe-area-inset-left, 0px));
-        padding-right: calc(18px + env(safe-area-inset-right, 0px));
+        padding-bottom: calc(0px + env(safe-area-inset-bottom, 0px));
+        padding-left: calc(0px + env(safe-area-inset-left, 0px));
+        padding-right: calc(0px + env(safe-area-inset-right, 0px));
     }
     .confirmation-panel.active {
     width: 80%;
@@ -1594,13 +1597,9 @@ scale: 1.05;
     }
      /* Footer ajustado para safe area */
     .welcome-footer, .chat-footer {
-        position: fixed;
-        bottom: env(safe-area-inset-left, 0px);
-        left: env(safe-area-inset-left, 0px);
-        right: env(safe-area-inset-right, 0px);
-        padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
-        padding-left: calc(18px + env(safe-area-inset-left, 0px));
-        padding-right: calc(18px + env(safe-area-inset-right, 0px));
+        padding-bottom: calc(0px + env(safe-area-inset-bottom, 0px));
+        padding-left: calc(0px + env(safe-area-inset-left, 0px));
+        padding-right: calc(0px + env(safe-area-inset-right, 0px));
      }
     .welcome-message {
         padding: 0px 14px 14px;
