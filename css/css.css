@@ -1328,7 +1328,7 @@ scale: 1.05;
     padding: 16px;
     padding-left: calc(16px + env(safe-area-inset-left, 0px));
     padding-right: calc(16px + env(safe-area-inset-right, 0px));
-    max-height: calc(90vh - env(safe-area-top, 0px) - env(safe-area-bottom, 0px) - 140px);
+    max-height: calc(90vh - env(safe-area-top, 0px) - env(safe-area-bottom, 0px) - 100px);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
