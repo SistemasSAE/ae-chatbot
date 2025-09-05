@@ -1616,7 +1616,6 @@ scale: 1.05;
     }
     
     .welcome-footer {
-        padding: 12px 18px;
         border-top: 1px solid #c7c7c7;
     }
     .input-area {    
@@ -1785,9 +1784,9 @@ scale: 1.05;
 }
    /* Footer ajustado para safe area */
    .welcome-footer, .chat-footer {
-    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
-    padding-left: calc(18px + env(safe-area-inset-left, 0px));
-    padding-right: calc(18px + env(safe-area-inset-right, 0px));
+    padding-bottom: calc(0px + env(safe-area-inset-bottom, 0px));
+    padding-left: calc(0px + env(safe-area-inset-left, 0px));
+    padding-right: calc(0px + env(safe-area-inset-right, 0px));
 }
 /* Ajustes específicos para dispositivos muy pequeños */
 @media (max-width: 350px) {
