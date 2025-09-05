@@ -366,7 +366,7 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 8px;
     min-height: 0;
 }
 
