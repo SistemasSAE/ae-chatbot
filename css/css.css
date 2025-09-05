@@ -1545,7 +1545,14 @@ scale: 1.05;
         min-height: 100vh;
         border-radius: 0;
     }
-    
+    .welcome-footer, .chat-footer {
+        padding: 10px 18px;
+        padding-bottom: 40px;
+        text-align: center;
+        flex-shrink: 0;
+        background: #f8f9fa;
+        margin-top: auto;
+    }
     .chat-header {
         border-radius: 0;
     }
@@ -1617,7 +1624,14 @@ scale: 1.05;
         bottom: 10px;
         right: 15px;
     }
-    
+    .welcome-footer, .chat-footer {
+        padding: 10px 18px;
+        padding-bottom: 40px;
+        text-align: center;
+        flex-shrink: 0;
+        background: #f8f9fa;
+        margin-top: auto;
+    }  
     .header-btn {
         min-width: 28px;
         height: 28px;
@@ -1703,7 +1717,14 @@ scale: 1.05;
         font-size: 16px;
         line-height: 0.8
     }
-    
+    .welcome-footer, .chat-footer {
+        padding: 10px 18px;
+        padding-bottom: 40px;
+        text-align: center;
+        flex-shrink: 0;
+        background: #f8f9fa;
+        margin-top: auto;
+    }
     .welcome-avatar {
         width: 36px;
         height: 36px;
