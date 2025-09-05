@@ -1593,6 +1593,10 @@ scale: 1.05;
     }
      /* Footer ajustado para safe area */
     .welcome-footer, .chat-footer {
+        position: fixed;
+        bottom: env(safe-area-inset-left, 0px);
+        left: env(safe-area-inset-left, 0px);
+        right: env(safe-area-inset-right, 0px);
         padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
         padding-left: calc(18px + env(safe-area-inset-left, 0px));
         padding-right: calc(18px + env(safe-area-inset-right, 0px));
@@ -1616,7 +1620,7 @@ scale: 1.05;
         border-top: 1px solid #c7c7c7;
     }
     .input-area {    
-        position: fixed;
+        position: fix;
         bottom: env(safe-area-inset-left, 0px);
         left: env(safe-area-inset-left, 0px);
         right: env(safe-area-inset-right, 0px);
