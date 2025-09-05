@@ -411,6 +411,7 @@
     align-self: flex-end;
     font-size: 14px;
     margin-left: auto;
+    margin-bottom: 10px;
     position: relative;
     word-wrap: break-word;
     line-height: 1.4;
@@ -1501,8 +1502,6 @@ scale: 1.05;
      /* Área de conversación ajustada */
   .conversation-area {
     padding: 16px;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
 }
     
     .chat-panel {
@@ -1784,8 +1783,6 @@ scale: 1.05;
      /* Área de conversación ajustada */
   .conversation-area {
     padding: 16px;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
 }
     
     .bot-message {
@@ -1813,8 +1810,6 @@ scale: 1.05;
     
     .conversation-area {
         padding: 12px;
-        padding-left: calc(12px + env(safe-area-inset-left, 0px));
-        padding-right: calc(12px + env(safe-area-inset-right, 0px));
     }
     
     .bot-message, .user-selection {
