@@ -1615,8 +1615,9 @@ scale: 1.05;
         padding: 12px 18px;
         border-top: 1px solid #c7c7c7;
     }
-    .input-area {
-        padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    .input-area {    
+        position: relative;
+        bottom: env(safe-area-inset-left, 0px);
         left: env(safe-area-inset-left, 0px);
         right: env(safe-area-inset-right, 0px);
         padding: 12px 16px;
