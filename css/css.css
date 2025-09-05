@@ -550,6 +550,7 @@
     border-radius: 25px !important;
     font-size: 14px;
     outline: none;
+    z-index: 1001;
     transition: border-color 0.2s ease;
     flex: 1;
 
@@ -1510,7 +1511,6 @@ scale: 1.05;
     }
     .welcome-footer, .chat-footer {
         padding: 10px 18px;
-        padding-bottom: 40px;
         text-align: center;
         flex-shrink: 0;
         background: #f8f9fa;
@@ -1545,14 +1545,7 @@ scale: 1.05;
         min-height: 100vh;
         border-radius: 0;
     }
-    .welcome-footer, .chat-footer {
-        padding: 10px 18px;
-        padding-bottom: 40px;
-        text-align: center;
-        flex-shrink: 0;
-        background: #f8f9fa;
-        margin-top: auto;
-    }
+    
     .chat-header {
         border-radius: 0;
     }
@@ -1593,7 +1586,12 @@ scale: 1.05;
         width: 34px;
         height: 34px;
     }
-    
+        /* Footer ajustado para safe area */
+        .welcome-footer, .chat-footer {
+            padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+            padding-left: calc(18px + env(safe-area-inset-left, 0px));
+            padding-right: calc(18px + env(safe-area-inset-right, 0px));
+        }
     .welcome-message {
         padding: 0px 14px 14px;
         height: 70px;
@@ -1612,7 +1610,18 @@ scale: 1.05;
         padding: 12px 18px;
         border-top: 1px solid #c7c7c7;
     }
-    
+    .input-area {
+        position: fixed;
+        bottom: env(safe-area-inset-bottom, 0px);
+        left: env(safe-area-inset-left, 0px);
+        right: env(safe-area-inset-right, 0px);
+        padding: 12px 16px;
+        padding-left: calc(16px + env(safe-area-inset-left, 0px));
+        padding-right: calc(16px + env(safe-area-inset-right, 0px));
+        background: white;
+        border-top: 1px solid #e0e0e0;
+        z-index: 1000;
+    }
     .chat-panel {
         left: 0;
         right: 15px;
@@ -1624,14 +1633,7 @@ scale: 1.05;
         bottom: 10px;
         right: 15px;
     }
-    .welcome-footer, .chat-footer {
-        padding: 10px 18px;
-        padding-bottom: 40px;
-        text-align: center;
-        flex-shrink: 0;
-        background: #f8f9fa;
-        margin-top: auto;
-    }  
+    
     .header-btn {
         min-width: 28px;
         height: 28px;
@@ -1717,14 +1719,7 @@ scale: 1.05;
         font-size: 16px;
         line-height: 0.8
     }
-    .welcome-footer, .chat-footer {
-        padding: 10px 18px;
-        padding-bottom: 40px;
-        text-align: center;
-        flex-shrink: 0;
-        background: #f8f9fa;
-        margin-top: auto;
-    }
+    
     .welcome-avatar {
         width: 36px;
         height: 36px;
