@@ -380,7 +380,6 @@
     font-size: 14px;
     line-height: 1.4;
     margin-left: 25px;
-    margin-top: -10px;
     position: relative;
     animation: messageSlideIn 0.3s ease;
 }
@@ -412,7 +411,7 @@
     align-self: flex-end;
     font-size: 14px;
     margin-left: auto;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     position: relative;
     word-wrap: break-word;
     line-height: 1.4;
