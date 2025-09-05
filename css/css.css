@@ -380,6 +380,7 @@
     font-size: 14px;
     line-height: 1.4;
     margin-left: 25px;
+    margin-top: -10px;
     position: relative;
     animation: messageSlideIn 0.3s ease;
 }
