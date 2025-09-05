@@ -1621,7 +1621,7 @@ scale: 1.05;
     }
     .input-area {    
         position: fixed;
-        bottom: env(safe-area-inset-left, 0px);
+        bottom: calc(45px + env(safe-area-inset-left, 0px));
         left: env(safe-area-inset-left, 0px);
         right: env(safe-area-inset-right, 0px);
         padding: 12px 16px;
