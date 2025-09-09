@@ -1085,7 +1085,7 @@ scale: 1.05;
 
 .confirmation-buttons, .rating-buttons {
     display: flex;
-    gap: 10px;
+    gap: 20px;
     justify-content: center;
 }
 .confirmation-btn{
@@ -1682,17 +1682,27 @@ scale: 1.05;
         left: 0%;
         width: 100%;
         height: 83%;
-        top:10%;
+        top:9%;
         font-size: 12px;
+    }
+    .confirmation-btn {
+        padding: 10px 30px;
+    }
+    .confirmation-buttons {
+        position: relative;
+        left: 0px;
+        display: flex;
+        gap: 20px;
+        flex-direction: row;
     }
     .confirmation-panel.active {
         left: 9%;
         width: 80%;
-        height: 40%;
+        height: 30%;
         top:28%;
         font-size: 12px;
     }
-    .confirmation-buttons, .rating-buttons {
+ .rating-buttons {
         flex-direction: column;
     }
     
@@ -1764,7 +1774,7 @@ scale: 1.05;
     .confirmation-panel.active {
         left: 9%;
         width: 80%;
-        height: 45%;
+        height: 35%;
         top:28%;
         font-size: 12px;
     }
